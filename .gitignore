@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+
+# Virtual env
+venv/
+.env
+
+# Docker
+*.log
+*.pid
+*.sock
+*.gz
+*.swp
+
+# Certbot / SSL
+certbot/conf/
+certbot/www/
+
+# Node / Frontend
+node_modules/
+dist/
+
+# VSCode
+.vscode/
