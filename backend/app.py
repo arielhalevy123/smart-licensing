@@ -1,16 +1,21 @@
 from flask import Flask, request, jsonify
 import os
 import json
-import openai
+from openai import OpenAI
 
 app = Flask(__name__)
-openai.api_key = os.getenv("OPENAI_API_KEY")
+
+# יצירת לקוח OpenAI עם מפתח מה־ENV
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 # נתיב לקבצי החוקים
 DATA_DIR = os.path.join(os.path.dirname(__file__), "json_rules")
 
 def load_rules():
     rules = []
+    if not os.path.exists(DATA_DIR):
+        return rules
+
     for filename in os.listdir(DATA_DIR):
         if filename.endswith(".json"):
             with open(os.path.join(DATA_DIR, filename), encoding="utf-8") as f:
@@ -41,7 +46,7 @@ def generate_report():
     # טען את כל החוקים מכל הקבצים
     rules = load_rules()
 
-    # סינון חוקים רלוונטיים
+    # סינון חוקים רלוונטיים לפי business_type
     matched = [
         r for r in rules
         if r.get("applies_when", {}).get("business_type", "") in [business_type, "", None]
@@ -63,7 +68,7 @@ def generate_report():
     """
 
     try:
-        response = openai.ChatCompletion.create(
+        response = client.chat.completions.create(
             model="gpt-4o-mini",
             messages=[{"role": "user", "content": prompt}]
         )
