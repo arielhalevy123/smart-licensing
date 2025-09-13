@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>שאלון רישוי – מאפייני העסק</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-gray-50 text-gray-900">
+
+  <main class="max-w-4xl mx-auto p-6">
+    <!-- Roadmap -->
+    <div class="flex items-center justify-center gap-6 mb-10">
+      <div class="flex flex-col items-center">
+        <div class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-600 text-white font-bold">1</div>
+        <span class="mt-2 text-sm font-semibold text-blue-600">סוג העסק</span>
+      </div>
+      <div class="h-0.5 w-16 bg-blue-600"></div>
+      <div class="flex flex-col items-center">
+        <div class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-600 text-white font-bold">2</div>
+        <span class="mt-2 text-sm font-semibold text-blue-600">פרטי העסק</span>
+      </div>
+      <div class="h-0.5 w-16 bg-blue-600"></div>
+      <div class="flex flex-col items-center">
+        <div class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-600 text-white font-bold">3</div>
+        <span class="mt-2 text-sm font-semibold text-blue-600">מאפיינים</span>
+      </div>
+      <div class="h-0.5 w-16 bg-blue-600"></div>
+      <div class="flex flex-col items-center">
+        <div class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-600 font-bold">4</div>
+        <span class="mt-2 text-sm text-gray-500">סיכום</span>
+      </div>
+    </div>
+
+    <h1 class="text-3xl font-bold mb-2 text-center">מאפייני העסק</h1>
+    <p class="text-center text-gray-600 mb-8">בחר את המאפיינים הרלוונטיים לעסק שלך</p>
+
+    <!-- Form -->
+    <form id="businessFeaturesForm" class="grid grid-cols-2 gap-6">
+      <label class="flex items-center gap-3 p-4 border rounded-xl cursor-pointer hover:bg-green-50 peer-checked:bg-green-100">
+        <input type="checkbox" name="has_gas" class="w-5 h-5 text-green-600 rounded" />
+        <div>
+          <span class="font-semibold">שימוש בגז</span>
+          <p class="text-sm text-gray-600">האם העסק עושה שימוש בגז?</p>
+        </div>
+      </label>
+
+      <label class="flex items-center gap-3 p-4 border rounded-xl cursor-pointer hover:bg-green-50 peer-checked:bg-green-100">
+        <input type="checkbox" name="serves_meat" class="w-5 h-5 text-green-600 rounded" />
+        <div>
+          <span class="font-semibold">הגשת בשר</span>
+          <p class="text-sm text-gray-600">האם העסק מגיש מוצרי בשר?</p>
+        </div>
+      </label>
+
+      <label class="flex items-center gap-3 p-4 border rounded-xl cursor-pointer hover:bg-green-50 peer-checked:bg-green-100">
+        <input type="checkbox" name="has_delivery" class="w-5 h-5 text-green-600 rounded" />
+        <div>
+          <span class="font-semibold">משלוחים</span>
+          <p class="text-sm text-gray-600">האם העסק מספק שירות משלוחים?</p>
+        </div>
+      </label>
+
+      <label class="flex items-center gap-3 p-4 border rounded-xl cursor-pointer hover:bg-green-50 peer-checked:bg-green-100">
+        <input type="checkbox" name="has_alcohol" class="w-5 h-5 text-green-600 rounded" />
+        <div>
+          <span class="font-semibold">מכירת אלכוהול</span>
+          <p class="text-sm text-gray-600">האם העסק מוכר משקאות אלכוהוליים?</p>
+        </div>
+      </label>
+
+      <div class="col-span-2 flex justify-between mt-8">
+        <a href="step2.html" class="px-6 py-3 rounded-lg border bg-white hover:bg-gray-50">חזרה</a>
+        <button type="submit" class="px-6 py-3 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700">
+          הבא
+        </button>
+      </div>
+    </form>
+  </main>
+
+  <script src="js/step3.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>מערכת רישוי עסקים – דף הבית</title>
+
+  <!-- Tailwind (CDN) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- אופציונלי: התאמות קטנות משלך -->
+  <link rel="stylesheet" href="css/landing.css" />
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-gray-50 text-gray-900">
+
+  <!-- Hero -->
+  <header class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-l from-blue-600/10 via-purple-600/5 to-green-600/10"></div>
+
+    <div class="relative max-w-6xl mx-auto px-6 pt-16 pb-10 md:pt-20 md:pb-16">
+      <div class="text-center max-w-4xl mx-auto">
+        <span class="inline-flex items-center gap-2 rounded-full bg-white/70 backdrop-blur px-4 py-2 text-sm border border-gray-200">
+          <i data-lucide="shield-check" class="w-4 h-4 text-blue-600"></i>
+          מערכת הכוונה לרישוי עסקים בישראל
+        </span>
+
+        <h1 class="mt-6 leading-tight font-extrabold text-4xl md:text-6xl">
+          הכוונה חכמה לרישוי
+          <span class="text-transparent bg-clip-text bg-gradient-to-l from-blue-600 to-green-600">העסק שלך</span>
+        </h1>
+
+        <p class="mt-4 md:mt-6 text-lg md:text-xl text-gray-600">
+          קבל דוח מותאם אישית עם כל דרישות הרישוי הרלוונטיות לעסק שלך, בעזרת טכנולוגיית בינה מלאכותית מתקדמת.
+        </p>
+
+        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="step1.html"
+             class="inline-flex items-center gap-2 px-7 py-3 rounded-xl text-white bg-gradient-to-l from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700 font-semibold">
+            התחל שאלון רישוי
+            <i data-lucide="arrow-left" class="w-5 h-5"></i>
+          </a>
+          <a href="#how-it-works"
+             class="inline-flex items-center gap-2 px-7 py-3 rounded-xl border border-gray-300 bg-white hover:bg-gray-50 font-semibold">
+            איך זה עובד?
+            <i data-lucide="sparkles" class="w-5 h-5 text-purple-500"></i>
+          </a>
+        </div>
+
+        <!-- סטטיסטיקות קצרות -->
+        <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl mx-auto">
+          <div class="text-center p-6 bg-white/70 backdrop-blur rounded-2xl border">
+            <div class="text-3xl font-bold text-purple-600 mb-1">AI</div>
+            <div class="text-gray-600">דוח חכם מותאם</div>
+          </div>
+          <div class="text-center p-6 bg-white/70 backdrop-blur rounded-2xl border">
+            <div class="text-3xl font-bold text-green-600 mb-1">6</div>
+            <div class="text-gray-600">סוגי עסקים נתמכים</div>
+          </div>
+          <div class="text-center p-6 bg-white/70 backdrop-blur rounded-2xl border">
+            <div class="text-3xl font-bold text-blue-600 mb-1">+50</div>
+            <div class="text-gray-600">דרישות במאגר</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- איך המערכת עובדת -->
+  <section id="how-it-works" class="px-6 py-12">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl md:text-4xl font-bold">איך המערכת עובדת?</h2>
+        <p class="text-gray-600 mt-2">תהליך פשוט ומהיר שיעזור לך להבין את כל דרישות הרישוי לעסק שלך</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- כרטיס 1 -->
+        <div class="group bg-white rounded-2xl border hover:shadow-lg transition p-6">
+          <div class="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center mb-3 group-hover:scale-110 transition">
+            <i data-lucide="file-text" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-bold text-lg mb-1">שאלון חכם</h3>
+          <p class="text-gray-600">שאלון מותאם שאוסף את המידע הנדרש על העסק שלך</p>
+        </div>
+
+        <!-- כרטיס 2 -->
+        <div class="group bg-white rounded-2xl border hover:shadow-lg transition p-6">
+          <div class="w-12 h-12 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center mb-3 group-hover:scale-110 transition">
+            <i data-lucide="sparkles" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-bold text-lg mb-1">דוח AI מתקדם</h3>
+          <p class="text-gray-600">דוח ברור ומעשי שנוצר על ידי בינה מלאכותית</p>
+        </div>
+
+        <!-- כרטיס 3 -->
+        <div class="group bg-white rounded-2xl border hover:shadow-lg transition p-6">
+          <div class="w-12 h-12 rounded-xl bg-green-100 text-green-600 flex items-center justify-center mb-3 group-hover:scale-110 transition">
+            <i data-lucide="check-circle-2" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-bold text-lg mb-1">דרישות מדויקות</h3>
+          <p class="text-gray-600">רשימת דרישות רלוונטיות לסוג העסק שלך</p>
+        </div>
+
+        <!-- כרטיס 4 -->
+        <div class="group bg-white rounded-2xl border hover:shadow-lg transition p-6">
+          <div class="w-12 h-12 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center mb-3 group-hover:scale-110 transition">
+            <i data-lucide="clock" class="w-6 h-6"></i>
+          </div>
+          <h3 class="font-bold text-lg mb-1">חסכון בזמן</h3>
+          <p class="text-gray-600">כל המידע מרוכז במקום אחד</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 צעדים פשוטים -->
+  <section class="px-6 pb-12">
+    <div class="max-w-6xl mx-auto">
+      <div class="bg-gradient-to-l from-blue-50 to-green-50 rounded-3xl p-8 md:p-12">
+        <h3 class="text-2xl md:text-3xl font-bold text-center mb-8">3 צעדים פשוטים לדוח מותאם</h3>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="text-center">
+            <div class="w-16 h-16 mx-auto rounded-2xl bg-blue-600 text-white flex items-center justify-center text-2xl font-bold">1</div>
+            <h4 class="mt-3 font-bold text-lg">מלא שאלון</h4>
+            <p class="text-gray-600 text-sm">ענה על שאלות קצרות – סוג, גודל ומאפיינים</p>
+          </div>
+
+          <div class="text-center">
+            <div class="w-16 h-16 mx-auto rounded-2xl bg-purple-600 text-white flex items-center justify-center text-2xl font-bold">2</div>
+            <h4 class="mt-3 font-bold text-lg">עיבוד AI</h4>
+            <p class="text-gray-600 text-sm">המערכת מתאימה את הדרישות ויוצרת דוח</p>
+          </div>
+
+          <div class="text-center">
+            <div class="w-16 h-16 mx-auto rounded-2xl bg-green-600 text-white flex items-center justify-center text-2xl font-bold">3</div>
+            <h4 class="mt-3 font-bold text-lg">קבל דוח</h4>
+            <p class="text-gray-600 text-sm">דוח מפורט עם עדיפויות והמלצות</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- סוגי עסקים נתמכים -->
+  <section class="px-6 pb-16">
+    <div class="max-w-6xl mx-auto text-center">
+      <h2 class="text-3xl md:text-4xl font-bold mb-3">סוגי עסקים נתמכים</h2>
+      <p class="text-gray-600 mb-8">המערכת תומכת במגוון עסקים במגזר המזון והאירוח</p>
+
+      <div class="flex flex-wrap justify-center gap-3 mb-10">
+        <span class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white border">
+          <i data-lucide="building-2" class="w-4 h-4"></i> מסעדות
+        </span>
+        <span class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white border">
+          <i data-lucide="coffee" class="w-4 h-4"></i> בתי קפה
+        </span>
+        <span class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white border">
+          <i data-lucide="wine" class="w-4 h-4"></i> ברים ופאבים
+        </span>
+        <span class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white border">
+          <i data-lucide="truck" class="w-4 h-4"></i> פוד טראק
+        </span>
+        <span class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white border">
+          <i data-lucide="cookie" class="w-4 h-4"></i> מאפיות
+        </span>
+        <span class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white border">
+          <i data-lucide="chef-hat" class="w-4 h-4"></i> קייטרינג
+        </span>
+      </div>
+
+      <a href="step1.html"
+         class="inline-flex items-center gap-2 px-10 py-4 rounded-xl text-white bg-gradient-to-l from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700 text-lg font-semibold">
+        בואו נתחיל!
+        <i data-lucide="arrow-left" class="w-6 h-6"></i>
+      </a>
+    </div>
+  </section>
+
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>

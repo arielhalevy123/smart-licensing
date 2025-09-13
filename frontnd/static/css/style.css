@@ -1,0 +1,12 @@
+/* עיצוב מותאם משלך */
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+label {
+  font-weight: 500;
+}
+
+button {
+  transition: background-color 0.2s ease;
+}

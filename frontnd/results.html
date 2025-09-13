@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>דוח רישוי מותאם</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-gray-50">
+
+  <main class="max-w-5xl mx-auto p-6">
+    <!-- כותרת -->
+    <h1 class="text-3xl font-bold mb-6 text-center">דוח מותאם לעסק שלך</h1>
+
+    <!-- סיכום AI -->
+    <section id="aiSummary" class="mb-6 p-6 bg-white rounded-xl border shadow"></section>
+
+    <!-- הערכות (עלות / זמן) -->
+    <section id="aiEstimates" class="grid grid-cols-2 gap-6 mb-6"></section>
+
+    <!-- דרישות רגולטוריות -->
+    <section id="requirementsList" class="bg-white rounded-xl border p-6 shadow"></section>
+
+    <!-- כפתורים -->
+    <div class="mt-6 flex gap-3 justify-center">
+      <a href="index.html" class="px-4 py-2 border rounded-lg bg-white hover:bg-gray-50">שאלון חדש</a>
+      <button onclick="window.print()" class="px-4 py-2 rounded-lg text-white bg-blue-600 hover:bg-blue-700">
+        הדפס דוח
+      </button>
+    </div>
+  </main>
+
+  <script src="js/results.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>

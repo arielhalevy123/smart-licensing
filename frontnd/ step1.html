@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>שאלון רישוי – סוג העסק</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-gray-50 text-gray-900">
+
+  <main class="max-w-4xl mx-auto p-6">
+    <!-- Roadmap -->
+    <div class="flex items-center justify-center gap-6 mb-10">
+      <div class="flex flex-col items-center">
+        <div class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-600 text-white font-bold">1</div>
+        <span class="mt-2 text-sm font-semibold text-blue-600">סוג העסק</span>
+      </div>
+      <div class="h-0.5 w-16 bg-blue-600"></div>
+      <div class="flex flex-col items-center">
+        <div class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-600 font-bold">2</div>
+        <span class="mt-2 text-sm text-gray-500">פרטי העסק</span>
+      </div>
+      <div class="h-0.5 w-16 bg-gray-200"></div>
+      <div class="flex flex-col items-center">
+        <div class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-600 font-bold">3</div>
+        <span class="mt-2 text-sm text-gray-500">מאפיינים</span>
+      </div>
+      <div class="h-0.5 w-16 bg-gray-200"></div>
+      <div class="flex flex-col items-center">
+        <div class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-600 font-bold">4</div>
+        <span class="mt-2 text-sm text-gray-500">סיכום</span>
+      </div>
+    </div>
+
+    <h1 class="text-3xl font-bold mb-2 text-center">שאלון רישוי עסקים</h1>
+    <p class="text-center text-gray-600 mb-8">בחר את סוג העסק שלך כדי להמשיך</p>
+
+    <!-- Form -->
+    <form id="businessTypeForm" class="space-y-6">
+
+      <div>
+        <label class="block mb-2 font-medium">שם העסק *</label>
+        <input type="text" name="business_name" required
+               class="w-full border p-3 rounded-lg focus:ring-2 focus:ring-blue-600" />
+      </div>
+
+      <div>
+        <label class="block mb-2 font-medium">סוג העסק *</label>
+        <div class="grid grid-cols-2 gap-4">
+
+          <label class="block border rounded-xl p-4 cursor-pointer hover:bg-blue-50 peer-checked:border-blue-600 peer-checked:bg-blue-100">
+            <input type="radio" name="business_type" value="restaurant" class="hidden peer" required />
+            <div class="flex items-center gap-2">
+              <i data-lucide="utensils" class="w-6 h-6 text-blue-600"></i>
+              <span class="font-semibold">מסעדה</span>
+            </div>
+            <p class="text-sm text-gray-600 mt-1">מסעדה מלאה עם מטבח וכלי אוכל</p>
+          </label>
+
+          <label class="block border rounded-xl p-4 cursor-pointer hover:bg-blue-50 peer-checked:border-blue-600 peer-checked:bg-blue-100">
+            <input type="radio" name="business_type" value="cafe" class="hidden peer" />
+            <div class="flex items-center gap-2">
+              <i data-lucide="coffee" class="w-6 h-6 text-green-600"></i>
+              <span class="font-semibold">בית קפה</span>
+            </div>
+            <p class="text-sm text-gray-600 mt-1">בית קפה עם מאפים ומשקאות</p>
+          </label>
+
+          <label class="block border rounded-xl p-4 cursor-pointer hover:bg-blue-50 peer-checked:border-blue-600 peer-checked:bg-blue-100">
+            <input type="radio" name="business_type" value="bar" class="hidden peer" />
+            <div class="flex items-center gap-2">
+              <i data-lucide="wine" class="w-6 h-6 text-purple-600"></i>
+              <span class="font-semibold">בר / פאב</span>
+            </div>
+            <p class="text-sm text-gray-600 mt-1">בר לשתייה עם או בלי אוכל</p>
+          </label>
+
+          <label class="block border rounded-xl p-4 cursor-pointer hover:bg-blue-50 peer-checked:border-blue-600 peer-checked:bg-blue-100">
+            <input type="radio" name="business_type" value="bakery" class="hidden peer" />
+            <div class="flex items-center gap-2">
+              <i data-lucide="cookie" class="w-6 h-6 text-orange-600"></i>
+              <span class="font-semibold">מאפייה</span>
+            </div>
+            <p class="text-sm text-gray-600 mt-1">מאפיות ועוגיות</p>
+          </label>
+
+          <label class="block border rounded-xl p-4 cursor-pointer hover:bg-blue-50 peer-checked:border-blue-600 peer-checked:bg-blue-100">
+            <input type="radio" name="business_type" value="food_truck" class="hidden peer" />
+            <div class="flex items-center gap-2">
+              <i data-lucide="truck" class="w-6 h-6 text-red-600"></i>
+              <span class="font-semibold">פוד טראק</span>
+            </div>
+            <p class="text-sm text-gray-600 mt-1">משאית מזון ניידת</p>
+          </label>
+
+          <label class="block border rounded-xl p-4 cursor-pointer hover:bg-blue-50 peer-checked:border-blue-600 peer-checked:bg-blue-100">
+            <input type="radio" name="business_type" value="catering" class="hidden peer" />
+            <div class="flex items-center gap-2">
+              <i data-lucide="chef-hat" class="w-6 h-6 text-pink-600"></i>
+              <span class="font-semibold">קייטרינג</span>
+            </div>
+            <p class="text-sm text-gray-600 mt-1">שירותי קייטרינג לאירועים</p>
+          </label>
+
+        </div>
+      </div>
+
+      <div class="flex justify-between mt-8">
+        <a href="index.html" class="px-6 py-3 rounded-lg border bg-white hover:bg-gray-50">חזרה</a>
+        <button type="submit" class="px-6 py-3 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700">
+          הבא
+        </button>
+      </div>
+    </form>
+  </main>
+
+  <script src="js/step1.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>

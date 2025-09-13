@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>שאלון רישוי – פרטי העסק</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-gray-50 text-gray-900">
+
+  <main class="max-w-4xl mx-auto p-6">
+    <!-- Roadmap -->
+    <div class="flex items-center justify-center gap-6 mb-10">
+      <div class="flex flex-col items-center">
+        <div class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-600 text-white font-bold">1</div>
+        <span class="mt-2 text-sm font-semibold text-blue-600">סוג העסק</span>
+      </div>
+      <div class="h-0.5 w-16 bg-blue-600"></div>
+      <div class="flex flex-col items-center">
+        <div class="w-10 h-10 flex items-center justify-center rounded-full bg-blue-600 text-white font-bold">2</div>
+        <span class="mt-2 text-sm font-semibold text-blue-600">פרטי העסק</span>
+      </div>
+      <div class="h-0.5 w-16 bg-blue-600"></div>
+      <div class="flex flex-col items-center">
+        <div class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-600 font-bold">3</div>
+        <span class="mt-2 text-sm text-gray-500">מאפיינים</span>
+      </div>
+      <div class="h-0.5 w-16 bg-gray-200"></div>
+      <div class="flex flex-col items-center">
+        <div class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-200 text-gray-600 font-bold">4</div>
+        <span class="mt-2 text-sm text-gray-500">סיכום</span>
+      </div>
+    </div>
+
+    <h1 class="text-3xl font-bold mb-2 text-center">פרטי העסק</h1>
+    <p class="text-center text-gray-600 mb-8">הזן את פרטי העסק שלך להמשך התהליך</p>
+
+    <!-- Form -->
+    <form id="businessDetailsForm" class="space-y-6">
+      <div class="grid grid-cols-2 gap-6">
+        <div>
+          <label class="block mb-2 font-medium">שטח העסק (במ"ר)</label>
+          <input type="number" name="area_sqm" min="0" required
+                 class="w-full border p-3 rounded-lg focus:ring-2 focus:ring-blue-600" />
+        </div>
+        <div>
+          <label class="block mb-2 font-medium">מספר מקומות ישיבה</label>
+          <input type="number" name="seating_capacity" min="0" required
+                 class="w-full border p-3 rounded-lg focus:ring-2 focus:ring-blue-600" />
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-6">
+        <div>
+          <label class="block mb-2 font-medium">מספר עובדים</label>
+          <input type="number" name="employees" min="0"
+                 class="w-full border p-3 rounded-lg focus:ring-2 focus:ring-blue-600" />
+        </div>
+        <div>
+          <label class="block mb-2 font-medium">עיר / אזור</label>
+          <input type="text" name="city"
+                 class="w-full border p-3 rounded-lg focus:ring-2 focus:ring-blue-600" />
+        </div>
+      </div>
+
+      <div class="flex justify-between mt-8">
+        <a href="step1.html" class="px-6 py-3 rounded-lg border bg-white hover:bg-gray-50">חזרה</a>
+        <button type="submit" class="px-6 py-3 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700">
+          הבא
+        </button>
+      </div>
+    </form>
+  </main>
+
+  <script src="js/step2.js"></script>
+  <script>lucide.createIcons();</script>
+</body>
+</html>
