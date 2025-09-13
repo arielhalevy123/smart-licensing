@@ -26,6 +26,8 @@ jobs:
             --exclude '.git' \
             --exclude '.gitkeep' \
             --exclude '.DS_Store' \
+            --exclude 'certbot/certbot/conf/*' \
+            --exclude 'certbot/certbot/www/*' \
             ./ ubuntu@${{ secrets.EC2_HOST }}:~/smart-licensing/
 
       - name: Deploy with Docker Compose
