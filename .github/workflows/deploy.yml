@@ -29,6 +29,6 @@ jobs:
           ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} "
             cd ~/smart-licensing &&
             echo OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} > .env &&
-            docker compose down &&
-            docker compose up -d --build
+            docker-compose down &&
+            docker-compose up -d --build
           "
