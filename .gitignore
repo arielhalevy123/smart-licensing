@@ -25,4 +25,4 @@ node_modules/
 dist/
 
 # VSCode
-.vscode/
+.vscode/.DS_Store
