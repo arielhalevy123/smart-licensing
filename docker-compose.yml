@@ -15,10 +15,10 @@ services:
     container_name: licensing-nginx
     restart: always
     volumes:
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
-      - ./frontend:/usr/share/nginx/html:ro
-      - /opt/certbot/conf:/etc/letsencrypt
-      - /opt/certbot/www:/var/www/certbot
+          - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+          - ./frontend:/usr/share/nginx/html:ro
+          - ./certbot/certbot/conf:/etc/letsencrypt
+          - ./certbot/certbot/www:/var/www/certbot
     ports:
       - "80:80"
       - "443:443"
@@ -29,8 +29,8 @@ services:
     image: certbot/certbot
     container_name: licensing-certbot
     volumes:
-      - /opt/certbot/conf:/etc/letsencrypt
-      - /opt/certbot/www:/var/www/certbot
+      - ./certbot/certbot/conf:/etc/letsencrypt
+      - ./certbot/certbot/www:/var/www/certbot
     entrypoint: >
       sh -c "trap exit TERM; while :; do
       certbot renew --webroot -w /var/www/certbot;
