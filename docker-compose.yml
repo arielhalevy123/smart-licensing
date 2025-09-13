@@ -2,13 +2,13 @@ version: "3.8"
 
 services:
   api:
-    build: .
-    container_name: licensing-api
-    restart: always
-    env_file:
-      - .env
-    expose:
-      - "5000"
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      container_name: licensing-api
+      restart: always
+      environment:
+       - OPENAI_API_KEY=${OPENAI_API_KEY}
 
   nginx:
     image: nginx:alpine
