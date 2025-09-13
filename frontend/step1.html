@@ -4,8 +4,14 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>שאלון רישוי – סוג העסק</title>
+
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- CSS מותאם -->
   <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body class="bg-gray-50 text-gray-900">
@@ -40,18 +46,21 @@
     <!-- Form -->
     <form id="businessTypeForm" class="space-y-6">
 
+      <!-- Business name -->
       <div>
         <label class="block mb-2 font-medium">שם העסק *</label>
         <input type="text" name="business_name" required
                class="w-full border p-3 rounded-lg focus:ring-2 focus:ring-blue-600" />
       </div>
 
+      <!-- Business type -->
       <div>
         <label class="block mb-2 font-medium">סוג העסק *</label>
         <div class="grid grid-cols-2 gap-4">
 
+          <!-- Restaurant -->
           <label class="block border rounded-xl p-4 cursor-pointer hover:bg-blue-50 peer-checked:border-blue-600 peer-checked:bg-blue-100">
-            <input type="radio" name="business_type" value="restaurant" class="hidden peer" required />
+            <input type="radio" name="business_type" value="restaurant" class="peer hidden" required />
             <div class="flex items-center gap-2">
               <i data-lucide="utensils" class="w-6 h-6 text-blue-600"></i>
               <span class="font-semibold">מסעדה</span>
@@ -59,8 +68,9 @@
             <p class="text-sm text-gray-600 mt-1">מסעדה מלאה עם מטבח וכלי אוכל</p>
           </label>
 
-          <label class="block border rounded-xl p-4 cursor-pointer hover:bg-blue-50 peer-checked:border-blue-600 peer-checked:bg-blue-100">
-            <input type="radio" name="business_type" value="cafe" class="hidden peer" />
+          <!-- Cafe -->
+          <label class="block border rounded-xl p-4 cursor-pointer hover:bg-blue-50 peer-checked:border-green-600 peer-checked:bg-green-100">
+            <input type="radio" name="business_type" value="cafe" class="peer hidden" />
             <div class="flex items-center gap-2">
               <i data-lucide="coffee" class="w-6 h-6 text-green-600"></i>
               <span class="font-semibold">בית קפה</span>
@@ -68,8 +78,9 @@
             <p class="text-sm text-gray-600 mt-1">בית קפה עם מאפים ומשקאות</p>
           </label>
 
-          <label class="block border rounded-xl p-4 cursor-pointer hover:bg-blue-50 peer-checked:border-blue-600 peer-checked:bg-blue-100">
-            <input type="radio" name="business_type" value="bar" class="hidden peer" />
+          <!-- Bar -->
+          <label class="block border rounded-xl p-4 cursor-pointer hover:bg-blue-50 peer-checked:border-purple-600 peer-checked:bg-purple-100">
+            <input type="radio" name="business_type" value="bar" class="peer hidden" />
             <div class="flex items-center gap-2">
               <i data-lucide="wine" class="w-6 h-6 text-purple-600"></i>
               <span class="font-semibold">בר / פאב</span>
@@ -77,8 +88,9 @@
             <p class="text-sm text-gray-600 mt-1">בר לשתייה עם או בלי אוכל</p>
           </label>
 
-          <label class="block border rounded-xl p-4 cursor-pointer hover:bg-blue-50 peer-checked:border-blue-600 peer-checked:bg-blue-100">
-            <input type="radio" name="business_type" value="bakery" class="hidden peer" />
+          <!-- Bakery -->
+          <label class="block border rounded-xl p-4 cursor-pointer hover:bg-blue-50 peer-checked:border-orange-600 peer-checked:bg-orange-100">
+            <input type="radio" name="business_type" value="bakery" class="peer hidden" />
             <div class="flex items-center gap-2">
               <i data-lucide="cookie" class="w-6 h-6 text-orange-600"></i>
               <span class="font-semibold">מאפייה</span>
@@ -86,8 +98,9 @@
             <p class="text-sm text-gray-600 mt-1">מאפיות ועוגיות</p>
           </label>
 
-          <label class="block border rounded-xl p-4 cursor-pointer hover:bg-blue-50 peer-checked:border-blue-600 peer-checked:bg-blue-100">
-            <input type="radio" name="business_type" value="food_truck" class="hidden peer" />
+          <!-- Food truck -->
+          <label class="block border rounded-xl p-4 cursor-pointer hover:bg-blue-50 peer-checked:border-red-600 peer-checked:bg-red-100">
+            <input type="radio" name="business_type" value="food_truck" class="peer hidden" />
             <div class="flex items-center gap-2">
               <i data-lucide="truck" class="w-6 h-6 text-red-600"></i>
               <span class="font-semibold">פוד טראק</span>
@@ -95,8 +108,9 @@
             <p class="text-sm text-gray-600 mt-1">משאית מזון ניידת</p>
           </label>
 
-          <label class="block border rounded-xl p-4 cursor-pointer hover:bg-blue-50 peer-checked:border-blue-600 peer-checked:bg-blue-100">
-            <input type="radio" name="business_type" value="catering" class="hidden peer" />
+          <!-- Catering -->
+          <label class="block border rounded-xl p-4 cursor-pointer hover:bg-blue-50 peer-checked:border-pink-600 peer-checked:bg-pink-100">
+            <input type="radio" name="business_type" value="catering" class="peer hidden" />
             <div class="flex items-center gap-2">
               <i data-lucide="chef-hat" class="w-6 h-6 text-pink-600"></i>
               <span class="font-semibold">קייטרינג</span>
@@ -107,6 +121,7 @@
         </div>
       </div>
 
+      <!-- Buttons -->
       <div class="flex justify-between mt-8">
         <a href="index.html" class="px-6 py-3 rounded-lg border bg-white hover:bg-gray-50">חזרה</a>
         <button type="submit" class="px-6 py-3 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700">
@@ -116,6 +131,7 @@
     </form>
   </main>
 
+  <!-- Scripts -->
   <script src="js/step1.js"></script>
   <script>lucide.createIcons();</script>
 </body>
