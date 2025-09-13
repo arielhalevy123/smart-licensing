@@ -1,45 +1,51 @@
-// שולף את כל הנתונים שאוחסנו
+// --- שליפת נתוני המשתמש מה-localStorage ---
 const finalData = JSON.parse(localStorage.getItem("finalBusinessData")) || {};
 
-// --- הדמיה של דוח AI (בפרויקט האמיתי זה מגיע מ-API של GPT/Claude) ---
-const aiReport = {
-  executive_summary: `על פי הנתונים שסיפקת, העסק מסוג "${finalData.business_type}" 
-  בעיר "${finalData.city}" צפוי לעמוד בדרישות בסיסיות.`,
-  recommendations: "מומלץ לבצע בדיקות בטיחות, ולהגיש מסמכים למשרד הבריאות.",
-  estimated_timeline: "כ-30 יום",
-  estimated_total_cost: "כ-5,000 ₪"
-};
+// --- קריאה ל-API ---
+async function fetchReport() {
+  try {
+    const res = await fetch("/api/generate-report", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(finalData)
+    });
 
-// שמור ל-localStorage אם תרצה
-localStorage.setItem("aiReport", JSON.stringify(aiReport));
+    if (!res.ok) throw new Error("שגיאה בשרת");
 
-// --- הצגת סיכום ---
-const aiSumEl = document.getElementById("aiSummary");
-aiSumEl.innerHTML = `
-  <h2 class="font-bold text-xl mb-2">תמצית מנהלים</h2>
-  <p>${aiReport.executive_summary}</p>
-  <h3 class="mt-4 font-semibold">המלצות:</h3>
-  <p>${aiReport.recommendations}</p>
-`;
+    const data = await res.json();
 
-// --- הצגת הערכות ---
-const aiEstEl = document.getElementById("aiEstimates");
-aiEstEl.innerHTML = `
-  <div class="p-4 bg-white border rounded-lg shadow"><b>זמן:</b> ${aiReport.estimated_timeline}</div>
-  <div class="p-4 bg-white border rounded-lg shadow"><b>עלות:</b> ${aiReport.estimated_total_cost}</div>
-`;
+    // הצגת תמצית מנהלים
+    const aiSumEl = document.getElementById("aiSummary");
+    aiSumEl.innerHTML = `
+      <h2 class="font-bold text-xl mb-2">תמצית מנהלים</h2>
+      <p>${data.executive_summary}</p>
+    `;
 
-// --- הצגת דרישות רגולטוריות (בשלב הזה אפשר לסנן מתוך JSONים אמיתיים) ---
-const requirementsList = [
-  { title: "היגיינה", description: "שמירה על ניקיון המטבח לפי תקן 1234" },
-  { title: "בטיחות אש", description: "מערכת כיבוי אש תקינה ואישור מכבי אש" },
-  { title: "בריאות", description: "בדיקות מים תקופתיות בהתאם להנחיות משרד הבריאות" }
-];
+    // הצגת הערכות כלליות (בשלב ראשון GPT נותן תקציר כולל המלצות)
+    const aiEstEl = document.getElementById("aiEstimates");
+    aiEstEl.innerHTML = `
+      <div class="p-4 bg-white border rounded-lg shadow"><b>סוג עסק:</b> ${data.business_type}</div>
+      <div class="p-4 bg-white border rounded-lg shadow"><b>שם עסק:</b> ${data.business_name}</div>
+    `;
 
-const listEl = document.getElementById("requirementsList");
-listEl.innerHTML = `
-  <h2 class="font-bold text-xl mb-2">דרישות רגולטוריות</h2>
-  <ul class="list-disc pr-6 space-y-1">
-    ${requirementsList.map(r => `<li><b>${r.title}:</b> ${r.description}</li>`).join("")}
-  </ul>
-`;
+    // הצגת דרישות רגולטוריות שחזרו מה-json_rules
+    const listEl = document.getElementById("requirementsList");
+    if (data.matched_rules && data.matched_rules.length > 0) {
+      listEl.innerHTML = `
+        <h2 class="font-bold text-xl mb-2">דרישות רגולטוריות</h2>
+        <ul class="list-disc pr-6 space-y-1">
+          ${data.matched_rules.map(r => `<li><b>${r.title}:</b> ${r.actions.join(", ")}</li>`).join("")}
+        </ul>
+      `;
+    } else {
+      listEl.innerHTML = `<p>לא נמצאו דרישות רלוונטיות</p>`;
+    }
+
+  } catch (err) {
+    console.error("שגיאה:", err);
+    document.getElementById("aiSummary").innerHTML = `<p class="text-red-600">נכשלה שליפת הדוח</p>`;
+  }
+}
+
+// קריאה לפונקציה בהטענת הדף
+fetchReport();
