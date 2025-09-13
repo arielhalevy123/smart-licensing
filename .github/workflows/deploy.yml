@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Set up SSH
@@ -19,18 +19,16 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
 
-      - name: Copy files to EC2
+      - name: Copy project to EC2
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} "mkdir -p ~/licensing-api"
-          rsync -avz --exclude '.git' ./ ubuntu@${{ secrets.EC2_HOST }}:~/licensing-api/
+          ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} "mkdir -p ~/smart-licensing"
+          rsync -avz --exclude '.git' ./ ubuntu@${{ secrets.EC2_HOST }}:~/smart-licensing/
 
-      - name: Deploy Docker
+      - name: Deploy with Docker Compose
         run: |
-          ssh ubuntu@${{ secrets.EC2_HOST }} "
-            cd ~/licensing-api &&
-            docker build -t licensing-api:${GITHUB_REF_NAME} . &&
-            docker stop licensing-api || true &&
-            docker rm licensing-api || true &&
-            docker run -d -p 5000:5000 --name licensing-api \
-              -e OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} licensing-api:${GITHUB_REF_NAME}
+          ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} "
+            cd ~/smart-licensing &&
+            echo OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} > .env &&
+            docker compose down &&
+            docker compose up -d --build
           "

@@ -14,5 +14,5 @@ COPY . .
 # חשיפת פורט Flask
 EXPOSE 5000
 
-# הרצה עם Gunicorn (עדיף מ-flask run)
+# הרצה עם Gunicorn (עדיף מ-fla sk run)
 CMD ["gunicorn", "-b", "0.0.0.0:5000", "app:app"]
