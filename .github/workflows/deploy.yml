@@ -22,13 +22,17 @@ jobs:
       - name: Copy project to EC2
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} "mkdir -p ~/smart-licensing"
-          rsync -avz --exclude '.git' ./ ubuntu@${{ secrets.EC2_HOST }}:~/smart-licensing/
+          rsync -avz \
+            --exclude '.git' \
+            --exclude '.gitkeep' \
+            --exclude '.DS_Store' \
+            ./ ubuntu@${{ secrets.EC2_HOST }}:~/smart-licensing/
 
       - name: Deploy with Docker Compose
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_HOST }} "
             cd ~/smart-licensing &&
             echo OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} > .env &&
-            docker-compose down &&
+            docker-compose down || true &&
             docker-compose up -d --build
           "
