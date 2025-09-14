@@ -57,22 +57,27 @@ function renderReport(data) {
 
   // דרישות רגולטוריות
   const listEl = document.getElementById("requirementsList");
-  if (data.matched_rules && data.matched_rules.length > 0) {
-    listEl.innerHTML = data.matched_rules.map((r, i) => `
-      <details class="py-3">
-        <summary class="cursor-pointer font-semibold flex justify-between items-center">
-          <span>${r.title}</span>
-          <span class="text-sm text-gray-500">עדיפות: ${r.priority || "לא צוינה"}</span>
+if (data.requirements_by_priority && data.requirements_by_priority.length > 0) {
+  listEl.innerHTML = `
+    <h2 class="font-bold text-xl mb-4">רשימת דרישות רישוי מפורטת</h2>
+    ${data.requirements_by_priority.map(r => `
+      <details class="mb-3 p-4 border rounded-lg bg-white shadow">
+        <summary class="cursor-pointer font-semibold">
+          ${r.title} 
+          <span class="ml-2 text-sm text-gray-500">(${r.priority})</span>
         </summary>
-        <ul class="list-disc pr-6 mt-2 space-y-1 text-gray-700">
-          ${r.actions.map(a => `<li>${a}</li>`).join("")}
-        </ul>
+        <div class="mt-2 text-sm text-gray-700">
+          <p><b>פעולות נדרשות:</b> ${r.actions.join(", ")}</p>
+          <p><b>קשור ל:</b> ${r.related_to || "לא צויין"}</p>
+          <p><b>עלות משוערת:</b> ${r.estimated_cost || "לא צויין"}</p>
+          <p><b>זמן משוער:</b> ${r.estimated_time || "לא צויין"}</p>
+        </div>
       </details>
-    `).join("");
-  } else {
-    listEl.innerHTML = `<p>לא נמצאו דרישות רלוונטיות</p>`;
-  }
-
+    `).join("")}
+  `;
+} else {
+  listEl.innerHTML = `<p>לא נמצאו דרישות רלוונטיות</p>`;
+}
   lucide.createIcons();
 }
 
