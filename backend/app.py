@@ -39,30 +39,36 @@ def generate_report():
     ]
 
     prompt = f"""
-    צור דוח רישוי בפורמט JSON בלבד.
-    פרטי העסק:
+    אתה מקבל נתוני עסק:
     - שם: {business_name}
     - סוג: {business_type}
     - שטח: {area} מ"ר
     - מקומות ישיבה: {seats}
 
-    דרישות רגולטוריות:
+    דרישות רגולטוריות שנמצאו:
     {json.dumps(matched, ensure_ascii=False, indent=2)}
 
-    החזר תשובה בפורמט JSON עם השדות:
+    הפק דוח רישוי מפורט **בפורמט JSON בלבד** עם השדות:
     {{
-      "executive_summary": "טקסט ברור עם תמצית מנהלים",
-      "estimated_cost": "טווח עלויות משוער",
-      "estimated_time": "טווח זמן משוער",
-      "recommendations": "המלצות מפורטות",
-      "requirements_by_priority": [
+    "executive_summary": "תקציר מנהלים ברור",
+    "estimated_cost": "טווח עלויות משוער (לדוגמה: ₪2,500-₪8,000)",
+    "estimated_time": "טווח זמן משוער (לדוגמה: 6-20 שבועות)",
+    "recommendations": "המלצות מעשיות לבעל העסק",
+    "requirements_by_priority": [
         {{
-          "title": "שם הדרישה",
-          "priority": "גבוה/קריטי/בינוני",
-          "actions": ["פעולה 1", "פעולה 2"]
+        "title": "כותרת הדרישה",
+        "priority": "קריטי/גבוה/בינוני",
+        "actions": ["פעולה 1", "פעולה 2"],
+        "related_to": "למשל: משרד הבריאות / בטיחות אש",
+        "estimated_cost": "₪500-₪1,500",
+        "estimated_time": "2-6 שבועות"
         }}
-      ]
+    ]
     }}
+
+    שים לב:
+    - השתמש בדרישות שהעברתי לך בתוך JSON (`matched`).
+    - אל תחזיר טקסט חופשי, רק JSON תקין.
     """
 
     try:

@@ -57,27 +57,27 @@ function renderReport(data) {
 
   // דרישות רגולטוריות
   const listEl = document.getElementById("requirementsList");
-if (data.requirements_by_priority && data.requirements_by_priority.length > 0) {
-  listEl.innerHTML = `
-    <h2 class="font-bold text-xl mb-4">רשימת דרישות רישוי מפורטת</h2>
-    ${data.requirements_by_priority.map(r => `
-      <details class="mb-3 p-4 border rounded-lg bg-white shadow">
-        <summary class="cursor-pointer font-semibold">
-          ${r.title} 
-          <span class="ml-2 text-sm text-gray-500">(${r.priority})</span>
-        </summary>
-        <div class="mt-2 text-sm text-gray-700">
-          <p><b>פעולות נדרשות:</b> ${r.actions.join(", ")}</p>
-          <p><b>קשור ל:</b> ${r.related_to || "לא צויין"}</p>
-          <p><b>עלות משוערת:</b> ${r.estimated_cost || "לא צויין"}</p>
-          <p><b>זמן משוער:</b> ${r.estimated_time || "לא צויין"}</p>
-        </div>
-      </details>
-    `).join("")}
-  `;
-} else {
-  listEl.innerHTML = `<p>לא נמצאו דרישות רלוונטיות</p>`;
-}
+  if (data.requirements_by_priority && data.requirements_by_priority.length > 0) {
+    listEl.innerHTML = `
+      <h2 class="font-bold text-xl mb-4">רשימת דרישות רישוי מפורטת</h2>
+      ${data.requirements_by_priority.map(r => `
+        <details class="mb-3 p-4 border rounded-lg bg-white shadow">
+          <summary class="cursor-pointer font-semibold">
+            ${r.title} 
+            <span class="ml-2 text-sm text-gray-500">(${r.priority})</span>
+          </summary>
+          <div class="mt-2 text-sm text-gray-700">
+            <p><b>פעולות נדרשות:</b> ${r.actions.join(", ")}</p>
+            <p><b>קשור ל:</b> ${r.related_to || "לא צויין"}</p>
+            <p><b>עלות משוערת:</b> ${r.estimated_cost || "לא צויין"}</p>
+            <p><b>זמן משוער:</b> ${r.estimated_time || "לא צויין"}</p>
+          </div>
+        </details>
+      `).join("")}
+    `;
+  } else {
+    listEl.innerHTML = `<p>לא נמצאו דרישות רלוונטיות</p>`;
+  }
   lucide.createIcons();
 }
 
