@@ -1,0 +1,4705 @@
+{
+  "rules": [
+    {
+      "id": "R001",
+      "title": "הגשת מסמכים לרישוי עסק בתחום בתי אוכל",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "food_truck",
+          "cafe"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "לבקשה לרישיון יצורפו, לאחר חתימה על ידי בעל מקצוע מוסמך: תרשים סביבה, מפה מצבית ותכנית עסק, כמפורט בתקנות 12-15 לתקנות.",
+        "יש לצרף לבקשה מסמכים נוספים המפורטים במפרט, אם ניתן להגישם בעת הבקשה."
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R002",
+      "title": "מגבלת תוקף רישיון לעסק עם היתר לשימוש חורג",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "food_truck",
+          "cafe"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "לעסק שפעילותו דורשת היתר לשימוש חורג לפי חוק התכנון והבנייה, לא יינתן רישיון לתקופה ארוכה מתוקף ההיתר לשימוש חורג."
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R003",
+      "title": "חובת הצגת רישיון במקום העסק",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "food_truck",
+          "cafe"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "רישיון העסק יוצג בעסק במקום נראה לעין."
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R004",
+      "title": "דיווח על שינוי בעסק המשפיע על תנאי הרישיון",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "food_truck",
+          "cafe"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "בעל העסק ידווח לנותן האישור על כל שינוי בעסק העלול להשפיע על העמידה בתנאי הרישיון, שלושה חודשים מראש לפחות, ויפעל לפי הנחיות נותן האישור."
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R005",
+      "title": "ביטול רישיון והעדר תוקף בשל שינוי מהותי",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "food_truck",
+          "cafe"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "רישיון עסק או היתר זמני ייבטלו או לא יהיו בתוקף אם בוצעו שינויים מהותיים מהרשום בו או במסמכים המצורפים (סוג עסק, מבנה, שטח, בעלות, מיקום, סוג עיסוק וכו').",
+        "רשיון יבוטל אם נעשו שינויים בעסק בהשוואה לתרשים הסביבה, המפה המצבית או לתכנית העסק, לאחר שניתנה לבעל הרישיון הזדמנות להשמיע טענותיו."
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R001",
+      "title": "דרישת בדיקת רקע פלילי ופסילת בקשת רישיון על סמך ממצאים",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "event_venue"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "משטרת ישראל תבצע בדיקה בדבר מידע פלילי ואחר של בעל העסק, מבקש הרישיון ובעלי תפקיד נוספים בעסק",
+        "תוצאות הבדיקה יכולות להוות עילה לפסילת הבקשה"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R002",
+      "title": "פטור מדרישות אם אין מכירת, הגשה וצריכת משקאות משכרים בעסק עד 200 מקומות ישיבה",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "event_venue"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": "עד 200",
+        "additional_conditions": [
+          "אין מכירה, הגשה וצריכה של משקאות משכרים"
+        ]
+      },
+      "actions": [
+        "פטור מהדרישות המופיעות בפריט זה"
+      ],
+      "priority": "גבוה"
+    },
+    {
+      "id": "R003",
+      "title": "התקנת מערכת מצלמות טלוויזיה במעגל סגור (טמ\"ס) בעסק",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "event_venue"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "להתקין מערכת מצלמות טלוויזיה במעגל סגור (טמ\"ס) ברזולוציה של 1.3 מגה פיקסל לפחות או שווה ערך",
+        "לתלות שלט בכניסה ובאזורי הצילום מחוץ לעסק, המודיע על צילום",
+        "המערכת תכלול גיבוי של חצי שעה לפחות למקרה של הפסקת חשמל"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R004",
+      "title": "מיקום ותכונות מצלמות טמ\"ס בעסק",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "event_venue"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "להתקין מצלמה במבואת הכניסה באופן שתצלם כלפי חוץ",
+        "להתקין מצלמה בקיר החיצוני של העסק שתצלם עד למרחק של 10 מ'",
+        "להתקין מצלמות עם חשיפה אוטומטית וצמצם אוטומטי",
+        "לאפשר צילום בחשיכה ומהירות צילום מינימום 25 FPS",
+        "לא לכוון מצלמות ישירות למקור אור בהיר",
+        "מצלמות בכניסה ובעסק יאפשרו זיהוי תווי פנים"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R005",
+      "title": "ניהול הקלטות ודרישות ציוד הקלטה לטמ\"ס",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "event_venue"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "להחזיק הקלטה מכל מצלמות הטמ\"ס למשך 14 יום לפחות",
+        "ההקלטה תהיה ברזולוציה של 1.3 מגה פיקסל לפחות",
+        "המערכת תאפשר הוצאת קבצים למדיה מגנטית נתיקה (CD, DISK ON KEY, DVD)",
+        "יחובר מסך למערכת לטובת צפייה בהקלטה"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R006",
+      "title": "דרישות תאורה חיצונית בשעות החשיכה",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "event_venue"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "בזמן חשיכה להפעיל מחוץ לעסק תאורה שתאיר את דרכי הגישה והיציאות",
+        "להבטיח תקינות קבועה של התאורה החיצונית"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R007",
+      "title": "איסור העסקת קטינים במכירת משקאות משכרים",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "event_venue"
+        ],
+        "food_type": [
+          "משקאות משכרים"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "אין להעסיק במכירת משקאות משכרים מי שטרם מלאו לו 18 שנים"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R008",
+      "title": "שילוט והודעות בנוגע לאיסור מכירה/הגשה משקאות משכרים לקטינים",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "event_venue"
+        ],
+        "food_type": [
+          "משקאות משכרים"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "בעל העסק יודיע ויתלה שילוט מעל פתחי הכניסה שלא יימכרו או יוגשו משקאות משכרים לקטינים",
+        "השלט יהיה מחומר קשיח ומידותיו 40x50 ס\"מ",
+        "אותיות בשלט יהיו בגודל 2.5x2.5 ס\"מ, שחורות על רקע לבן",
+        "השלט יוצב בגובה 1.80-2.20 מטר ויואר בשעות החשיכה כאשר העסק פתוח",
+        "לשון ההודעה תהיה: מכירה או הגשה של משקאות משכרים למי שטרם מלאו לו 18 שנה - אסורה! ... לפי החוק"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R009",
+      "title": "דרישת זיהוי גיל בצריכת משקאות משכרים",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "event_venue"
+        ],
+        "food_type": [
+          "משקאות משכרים"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "המבקש לצרוך משקאות משכרים חייב להציג תעודה מזהה לאימות גיל"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R010",
+      "title": "שימוש בכוסות פלסטיק לא קשיח בלבד באירועים בשטח פתוח",
+      "applies_when": {
+        "business_type": [
+          "event_venue",
+          "food_truck"
+        ],
+        "food_type": [
+          "כל המשקאות"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null,
+        "additional_conditions": [
+          "אירועים תחת כיפת השמיים או אירועים ארעיים"
+        ]
+      },
+      "actions": [
+        "במכירה וצריכה של כל סוגי המשקאות באירועים פתוחים, יש לספק אך ורק בכוסות פלסטיק לא קשיח"
+      ],
+      "priority": "גבוה"
+    },
+    {
+      "id": "R011",
+      "title": "העברת כספים מהעסק בסכומים גבוהים",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "event_venue"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null,
+        "additional_conditions": [
+          "בהעברת סכום מ-50,000 ₪ ומעלה"
+        ]
+      },
+      "actions": [
+        "העברת כספים מהעסק בסכום מ-50,000 ₪ תבוצע באמצעות בלדרות מאובטחת המחזיקה ברישיון עסק מתאים"
+      ],
+      "priority": "גבוה"
+    },
+    {
+      "id": "R012",
+      "title": "חובת אחזקת מידע ומסמכים בעסק",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "event_venue"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "לשמור בעסק נספח א' – נתונים כלליים של העסק (שם, מספר עובדים, ח.פ/ע.מ, טלפון, פקס)",
+        "להחזיק רשימת מועסקים בכל עת, הכוללת שמות העובדים, מספרי תעודת זהות, כתובות ודרכי תקשורת",
+        "לשמור את הקלטות מצלמות הטמ\"ס לפי המפורט"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R001",
+      "title": "הגשת מסמכים לבקשה לרישיון עסק",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "לצרף תכנית אדריכלית וסניטרית עם תרשים סביבה ותכנית מגרש, כולל ציון גבולות השטחים הייעודיים ואזורי פעילות מזון",
+        "לצרף פירוט של מערכות אספקת מים ומתקני מניעת זרימה חוזרת",
+        "לספק תכנית מערכת סילוק שפכים ונקודות חיבור לתשתיות עירוניות/אזוריות",
+        "להגיש תכנית בקנה מידה 1:100 עם פירוט חדרים, אזורי טיפול והתקני סניטציה",
+        "לצרף פרשה טכנית הכוללת פירוט מבקרים, סידורים תברואיים ופירוט מדורים"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R002",
+      "title": "מסמכים נדרשים לחידוש רישיון עסק",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "להגיש הצהרת בעל עסק כי לא נערכו שינויים מהותיים בעסק",
+        "להגיש דוחות מתקין מוסמך על התקנה ובדיקה של מז\"ח (אבזר למניעת זרימת מים חוזרת)"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R003",
+      "title": "קיום נהלים ותקנות טיפול במזון",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "לקיים את הדרישות המפורטות במדריך נהלים ותקנות לטיפול במזון במטבחים גדולים"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R004",
+      "title": "שמירת מסמכים והעברה לרשות הבריאות",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "לשמור אישורי התקנת מז\"ח, אישורי ניקוי וחיטוי מאגרי מים, ותעודות פינוי מפרידי שומן 5 שנים ולהעבירם לרשות הבריאות לפי דרישה"
+      ],
+      "priority": "גבוה"
+    },
+    {
+      "id": "R005",
+      "title": "איסור עישון בעסק",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "להציב שלטים האוסרים עישון בהתאם לחוק למניעת העישון במקומות ציבוריים",
+        "לא להציב מאפרות בתחומי העסק, למעט במקום נפרד שהוקצה לעישון",
+        "לעשות כל שניתן כדי למנוע עישון מחוץ לאזור העישון, אם הוקצה"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R006",
+      "title": "אספקת מי שתייה ותכנון מערכת המים בעסק",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "לדאוג שחיבור אספקת המים למערכת מים מאושרת ע\"י רשות הבריאות בלבד",
+        "לוודא שהמים בתחומי העסק עומדים בתקן",
+        "לתכנן, להקים, להפעיל ולתחזק את המערכת בהתאם לתקנות מים, תקנים ישראלים והנחיות משרד הבריאות הרלוונטיות"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R001",
+      "title": "ניקוי וחיטוי מערכת אספקת מים",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen",
+          "food_business"
+        ],
+        "food_type": [],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "בעל העסק יבצע ניקוי וחיטוי במערכת אספקת מים לרבות בריכה, כמפורט בתקנות מי שתייה, תקנות מערכות בריכה ובהנחיות לניקוי וחיטוי מערכות אספקת מים"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R002",
+      "title": "התקנת מערכת חיטוי משלימה לאספקת מים",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen",
+          "food_business"
+        ],
+        "food_type": [],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "בעל העסק יתקין מערכת חיטוי משלימה להבטחת רמת חיטוי נאותה, אם דרש זאת המנהל ובהתאם להנחיותיו"
+      ],
+      "priority": "חשוב"
+    },
+    {
+      "id": "R003",
+      "title": "בדיקות לגילוי חיידקי ליגיונלה במערכות ערפול/מזרקה/מגדלי קירור",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen",
+          "food_business"
+        ],
+        "food_type": [],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "בעסק בו מותקנים מערכות ערפול, מזרקות ומגדלי קירור, יבצע בעל העסק בדיקות לגילוי חיידקי ליגיונלה בהתאם להנחיות למניעת התרבות חיידקי לגיונלה במערכות מים"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R004",
+      "title": "הפרדה בין מערכת אספקת מי שתייה למערכות מים אחרות",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen",
+          "food_business"
+        ],
+        "food_type": [],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "בעסק תתקיים בכל עת הפרדה מוחלטת בין מערכת אספקת מי שתייה ובין מערכת אספקת מים לתהליכי עבודה, ייצור ושימושים אחרים, כגון: כיבוי אש, גינון וכו'"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R005",
+      "title": "מניעת זרימה חוזרת בין מערכות מים",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen",
+          "food_business"
+        ],
+        "food_type": [],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "במקרה בו לא ניתן ליצור הפרדה בין מערכות מים, יש להתקין מכשיר מונע זרימה חוזרת בנקודת החיבור לפי התקנות והנחיות משרד הבריאות"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R006",
+      "title": "תחלופת מים בבריכה",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen",
+          "food_business"
+        ],
+        "food_type": [],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "בעל העסק יבטיח שתחלופת המים במכל בריכה תהיה כך שכל נפח המכל מוחלף במים טריים לפחות פעם בשלושה ימים"
+      ],
+      "priority": "חשוב"
+    },
+    {
+      "id": "R007",
+      "title": "סילוק שפכים רק דרך מערכת ביוב מאושרת",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen",
+          "food_business"
+        ],
+        "food_type": [],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "שפכי העסק יסולקו רק דרך מערכת סילוק שפכים המחוברת למערכת ביוב מרכזית באישור הרשות המקומית; כל פתרון אחר דורש אישור משרד הבריאות"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R008",
+      "title": "התקנת ותפעול מערכות סילוק שפכים לפי התקנים",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen",
+          "food_business"
+        ],
+        "food_type": [],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "מערכות סילוק שפכים יותקנו, יופעלו ויתוחזקו לפי הל\"ת, תקן ת\"י 1205.3, ת\"י 1205.4, והנחיות משרד הבריאות"
+      ],
+      "priority": "חשוב"
+    },
+    {
+      "id": "R009",
+      "title": "קווי איסוף שפכים לא יעברו מתחת לעסקי מזון/בריכות/מי שתייה",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen",
+          "food_business"
+        ],
+        "food_type": [],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "קווי איסוף וקולטני שפכים לא יעברו מתחת לתקרה של עסקי מזון, בריכות או מאגרי מי שתייה"
+      ],
+      "priority": "חשוב"
+    },
+    {
+      "id": "R010",
+      "title": "מערכת סילוק שפכים תחובר למפריד שומן",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen",
+          "food_business"
+        ],
+        "food_type": [],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "מערכת סילוק שפכים של העסק תחובר למפריד שומן, שיורכב לפי הוראות המנהל"
+      ],
+      "priority": "חשוב"
+    },
+    {
+      "id": "R011",
+      "title": "מניעת הצפה עקב סתימה בביב הציבורי",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen",
+          "food_business"
+        ],
+        "food_type": [],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "בעל העסק יוודא כי סתימה במערכת הביוב הציבורית לא תגרום להצפה בעסק וינקוט בכל האמצעים הדרושים"
+      ],
+      "priority": "חשוב"
+    },
+    {
+      "id": "R012",
+      "title": "ניהול הצפה של שפכים",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen",
+          "food_business"
+        ],
+        "food_type": [],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "במקרה של גלישת שפכים בתחום העסק, יש לסגור מידית את העסק, לדווח לרשות הבריאות ולנקות ולחטא את העסק"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R013",
+      "title": "הגנה על אזורי פריקת מזון",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen"
+        ],
+        "food_type": [],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "אזורי פריקת המזון לא יושפעו ממטרדים סביבתיים"
+      ],
+      "priority": "חשוב"
+    },
+    {
+      "id": "R014",
+      "title": "שיטת עבודה בבית אוכל - 'בשל-הגש' בלבד אלא אם קיבל אישור",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen"
+        ],
+        "food_type": [],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "שיטת העבודה המותרת בבית האוכל היא \"בשל-הגש\" אלא אם התקבל אישור מהמנהל לשיטה אחרת"
+      ],
+      "priority": "חשוב"
+    },
+    {
+      "id": "R015",
+      "title": "חישוב שירותים ציבוריים לפי הל\"ת",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen",
+          "food_business"
+        ],
+        "food_type": [],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "מספר השירותים ומתקני התברואה יחושב לפי פרק 3 להל\"ת"
+      ],
+      "priority": "חשוב"
+    },
+    {
+      "id": "R016",
+      "title": "הכוונה לשירותים",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen",
+          "food_business"
+        ],
+        "food_type": [],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "יוצבו שלטים בולטים המכוונים לשירותים"
+      ],
+      "priority": "נדרש"
+    },
+    {
+      "id": "R017",
+      "title": "ציוד ליד הכיורים בשירותים",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen",
+          "food_business"
+        ],
+        "food_type": [],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "ליד הכיורים יוצבו ציוד לסבון נוזלי, מגבות נייר ומכלים לאיסוף אשפה"
+      ],
+      "priority": "חשוב"
+    },
+    {
+      "id": "R018",
+      "title": "שמירה על ניקיון השירותים במשך כל שעות הפעילות",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen",
+          "food_business"
+        ],
+        "food_type": [],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "ניקיון שוטף של השירותים יבוצע בכל שעות פתיחת העסק, והשירותים יהיו נקיים בכל עת"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R019",
+      "title": "תחזוקת מערכות שרברבות",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen",
+          "food_business"
+        ],
+        "food_type": [],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "בעל העסק אחראי שמערכות שרברבות יתוחזקו באופן שוטף למניעת נזק ומטרדים סביבתיים"
+      ],
+      "priority": "חשוב"
+    },
+    {
+      "id": "R020",
+      "title": "סילוק פסולת לפי תקנות הבנייה ועמידה בתנאים סביבתיים ותברואתיים",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen",
+          "food_business"
+        ],
+        "food_type": [],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "סילוק פסולת יהיה לפי חלק ו' לתקנות התכנון והבנייה - אצירת אשפה וסילוקה מבניין",
+        "יש למנוע מטרדים סביבתיים ובריאותיים"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R021",
+      "title": "הצבת מכלי קיבול לפסולת מוצקה",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen",
+          "food_business"
+        ],
+        "food_type": [],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "בעל העסק יציב מכלי קיבול לאיסוף פסולת מוצקה, בכמות ובמקומות המבטיחים ניקיון להנחת דעתו של המנהל"
+      ],
+      "priority": "חשוב"
+    },
+    {
+      "id": "R022",
+      "title": "דרישות למכלי אשפה בעסק",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen",
+          "food_business"
+        ],
+        "food_type": [],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "מכלי אשפה יוצבו בחצר העסק או בחדר ייעודי בלבד",
+        "מכלים יהיו בנפח המבטיח איסוף כל הפסולת המוצקה",
+        "המכלים יהיו שלמים, תקינים ובעלי מכסים נגד חדירת מזיקים"
+      ],
+      "priority": "חשוב"
+    },
+    {
+      "id": "R023",
+      "title": "שמירה על מצב תברואי תקין בחדר האשפה",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen",
+          "food_business"
+        ],
+        "food_type": [],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "בעל העסק ישמור על מצב תברואי תקין בחדר האשפה"
+      ],
+      "priority": "חשוב"
+    },
+    {
+      "id": "R001",
+      "title": "רכישת מזון מעסק בעל רישיון תקף וסימון מזון מתאים",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "catering"
+        ],
+        "food_type": [],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "יש לרכוש מזון מעסק בעל רישיון יצרן ורישיון עסק בר תוקף",
+        "כל מוצר מזון יסומן בשם היצרן, כתובתו, הרכב תזונתי, משקל ותאריך אחרון לשיווק"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R002",
+      "title": "פיקוח וטרינרי מלא למזון מן החי",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "catering"
+        ],
+        "food_type": [
+          "בשר",
+          "דגים",
+          "עופות",
+          "ביצים"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "על המזון מן החי להיות תחת פיקוח וטרינרי מלא",
+        "יש לוודא קבלת תעודות וטרינריות לכל בשר, עופות ודגים"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R003",
+      "title": "שירות להחלפת מוצר פגום",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "catering"
+        ],
+        "food_type": [],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "יש לספק שירות להחלפת מוצר פגום"
+      ],
+      "priority": "בינוני"
+    },
+    {
+      "id": "R004",
+      "title": "הקפדה על טמפרטורת המזון המתקבל",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "catering"
+        ],
+        "food_type": [
+          "בשר",
+          "דגים",
+          "עוף",
+          "מזון קפוא",
+          "מזון חם",
+          "סלטים עם רוטב",
+          "קונדיטוריה עם קרמים"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "יש לבדוק טמפרטורת המזון הקפוא, המצונן או החם בעת הקבלה ולא לקבל מזון שאינו בטווח התקני",
+        "יש לרשום את טמפרטורת הסחורה בזמן הגעתה ולשמור את הרישום חודש לפחות"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R005",
+      "title": "דרישות להובלת בשר, עופות ודגים",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "catering"
+        ],
+        "food_type": [
+          "בשר",
+          "דגים",
+          "עופות"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "הובלת בשר, עופות ודגים תהיה בהתאם לתקנות רישוי עסקים תנאים תברואתיים להובלת בשר, דגים, עופות ומוצריהם, התשל\"ב–1971"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R006",
+      "title": "דרישות קבלה ובדיקת רכבים להובלת מזון",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "catering"
+        ],
+        "food_type": [],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "רכב להובלת מזון יהיה בעל רישיון עסק בתוקף ויעמוד בת\"י 1291 (רכב להובלת מזון בטמפרטורה מבוקרת)",
+        "הרכב יהיה מתאים לסוג המזון שהוא מוביל",
+        "יש לבדוק ניקיון הרכב ושלמות האריזות, וכן לרשום ולבדוק טמפרטורת הרכב והמזון בעת ההגעה",
+        "בדיקת טמפרטורה בחלל הרכב ובמזון תבוצע במד חום אינדיקטורי, ותוצאותיה תירשמנה על טופס המשלוח",
+        "יש לבדוק ולעמוד בדרישות ייחודיות למוצרי לחם, ביצים, חלב ומזון קפוא"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R007",
+      "title": "בדיקת ביצים ותנאי קבלתן",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "catering"
+        ],
+        "food_type": [
+          "ביצים"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "יש לקבל אך ורק ביצי מאכל שלמות וללא סדקים",
+        "הביצים צריכות להימסר עם תעודת משלוח לפי כללי המועצה לענף הלול",
+        "יש לוודא שהביצים שמורות בטמפרטורה שלא תעלה על 20 מעלות צלזיוס"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R008",
+      "title": "קליטה, רישום ופסילת מזון על ידי גורם מוסמך",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "catering"
+        ],
+        "food_type": [],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "הזמנה, קבלה, רישום, בדיקה ופסילה של מזון תתבצע על ידי אדם אחראי ומיומן בלבד",
+        "האדם האחראי ידרוש מספק המזון לעמוד בדרישות החוק הרלוונטיות",
+        "אין לקבל מוצר שאינו עומד בקריטריונים – יש להצהיר ולתעד סיבת הפסילה"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R009",
+      "title": "הובלת מזון – רכבים ותנאים מיוחדים",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "catering"
+        ],
+        "food_type": [],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "רכב להובלת מזון קפוא יהיה מבודד ומקורר כך שטמפרטורת המוצרים הקפואים לא תעלה על מינוס 12 מעלות והמוצרים המקוררים לא יעלו על פלוס 7 מעלות",
+        "ביצים יובלו בטמפרטורה שלא תעלה על 20 מעלות",
+        "מזון שעבר תהליך 'בשל/קרר' יובא בטמפרטורה שלא תעלה על 3+ מעלות",
+        "מזון חם יובל במינימום 65+ מעלות"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R010",
+      "title": "תקינות מיכלי קופסאות שימורים",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "catering"
+        ],
+        "food_type": [
+          "שימורים"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "יש לוודא שקופסאות שימורים נמצאות במצב תקין, ללא סימני חלודה, נזילה או נפיחות"
+      ],
+      "priority": "גבוה"
+    },
+    {
+      "id": "R001",
+      "title": "הפרדה בין מזון גולמי, מוכן ומוכן למחצה",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck"
+        ],
+        "food_type": [
+          "בשר",
+          "דגים",
+          "ביצים",
+          "ירקות",
+          "פירות",
+          "מאפים",
+          "כולל כל סוגי המזון"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "יש להקצות אזורים נפרדים לאחסון וטיפול במזון גולמי, מוכן לאכילה ומוכן למחצה",
+        "יש לבצע הפרדה במשטחי העבודה ובכלים",
+        "רצוי להשתמש בכלים נפרדים לשני סוגי המזון",
+        "אם עושים שימוש בכלים משותפים – יש לרחוץ היטב במים ובסבון בין השימושים",
+        "רצוי לסמן את הכלים לפי סוג המזון המתאים",
+        "יש להקצות אזורים יעודיים לפעולות ייעודיות: טיפול בבשר ודגים, חדר קירור, הכנת סלטים, ארוחות חלביות, לחם, משלוחים ומזון רגיש"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R002",
+      "title": "שמירה על טמפרטורה נכונה של המזון",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck"
+        ],
+        "food_type": [
+          "בשר",
+          "דגים",
+          "ביצים",
+          "מזון מבושל",
+          "מזון מצונן",
+          "מזון קפוא"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "יש להקפיד על שמירת טמפרטורת המזון בהתאם לאורך כל שרשרת הטיפול",
+        "החזקת מזון מבושל, מוכן לאכילה: מעל 65 מעלות צלזיוס",
+        "שמירה על מזון מצונן: 5 מעלות צלזיוס, ובקפיאה: מינוס 18 מעלות צלזיוס",
+        "הפרדה בין סוגי מזון שונים במקרר",
+        "הפשרה רק במקרר או במתקן ייעודי בטמפרטורה עד 10 מעלות צלזיוס, ולא במים או מחוץ למקרר"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R003",
+      "title": "טיפול בציוד וכלים",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck"
+        ],
+        "food_type": [
+          "כל סוגי המזון"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "יש להוריד שאריות מזון לפני שטיפת הכלים",
+        "לרחוץ במים וסבון, להדיח במים זורמים, לייבש באוויר",
+        "יש להקפיד במיוחד על ניקוי מטחנות בשר ומיקסרים לפי הוראות היצרן",
+        "שמן משומש יועבר לכלי ייעודי המיועד למיחזור",
+        "איסור מוחלט לשפוך שמן משומש לביוב"
+      ],
+      "priority": "חשוב"
+    },
+    {
+      "id": "R004",
+      "title": "ארגון המטבח לשמירה על הניקיון",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck"
+        ],
+        "food_type": [
+          "כל סוגי המזון"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "כלים נקיים יוצבו במתקנים ניידים ולא על רצפת המטבח",
+        "יש להימנע מהימצאות מים עומדים",
+        "עובד מטבח לא יעסוק בפעילות אחרת",
+        "לסמן את הכלים המיועדים לעבודה במטבח",
+        "להפריד ולסמן כלי ניקוי לשירותים בלבד, ולשמור כלי ניקוי וחומרי ניקיון במקום סגור, מורחק ממזון"
+      ],
+      "priority": "חשוב"
+    },
+    {
+      "id": "R005",
+      "title": "טיפול במזון שלא יצא מתחום המטבח (שאריות מזון)",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck"
+        ],
+        "food_type": [
+          "כל סוגי המזון"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "ניתן לשמור מזון שהוכן בשיטת 'בשל/הקפא' או 'בשל/הגש' עד 48 שעות בקירור",
+        "אסור להשתמש בשאריות מזון מחדר האוכל או עגלות הגשה"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R006",
+      "title": "הכשרת עובדי המטבח והיגיינה אישית",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck"
+        ],
+        "food_type": [
+          "כל סוגי המזון"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "רק עובדים שעברו הדרכה מתאימה לטיפול במזון יעבדו במטבח",
+        "לפחות עובד בכיר אחד יהיה בעל השתלמות בנושא איכות טיפול במזון בהתאם לנדרש (משרד הבריאות/HACCP)",
+        "יש להקפיד על היגיינה אישית: בגדי עבודה נפרדים, רחיצת ידיים לפני עבודה ובמהלך העבודה, שמירת בגדי הבית מחוץ לאזור המזון, איסור עישון/התעטשות ליד מזון לא מוגן, ציפורניים גזוזות, כיסוי שיער, בדיקה רפואית בעת הצורך",
+        "אסור לעבוד בעת מחלה מדבקת או עם פצעים פתוחים/מוגלתיים"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R007",
+      "title": "אחסון, הכנה ועיבוד המזון – ארגון מחסנים ומתקנים",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck"
+        ],
+        "food_type": [
+          "כל סוגי המזון"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "אחסון אריזות ריקות יהיה מוגבה מהרצפה ובצורה שמונעת מטרדים סביבתיים",
+        "חדרי אשפה ימוקמו עם גישה נוחה ויצוידו במתקן שטיפה וניקוז",
+        "הקצה אזורים או מחסנים ייעודיים לכל סוג של קבלה, אחסון, ושימור (קבלה, מחסן חודשי, מחסן יומי/שבועי, ירקות ופירות לפני ניקוי וכו')"
+      ],
+      "priority": "חשוב"
+    },
+    {
+      "id": "R001",
+      "title": "חובה להפריד באחסון בין סוגי בשר שונים (בעלי כנף, בהמות, דגים)",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "catering"
+        ],
+        "food_type": [
+          "בשר",
+          "דגים"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "יש לאחסן בשר בעלי כנף, בשר בהמות ודגים במחסנים נפרדים ולא יחד"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R002",
+      "title": "חובה על חדרי הקפאה, מקררים ומתקן הפשרה לבשר",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "catering"
+        ],
+        "food_type": [
+          "בשר"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "יש להחזיק חדר הקפאה ומקפיא שבהם מזון בשרי נשמר במינימום מינוס 18 מעלות צלזיוס",
+        "מתקן הפשרה או מקרר לטמפ' מקסימום פלוס 10 מעלות צלזיוס או מתקן ייעודי להפשרה מהירה לפי הוראות יצרן",
+        "חדר ממוזג (20 מעלות) לטיפול, מקרר עגלות לבשר בתהליך"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R003",
+      "title": "חובת הפרדה מוחלטת בין אזור הכנת דגים ובשר",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "catering"
+        ],
+        "food_type": [
+          "בשר",
+          "דגים"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "יש להבטיח הפרדה מוחלטת בין אזור הכנת דגים לאזורי הכנת בשר בהמות ובשר עוף בכל שלבי האחסנה, ההכנה והייצור"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R004",
+      "title": "התנהלות קירור ושמירת מזון לאחר בישול",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "catering"
+        ],
+        "food_type": [
+          "בשר",
+          "דגים",
+          "ביצים",
+          "חלב",
+          "ירקות",
+          "פירות"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "מזון שמועד הגשתו אינו ביום ההכנה: לאחסן במקרר משב קור ולשמור בחדר קירור בטמפ' של 2°C בשיטת 'בשל/קרר' או 4°C בשיטת 'בשל/הגש'",
+        "צינון במקרר משב קור: ירידת טמפ' המזון החם מ-70°C ל-5°C בתוך שעתיים לכל היותר ושימור בקירור",
+        "בקירור עופות יש לחתוך לחצאים ולשים בשכבה אחת, בשר – גובה ומשקל גוש לא יעלו לפי מפרט",
+        "מומלץ לקרר מזון חם במכלים בגובה מתאים"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R005",
+      "title": "חובה על אזור טיפול והכנת ירקות ופירות",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "catering"
+        ],
+        "food_type": [
+          "ירקות",
+          "פירות"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "צריך להיות אזור קילוף/ניקוי לירקות ופירות",
+        "חדר קירור לירקות/פירות (לאחר ניקוי/קילוף) בטמפ' עד 4°C"
+      ],
+      "priority": "בינוני"
+    },
+    {
+      "id": "R006",
+      "title": "אזור הכנת מזון חלבי ומוצרי חלב",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "catering"
+        ],
+        "food_type": [
+          "חלב"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "חדר קירור למוצרי חלב בטמפ' של עד 4°C",
+        "חדר בישול חלבי ואזור לארוחות חלביות/בוקר/ערב"
+      ],
+      "priority": "בינוני"
+    },
+    {
+      "id": "R007",
+      "title": "הפרדת אזורי הדחת כלים בשריים וחלביים",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "catering"
+        ],
+        "food_type": [
+          "בשר",
+          "חלב"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "יש להבטיח הפרדה באזורים להדחת כלים בשריים וחלביים"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R008",
+      "title": "אזורים נוספים הנדרשים במבנה",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "catering"
+        ],
+        "food_type": [],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "אזורי הכנה לחלוקה ומשלוח",
+        "אזור ללחם",
+        "אזור לשטיפת עגלות טרמופורטים לאחר שימוש",
+        "אזור שירותים ומלתחות לצוות לפי מספר העובדים",
+        "חדר אוכל לצוות במטבח אם אינם סועדים עם כלל האורחים"
+      ],
+      "priority": "נמוך"
+    },
+    {
+      "id": "R009",
+      "title": "אחסון ובקרה על קירור מזון",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "catering"
+        ],
+        "food_type": [
+          "בשר",
+          "דגים",
+          "ביצים",
+          "חלב",
+          "ירקות",
+          "פירות"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "מתקן הקירור צריך לכלול מד-חום אינדיקטורי ומד-חום רושם",
+        "יש לשמור תיעוד הטמפרטורה למשך לפחות שלושה חודשים",
+        "מזון קפוא יישמר שלא יעלה על מינוס 18°C",
+        "מזון מצונן (מעובד/חלקית) לא יעלה על 5°C",
+        "מזון מקורר במקרר משב קור: טמפ' מקס' 2°C",
+        "מזון יאוחסן מוגן ומכוסה",
+        "חובה להפריד בין מזון קפוא מראש למזון בתהליך הקפאה במתקנים שונים",
+        "יש להפריד בין מזון גולמי למזון מעובד, במתקנים נפרדים",
+        "יש להפריד בין סוגי מזון שיכולים לזהם אחד את השני",
+        "ביצים יאוחסנו בנפרד, בקירור"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R010",
+      "title": "יישום שיטת F.I.F.O באחסון מזון (ראשון נכנס ראשון יוצא)",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "catering"
+        ],
+        "food_type": [
+          "בשר",
+          "דגים",
+          "ביצים",
+          "חלב",
+          "ירקות",
+          "פירות"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "הקפדה על הכנסת והוצאת מזון לאחסון בשיטת ראשון נכנס ראשון יוצא (F.I.F.O)"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R011",
+      "title": "שמירה על תקינות וניקיון מתקני קירור",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "catering"
+        ],
+        "food_type": [],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "מתקני הקירור יהיו נקיים, שלמים וללא הצטברות קרח או מים",
+        "דלתות המתקנים תהיינה אטומות עם גומיות תקינות",
+        "אחסון מאפשר זרימת אוויר לשמירה על טמפרטורת המזון",
+        "יש להתקין מנגנון שמירת טמפ' בזמן פתיחת דלתות (וילון PVC/מסך אוויר)",
+        "התקנת מספר רגשים לקירור לפי גודל המתקן",
+        "אם יש רגש אחד – למקמו בזרימת האוויר החוזרת (הנקודה החמה)"
+      ],
+      "priority": "בינוני"
+    },
+    {
+      "id": "R001",
+      "title": "סימון תאריכי ייצור ותפוגה על מזון מעובד",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "food_truck",
+          "cafe",
+          "catering"
+        ],
+        "food_type": [
+          "מזון מעובד"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "לסמן כל מזון מעובד בתאריך ייצור ו/או תפוגה"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R002",
+      "title": "שמירה על טמפרטורת קירור במקררים ומקפיאים",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "food_truck",
+          "cafe",
+          "catering"
+        ],
+        "food_type": [
+          "מזון בקירור",
+          "מזון קפוא"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "אין להשאיר דלתות מקררים ומקפיאים פתוחות",
+        "במקרה של קלקול מקרר/הפסקת חשמל מעל 4-5 שעות - יש להעביר המזון למקררים חלופיים",
+        "יש לצייד פתחי מתקני הקירור במנגנון לשמירת הטמפרטורה (מסכי אוויר, וילונות PVC וכו')"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R003",
+      "title": "דיווח ללשכת הבריאות במקרי הפסקת חשמל ממושכת",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "food_truck",
+          "cafe",
+          "catering"
+        ],
+        "food_type": [
+          "מזון בקירור",
+          "מזון קפוא"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "במקרה של הפסקת חשמל למקפיא עד 24 שעות כשלא נפתחה הדלת – אין צורך להעביר",
+        "בהפסקות חשמל גדולות - חובה להודיע ללשכת הבריאות לקבלת החלטה",
+        "במקרה של תקלה לא ידועה זמן התחלתה – יש להודיע מיידית ללשכה ואין להשתמש במזון עד קבלת החלטה"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R004",
+      "title": "שמירת מזון מקורר בטמפרטורה מוגדרת",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "food_truck",
+          "cafe",
+          "catering"
+        ],
+        "food_type": [
+          "מזון מקורר"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "מזון מקורר יישמר בטמפרטורה של 0 עד 3 מעלות צלזיוס עד החימום",
+        "בזמן הפשרת חדר קירור תותר טמפרטורה עד 5+ מעלות לפרק זמן קצר",
+        "חיי המדף של מזון מקורר יעמדו בתקן שיטת \"בשל-קרר\" ויש לספקו לאכילה תוך זמן קצר",
+        "במידה ולא הוגש בזמן, יש להשמיד את המזון"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R005",
+      "title": "השמדת מזון מקורר שבטמפרטורה מעל 10+ מעלות",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "food_truck",
+          "cafe",
+          "catering"
+        ],
+        "food_type": [
+          "מזון מקורר"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "כל מזון מקורר שטמפרטורתו עלתה מעל 10+ מעלות יש להשמידו, כיוון שאינו ראוי לאכילה"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R006",
+      "title": "אחסון מזון חם להגשה בטמפרטורה נאותה",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "food_truck",
+          "cafe",
+          "catering"
+        ],
+        "food_type": [
+          "מזון חם"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "מזון חם להגשה יישמר בטמפרטורה של מינימום 65+ מעלות צלזיוס"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R007",
+      "title": "הפרדת אזורי הכנה בין מזון גולמי למעובד",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "food_truck",
+          "cafe",
+          "catering"
+        ],
+        "food_type": [
+          "מזון גולמי",
+          "מזון מעובד"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "הכנת מזון תבוצע במטבח בלבד",
+        "אין לערבב בין מזון גולמי למעובד/מעובד חלקית",
+        "הכנה תבוצע בציוד נקי",
+        "טיפול במזון גולמי על משטחים יעודיים ונפרדים מהמוכנים",
+        "משטחי העבודה יהיו חלקים, לא סופגים וניתנים לניקוי",
+        "שימוש בכלי מטבח יעודיים עם סימון נחוץ לכל סוג מזון"
+      ],
+      "priority": "גבוה"
+    },
+    {
+      "id": "R008",
+      "title": "שטיפה ראשונית של פירות וירקות באזור ייעודי בלבד",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "catering"
+        ],
+        "food_type": [
+          "פירות",
+          "ירקות"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "יש לבצע שטיפה ראשונית של פירות וירקות באזור הייעודי בלבד",
+        "פירות וירקות יועברו למחלקות כשהם שטופים ונקיים"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R009",
+      "title": "הפשרת בשר/עופות/דגים גולמיים בתנאים מבוקרים",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "catering"
+        ],
+        "food_type": [
+          "בשר",
+          "עוף",
+          "דגים"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "יש לבצע הפשרת בשר, עופות ודגים גולמיים במכלים אוספי נוזלים בטמפ' עד 10+ מעלות, במתקן הפשרה מאושר ע\"י המנהל",
+        "הסרת אריזה באזור יעודי",
+        "הכשרת בשר במים עד 7+ מעלות בלבד, קירור המים בעזרת קרח ממי שתייה"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R010",
+      "title": "הכנת מזונות ייחודיים (פורמולות) במקום וציוד מיוחד",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "catering"
+        ],
+        "food_type": [
+          "פורמולות",
+          "תרכובות",
+          "תערובות מזון"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "יש להכין תערובות/תרכובות/פורמולות במקום ייעודי בלבד ובציוד מיוחד"
+      ],
+      "priority": "גבוה"
+    },
+    {
+      "id": "R011",
+      "title": "בישול וצלייה בטמפרטורות בטוחות",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "catering"
+        ],
+        "food_type": [
+          "בשר",
+          "דגים",
+          "עוף",
+          "ביצים",
+          "מאפים"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "בישול תוך ערבוב לקבלת רתיחה בכל חלקי התבשיל",
+        "צלייה/טיגון/אפייה עד לטמפ' מינימלית 72+ מעלות למשך 2 דקות בנקודה הקרה ביותר במנה"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R012",
+      "title": "קירור מהיר למזון חם שמוגש קר",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "catering"
+        ],
+        "food_type": [
+          "מזון שעבר עיבוד בחום ומוגש קר"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "חובה לבצע קירור מהיר במתקן משב קור או אחר שאושר על-ידי מנהל למזון חם שמוגש קר"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R013",
+      "title": "צינון ואחסון של מזון שעבר עיבוד בחום עד 4 ימים",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "catering"
+        ],
+        "food_type": [
+          "מזון חם לאחר עיבוד המוגש עד 4 ימים לאחר מכן"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "על מזון חם שיוגש תוך 1-4 ימים לעבור צינון במתקן מאושר",
+        "החובה לאחסן את המזון בקירור בטמפרטורה של 2+ מעלות צלזיוס"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R014",
+      "title": "הנחיות לטיפול בביצים",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "catering",
+          "medical_institution"
+        ],
+        "food_type": [
+          "ביצים"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "אין להשתמש בביצים סדוקות ושבורות",
+        "יש להוציא את הביצים מהמקרר סמוך לשימוש",
+        "במוסדות רפואיים אין להגיש ביצים רכות/חצי עשויות (כולל חביתות/אומלטים)",
+        "בטיגון הביצה יש להקפיד שכל החלבון ייקרש",
+        "אם מבשלים ביצה בקליפה – יש לשטוף אותה לפני השימוש",
+        "באופן כללי אין לשטוף ביצים (למניעת החדרת מזהמים)",
+        "ניתן להשתמש בביצים מפוסטרות שהוקפאו ממפעל ברישיון יצרן",
+        "להפשיר ביצים מפוסטרות במקרר",
+        "להשתמש בכל הביצה שהופשרה באותו יום, אין להקפיא שוב"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R015",
+      "title": "אחסון מזון קר שלא עבר טיפול טרמי",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "catering"
+        ],
+        "food_type": [
+          "סלטים",
+          "מזון מוכן קר"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "יש לאחסן מזון טרי שהוכן ולא עבר טיפול טרמי במקרר ייעודי עד לחלוקה, בטמפ' עד 5+ מעלות",
+        "אין להשתמש בביצים במזון שמוגש קר וללא חימום נוסף",
+        "אסור להכין מיונז במטבח"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R016",
+      "title": "אחסון מזון חם וקר לפני ואחרי חלוקה",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "catering"
+        ],
+        "food_type": [
+          "מזון חם",
+          "מזון קר"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "מזון חם ישמר במינימום 65+ מעלות",
+        "מזון קר ישמר בטמפ' עד 5+ מעלות במכלי קירור",
+        "מזון מחולק במגשים אישיים יש להגיש תוך חצי שעה מהחלוקה"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R017",
+      "title": "חימום מחדש של מזון קר",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "catering"
+        ],
+        "food_type": [
+          "מזון קר העובר חימום מחדש"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "מזון קר המיועד לחימום - יש לחמם כך שטמפ' הנקודה הקרה ביותר תגיע ל-72+ מעלות לצלזיוס לפחות",
+        "להגיש מיד לאחר החימום ולא יאוחר מחצי שעה מסיום החימום"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R018",
+      "title": "חלוקה והעברה בטוחה של מזון שאינו דורש קירור או חימום",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "catering"
+        ],
+        "food_type": [
+          "מזון בטמפ' החדר"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "להעביר לחלוקה כשהמזון נקי/מוכן לאכילה, ולדאוג שלא יזדהם בתהליך העברת המזון"
+      ],
+      "priority": "גבוה"
+    },
+    {
+      "id": "R019",
+      "title": "טיפול בשאריות מזון",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "catering"
+        ],
+        "food_type": [
+          "שאריות מזון",
+          "מוצרי חלב",
+          "ריבות",
+          "דברי מתיקה"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "שאריות במטבח הראשי - ניתן להשתמש עד 48 שעות ואחסנה בקירור",
+        "שימוש חוזר במזון 'בשל-קרר' לפי כללי השיטה",
+        "אסור לבצע שימוש חוזר במזון שחומם (בשל/הקפא)",
+        "שאריות שנשארו בעגלות/חלוקה/חדרי אוכל יושמדו",
+        "מוצרי מזון אישיים שחולקו יחשבו לשאריות ואסור בשימוש חוזר"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R001",
+      "title": "ניקיון ובריאות העובד במטבח",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "catering",
+          "kitchen"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "יש ללבוש בגדים נקיים ובהירים, המיועדים למטבח בלבד",
+        "החלפת בגדים חובה לפחות פעם ביום",
+        "שיער העובדים חייב להיות אסוף ומכוסה בכיסוי ראש",
+        "ציפורני העובדים חייבות להיות נקיות וללא ציפוי",
+        "אין לענוד תכשיטים, למעט טבעת נישואין",
+        "נדרשת הקפדה על ניקיון אישי ושטיפת ידיים במים וסבון, במיוחד במעבר בין מחלקות ולאחר שימוש בשירותים",
+        "אכילת מזון תותר במקום המיועד בלבד",
+        "אין לאפשר כניסת אנשים שאינם עובדי מטבח לשטח המטבח",
+        "אסור להעסיק עובד מטבח חולה במחלה מדבקת",
+        "אסור להעסיק עובד מטבח עם פצעים מוגלתיים ופתוחים",
+        "אסור להעסיק עובד מטבח המסרב לעבור בדיקות רפואיות או להמציא תעודה רפואית כנדרש",
+        "אין לעשן במטבח",
+        "אסור להחזיר לעבודה עובד שלא קיבל אישור רפואי לעבודה עם מזון לאחר מחלה",
+        "במקרה של הרעלת מזון יש לבצע בדיקות לעובדים לפי נהלי לשכות הבריאות"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R002",
+      "title": "ניקיון ושליטה בזיהום במטבחים – תהליך בסיסי",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "catering",
+          "kitchen"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "יש לבצע את תהליך הניקוי הבסיסי לכלי מטבח ומשטחי עבודה: איסוף פסולת/שאריות, ניקוי בדטרגנט ומים, השריה (במידת הצורך), שטיפה במים, ייבוש",
+        "יש לבצע תדירות ניקוי כמו שמצוין (בדרך כלל אחרי כל שימוש או פעם ביום)",
+        "יש לנקות על פי הנהלים והקפדה יתרה על כללי בטיחות, במיוחד ליד חשמל",
+        "במצבים חריגים (חומרים שנשפכו וכו'), יש להעלות את תדירות הניקוי",
+        "חדרים נוספים במטבח (כגון משרדים, שירותים) ינוקו לפי נהלים ייעודיים"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R003",
+      "title": "ארגון וניהול ניקיון המטבח",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "catering",
+          "kitchen"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "יש להניח כלי בישול נקיים במתקנים ייעודיים ולא על רצפת המטבח",
+        "יש להקפיד שניקוי מכשירים יתבצע בהתאם להוראות היצרן ולהדרכת תחזוקה",
+        "יש להקפיד על תלבושת נקייה לעובדים",
+        "יש להימנע ממים עומדים ברצפה",
+        "כוח-אדם שמנקה את המטבח לא יבצע עבודות אחרות באותו היום",
+        "יש לסמן כלי ניקוי המיועדים למטבח בלבד ולמנוע ערבובם עם כלי ניקוי של אזורים אחרים",
+        "יש להפריד ולסמן כלי ניקוי ייעודיים לשירותים",
+        "יש לרשום תאריך ניקוי לפריטים שאינם מנוקים כל יום"
+      ],
+      "priority": "גבוה"
+    },
+    {
+      "id": "R004",
+      "title": "נהלי ניקיון ציוד וכלים במטבח",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "catering",
+          "kitchen"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "כלי בישול וטיגון: ניקוי לפי תהליך בסיסי אחרי כל שימוש",
+        "כיריים: ניקוי בתהליך בסיסי פעם ביום",
+        "תנורים: חיצוני – תהליך בסיסי פעם ביום; פנימי ללא ציפוי – ניקוי במברשת פעם ביום; עם ציפוי – תהליך בסיסי פעם ביום",
+        "קומביסטימרים: התזה/מריחה של חומר מסיר שומן, חימום, שטיפה במים פעם ביום",
+        "קונבקטומטים: חיצונית – ניקוי בדטרגנט ובמטלית, וייבוש, פעם ביום; פנימית – חימום, התזת חומר מסיר שומנים, שטיפה, ניגוב במטלית לחה",
+        "מיקסר קבוע: תהליך בסיסי אחרי כל שימוש",
+        "מקררים ומקפיאים: חיצוני – תהליך בסיסי פעם ביום; פנימי – בדיקה פעם ביום",
+        "מכלי השרייה: תהליך בסיסי בהחלפת חומר ההשריה",
+        "מכלי אשפה: התזה במים ולחץ או קרצוף ידני ושטיפה עם חומר חיטוי בהחלפת שקית פסולת או אחרי כל ריקון",
+        "סרט נע: ניתוק מהחשמל, ניקוי במטלית וחומר מסיר שומן אחרי כל ארוחה",
+        "מדיח כלים: מדיח תעשייתי – התזה במים עם דטרגנט אחרי כל ארוחה; מדיח ביתי – הוצאת רשתות ומסננות וניקוי בסיסי",
+        "תבניות: ניקוי לפי תהליך בסיסי"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R001",
+      "title": "ניקוי עגלות להובלת מזון",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "food_industry"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "יש לנתק את העגלה ממערכת החשמל",
+        "יש לנקות עם מטלית לאחר כל ארוחה",
+        "לפי הצורך יש להשתמש בחומר מסיר שומן",
+        "אין להשתמש במים זורמים לניקוי"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R002",
+      "title": "ניקוי ציוד (טרמופורטים, גסטרונומים, מיקסרים ניידים, עגלות שירות, לוחות חיתוך, כלים לרג'יטרמיק, כלים למיניהם)",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "food_industry"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "יש לבצע תהליך בסיסי לניקוי הציוד לאחר כל שימוש"
+      ],
+      "priority": "גבוה"
+    },
+    {
+      "id": "R003",
+      "title": "החלפת ציוד מטבח וכלי אוכל",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "food_industry"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "יש להחליף ציוד מטבח וכלי אוכל ברגע שמתגלה פגם"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R004",
+      "title": "ניקוי ציוד וכלים בסיום יום העבודה",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "food_industry"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "אין להשאיר ציוד וכלים מזוהמים ליום שאחרי",
+        "יש לנקות את הציוד והכלים עם סיום העבודה"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R005",
+      "title": "התאמת אופן ותדירות הניקוי",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "food_industry"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "יש להקפיד על התאמת אופן הניקוי ותדירותו לכל פריט או שטח"
+      ],
+      "priority": "גבוה"
+    },
+    {
+      "id": "R006",
+      "title": "איסור טאטוא בקרבת מזון לא מוגן",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "food_industry"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "אין לטאטא בקרבת מזון לא מוגן"
+      ],
+      "priority": "גבוה"
+    },
+    {
+      "id": "R007",
+      "title": "ביקורת ותיקון תקלות מיידי",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "food_industry"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "יש לבצע ביקורת עצמית לעיתים קרובות",
+        "יש לתקן מיד את כל הטעון תיקון"
+      ],
+      "priority": "גבוה"
+    },
+    {
+      "id": "R008",
+      "title": "ניקיון פחי אשפה",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "food_industry"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "יש להקפיד שמכל האשפה במטבח יהיה נקי ותקין",
+        "יש לרוקן את מכל האשפה למכלי אשפה בחצר",
+        "יש להשתמש בשקיות ניילון לאשפה"
+      ],
+      "priority": "גבוה"
+    },
+    {
+      "id": "R009",
+      "title": "סידור וניקיון מדפים",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "food_industry"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "על המדפים להיות מסודרים ונקיים",
+        "יש לשמור מזון עטוף בניילון, סגור בצנצנת, או מוגן ברשת"
+      ],
+      "priority": "סטנדרטי"
+    },
+    {
+      "id": "R010",
+      "title": "איסור השארת מזון בחוץ בלילה",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "food_industry"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "אין להשאיר מזון בחוץ למשך שעות הלילה"
+      ],
+      "priority": "גבוה"
+    },
+    {
+      "id": "R011",
+      "title": "דרישות אחסון מחסן מזון",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "food_industry",
+          "warehouse"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "יש לדאוג לאוורור, צינון ותאורה מלאכותית חזקה במחסן",
+        "רצפה פנויה מקיר לקיר",
+        "גובה מדפי אחסון מעל 30 ס\"מ",
+        "מדפים קלים לניקוי ורווח בין המוצרים שעליהם"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R012",
+      "title": "אוורור מעבר בין קיר למדפים",
+      "applies_when": {
+        "business_type": [
+          "warehouse",
+          "food_industry",
+          "restaurant",
+          "cafe"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "יש לשמור על מעבר אוויר בין הקיר למדפים"
+      ],
+      "priority": "גבוה"
+    },
+    {
+      "id": "R013",
+      "title": "מבנה מחסן קשיח",
+      "applies_when": {
+        "business_type": [
+          "warehouse",
+          "food_industry",
+          "restaurant",
+          "cafe"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "המחסן יהיה בנוי מבניה קשיחה (לבנים, בטון)"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R014",
+      "title": "חוק תחלופה נכונה של מוצרים",
+      "applies_when": {
+        "business_type": [
+          "warehouse",
+          "food_industry",
+          "restaurant",
+          "cafe"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "יש לדאוג לתחלופה נכונה של מוצרים (ראשון נכנס - ראשון יוצא)"
+      ],
+      "priority": "גבוה"
+    },
+    {
+      "id": "R015",
+      "title": "ביקורת שוטפת למניעת קינון מזיקים",
+      "applies_when": {
+        "business_type": [
+          "warehouse",
+          "food_industry",
+          "restaurant",
+          "cafe"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "יש לערוך ביקורת שוטפת כדי לבדוק את טיב המצרכים ולמנוע קינון מזיקים"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R016",
+      "title": "שטיפת מחסן בקביעות",
+      "applies_when": {
+        "business_type": [
+          "warehouse",
+          "food_industry",
+          "restaurant",
+          "cafe"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "יש לשטוף את המחסן באופן קבוע"
+      ],
+      "priority": "גבוה"
+    },
+    {
+      "id": "R017",
+      "title": "אחסון חומרי ניקיון במקום נפרד",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "warehouse",
+          "food_industry"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "יש לאחסן חומרי ניקיון וחיטוי במקום נפרד ונעול"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R018",
+      "title": "סימון חומרי ניקיון",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "warehouse",
+          "food_industry"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "יש לשמור על חומרים אלו באריזות מקוריות עם סימון ברור"
+      ],
+      "priority": "גבוה"
+    },
+    {
+      "id": "R019",
+      "title": "תחזוקת מבנה – תיקון מיידי",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "warehouse",
+          "food_industry"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "יש להקפיד על תיקון המבנה מיד עם גילוי פגם",
+        "יש לתקן צנרת עם גילוי דליפה או פגם"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R020",
+      "title": "סדר וניקיון בחצר וסביבת העסק",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "warehouse",
+          "food_industry"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "יש לשמור על סדר וניקיון בחצר וסביבת העסק",
+        "יש להקפיד שפחי אשפה לא יהיו כאלה שהזבל נשפך מהם"
+      ],
+      "priority": "גבוה"
+    },
+    {
+      "id": "R021",
+      "title": "איסוף אשפה – פעמיים בשבוע",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "warehouse",
+          "food_industry"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "יש לאסוף את האשפה לפחות פעמיים בשבוע"
+      ],
+      "priority": "סטנדרטי"
+    },
+    {
+      "id": "R022",
+      "title": "הצבת מכל האשפה על עגלה מתאימה",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "warehouse",
+          "food_industry"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "על מכל האשפה לעמוד על עגלה עם גלגלים, על משטח בטון מנוקז עם ברז מים"
+      ],
+      "priority": "גבוה"
+    },
+    {
+      "id": "R023",
+      "title": "תחזוקת השירותים",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "food_industry"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "יש להחזיק את השירותים בתנאים סניטריים",
+        "לתקן כל פגם מיד לאחר גילויו",
+        "ניקוי השירותים ייעשה מספר פעמים ביום, כולל קירות, רצפות ומתקנים",
+        "יש לספק סבון נוזלי בשירותים",
+        "יש להשתמש במגבות חד פעמיות",
+        "השירותים חייבים להיות מאווררים ומוארים",
+        "אין להעמיד מכל לאיסוף ניירות טואלט משומשים"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R024",
+      "title": "סטנדרטים לאחסון מוצרים שאינם דורשים קירור",
+      "applies_when": {
+        "business_type": [
+          "warehouse",
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "food_industry"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "לאחסן מוצרי מזון וחומרי גלם במחסן באריזות סגורות",
+        "המחסן יהיה יבש ומאוורר",
+        "המחסן מוגן בפני חדירת חרקים, מכרסמים, ציפורים, בעלי חיים אחרים וזיהום",
+        "המזון יאוחסן על גבי משטחים שאינם סופגים רטיבות ומוגבהים לניקוי",
+        "אריזות סיטונאיות יועברו למכלים מיוחדים עם מכסה, יסומנו ויהיו ניתנים לזיהוי",
+        "ניפוי קמח יעשה במחסן חומרי גלם באזור נפרד, ויועבר למכלים עם מכסה",
+        "אין לאחסן מזון גולמי מחוץ למחסן המיועד; חומר גלם ימצא במטבח רק בתהליך עיבוד",
+        "מוצרי חיטוי וניקוי לא יאוחסנו יחד עם חומרי הגלם למזון אלא במקום סגור ונפרד",
+        "אין לאחסן במחסן חומרי גלם, ציוד או כלים חד פעמיים – יש לאחסנם במקום נפרד ומוגן"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R025",
+      "title": "ניהול הדברה בעסקי מזון",
+      "applies_when": {
+        "business_type": [
+          "food_manufacturer",
+          "bakery",
+          "mill",
+          "restaurant",
+          "food_industry",
+          "food_storage"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "כל פעולות ההדברה ירוכזו על ידי מדביר בעל היתר הדברה מטעם המשרד לאיכות הסביבה ובהתאם לתקנות רישוי עסקים (הדברת מזיקים) תשל\"ה 1975",
+        "יש לנהל את ההדברה לפי עקרונות ההדברה המשולבת (ניטור, מניעה והדברה)"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R001",
+      "title": "ביצוע הדברה בעסקי מזון",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "בית אוכל",
+          "מרכול"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "כל פעולות ההדברה המחייבות שימוש בתכשירי הדברה יתבצעו רק בנוכחות מדביר מוסמך",
+        "פעולות איוד יתבצעו על ידי מדביר בעל היתר לאיוד בלבד",
+        "המדביר יתחיל בפעולות רק לאחר תאום מלא וקבלת אישור מהאחראי שמונה מטעם העסק",
+        "בהדברה בעסקי מזון יש להשתמש רק בתכשירי הדברה המאושרים להדברה תברואתית על ידי המשרד להגנת הסביבה",
+        "פעולות הדברה כימיות יתבצעו רק בעקבות ניטור ואיתור מזיקים",
+        "יש להתקין תחנות ניטור מוגדרות ומסומנות במפה, פרט לפעולות במערכות ביוב סגורות",
+        "למנוע מגע חומר הדברה עם המזון"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R002",
+      "title": "הדברת מכרסמים בעסקי מזון",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "בית אוכל",
+          "מרכול"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "הדברת מכרסמים תעשה בידי מדביר בלבד",
+        "יש להשתמש רק בתחנות האכלה נעולות וקשיחות להצבת רעל למכרסמים",
+        "תחנות האכלה יותקנו לאורך הקירות החיצוניים של העסק ו/או בחצר",
+        "יש למנוע מגע בין קווי ייצור לחומרי הדברה למכרסמים",
+        "בקרבת קווי ייצור ומקומות רגישים יש להשתמש רק במלכודות, אותן יש לבדוק לפי תוכנית עבודה מצויה בתיק ההדברה",
+        "בתחנות האכלה יש להשתמש בחומר רעל מוצק בצורת קוביות המונעות נפילה מן התחנה"
+      ],
+      "priority": "גבוה"
+    },
+    {
+      "id": "R003",
+      "title": "סימון אזור הדברה ואיסוף ציוד",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "בית אוכל",
+          "מרכול"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "יש לסמן את האזור בו מבוצעת הדברה בשלט אזהרה בהתאם לתקנות",
+        "עם סיום ההדברה יאסוף המדביר את ציוד ההדברה ושאריות החומרים ויוסר שלט האזהרה"
+      ],
+      "priority": "בינוני"
+    },
+    {
+      "id": "R004",
+      "title": "ביצוע איוד",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "בית אוכל",
+          "מרכול"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "במהלך האיוד אין להימצא בשטח, פרט למדביר המבצע",
+        "כניסה לשטח לאחר איוד תותר רק באישור בכתב מהמדביר האחראי, שיופקד ביומן פעולות הדברה"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R005",
+      "title": "ניהול רישום הדברה ותיק הדברה",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "בית אוכל",
+          "מרכול"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "יש לנהל יומן ביצוע פעולות הדברה בו ירשמו פרטי המדביר, ביצוע ההדברה, תאריך, שעה, מקום, הסיבה להדברה, פרטי החומר הפעיל והמינון",
+        "הרישום ביומן אינו פוטר את המדביר מנהול פנקס רישום נפרד לפי תקנות",
+        "בכל עסק יימצא תיק הדברה הכולל: פרטי המדביר, העתקים של היתרים ורשיונות, תוויות חוקיות, גיליונות בטיחות, מפת אתר ותחנות ניטור, דוגמאות לשלטי אזהרה וכל חומר רלוונטי נוסף"
+      ],
+      "priority": "גבוה"
+    },
+    {
+      "id": "R006",
+      "title": "עיון ברשומות הדברה",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "בית אוכל",
+          "מרכול"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "רשומות ויומני הדברה יועמדו לעיון ולצילום לעובדי המשרד להגנת הסביבה, משרד הבריאות, משרד החקלאות, ושירותים סביבתיים"
+      ],
+      "priority": "בינוני"
+    },
+    {
+      "id": "R007",
+      "title": "טיפול בליקויים בהדברה",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "בית אוכל",
+          "מרכול"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "במקרה של ליקויים יש לפנות לבעל העסק ולמרכז המדבירים הארצי (האגף ללחימה במזיקים) במשרד להגנת הסביבה"
+      ],
+      "priority": "גבוה"
+    },
+    {
+      "id": "R008",
+      "title": "קבלת רישיון עסק לשליחת מזון",
+      "applies_when": {
+        "business_type": [
+          "עסק לשליחת מזון"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "לא יינתן רישיון עסק לשליחת מזון אלא אם מולאו כל דרישות ההנחיות להנחת דעת המנהל",
+        "לבקשת הרישיון יש לצרף: תוכניות בהתאם לתקנות רישוי עסקים, פרשה טכנית עם רשימת המוצרים, תנאי הכנה, כלים להובלה ופרטים על רכבים"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R009",
+      "title": "דרישת תכניות מפורטות לאזור הכנת משלוחים ורכב",
+      "applies_when": {
+        "business_type": [
+          "עסק לשליחת מזון"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "המנהל רשאי לדרוש תכניות מפורטות של אזור הכנת משלוחים ורכב ההובלה בקנה מידה 1:50 או אחר"
+      ],
+      "priority": "גבוה"
+    },
+    {
+      "id": "R010",
+      "title": "הקלות לחידוש רישיון עסק לשליחת מזון",
+      "applies_when": {
+        "business_type": [
+          "עסק לשליחת מזון"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "הוראות סעיף 2.2 אינן חלות על מבקש חידוש רישיון אם לא חלו שינויים בעסק, תכניות ישנות משקפות את המצב והוגשה הצהרה מתאימה"
+      ],
+      "priority": "בינוני"
+    },
+    {
+      "id": "R011",
+      "title": "דרישות למקום הכנת משלוחים – שטח ותשתיות נפרדות",
+      "applies_when": {
+        "business_type": [
+          "עסק לשליחת מזון"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "יש להקצות שטח נפרד נאות להכנת משלוחים כדי להבטיח תנאי תברואה נאותים",
+        "בעסק חייבים להיות מקררים/מקפיאים ומדפים ייחודיים לפעילות זו ובנפח סביר",
+        "קירות ותקרה יהיו מבטון, בלוקים או חומרים לא סופגים מאושרים בלבד, ולא עץ או אסבסט"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R001",
+      "title": "אספקת מים לשימוש בעסק",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "יש לספק מים באיכות מי שתייה בעסק",
+        "מערכות אספקת מים וסילוק שפכים יבוצעו לפי דרישות הל\"ת"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R002",
+      "title": "תנאי מדור משלוחים",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "delivery_kitchen"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "במדור יש להקים שולחנות עבודה, מדפים ויחידות קירור/הקפאה בנפח מתאים",
+        "להתקין מתקן רחצת ידיים לשימוש מחלקה בלבד ומתקן שטיפת כלים תקינים לשימוש בכל עת",
+        "מתקן הרחצה יכלול: כיור לפי דרישות הל\"ת, ציפוי סביב הכיור, ברזים מים חמים וקרים, סבון נוזלי, מגבות נייר ומכל לאיסוף",
+        "החיבור למערכות שרברבות יעשה בהתאם לדרישות הל\"ת"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R003",
+      "title": "אוורור ומיזוג שטחי העסק",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "השטחים יאוררו על ידי: חלונות נפתחים לאוויר חוץ (לפחות 1/8 משטח רצפת החדר), או מערכת אוורור המספקת 8 חילופי אויר לשעה לפי תקן, או שניהם",
+        "במקומות לאחסון ואריזת מזון רגיש — טמפ' האוויר לא תעלה על 20°C"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R004",
+      "title": "אחסון מזון – דרישות כלליות",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "יש לאחסן ולהציג למכירה מזון בצורה שמונעת זיהום ומאפשרת בדיקת תקינות, ניקיון והמצאות מזיקים",
+        "להחזיק את המזון מורם מהרצפה",
+        "לא להציג מזון למכירה מחוץ לכתלי העסק מלבד פירות/ירקות טריים באישור, או באישור מנהל לעוד סוגי מזון",
+        "יש ליישם שיטת FIFO (סחורה הנכנסת ראשונה יוצאת ראשונה)",
+        "מזון ארוז מראש יימכר רק באריזתו המקורית ולא ייפתח קודם"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R005",
+      "title": "אחסון מזון רגיש",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen"
+        ],
+        "food_type": [
+          "בשר",
+          "דגים",
+          "עופות",
+          "ביצים",
+          "מזון רגיש"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "מזון חם יישמר בטמפ' מעל 65°C, מזון קר לא יעלה על 4°C, מזון קפוא לא יעלה על -18°C, ביצים עד 20°C",
+        "מתקני קירור מתאימים לאחסון מזון טעון קירור – חובה",
+        "בכל מתקן קירור יהיה מדחום אינדיקטורי מדויק (דיוק של מעלה אחת)",
+        "חיישן המדחום יותקן בנקודה החמה ביותר; לוח קריאה נגיש",
+        "התקנת מגנון התרעה מעל טמפ' סף (10°C- בקפאה, 4°C- בקירור)",
+        "במתקני קירור גדולים – מערכת רישום שעות, נתונים יישמרו 3 חודשים לפחות",
+        "ניקוז מתקני קירור מחובר לביוב עם מחסום/מרווח אויר, הנקזים יהיו נקיים",
+        "קירות פנימיים של חדרי קירור יהיו חלקים וניתנים לניקוי",
+        "הפרדת סוגי מזון למניעת מעבר ריחות וזיהום, מזון מוכן יופרד ממזון לא מוכן (או באמצעות מחיצה אטומה)",
+        "אחסון במקרר כך שתהיה זרימה חופשית של אוויר",
+        "הפעלת מתקני קירור לפי הוראות יצרן; לא לאחסן מזון במקרר פתוח מעל המפלס",
+        "בדיקה מדגמית של טמפרטורת מזון רגיש ע\"י מדי חום מינימום/מקסימום באחסון ובהובלה, נתונים יישמרו 30 יום לפחות"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R006",
+      "title": "תנאים לציוד ורהיטים באחסון מזון",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "ציוד וריהוט יהיו שלמים ותקינים; עשויים מחומר שאינו רעיל/מחליד/סופג רטיבות/מתקלף",
+        "הציוד והרהיטים יאפשרו ניקוי וחיטוי בנקל",
+        "בעסק לא יימצאו ציוד וריהוט שאינם דרושים לניהולו"
+      ],
+      "priority": "גבוה"
+    },
+    {
+      "id": "R007",
+      "title": "דרישות איכות מזון ומקור אספקה",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "לא לאחסן/לספק/למכור מוצרים שלא יוצרו בעסק עם רישיון עסק ע\"פ תקנות רישוי עסקים (תנאים תברואיים לייצור מזון) או עם רישיון יצרן",
+        "ביצים יתקבלו רק אם מוינו בתחנת מיון עם רישיון עסק, בצירוף תעודת משלוח לפי כללי המועצה לענף הלול",
+        "בשר, עופות ודגים יסופקו ממקור עם רישיון יצרן בלבד, בצירוף כל תעודה וטרינרית נדרשת, בדיקות משנה כנדרש",
+        "חומר הגלם יתקבל מעסק עם רישיון עסק וייוצר במפעל בעל רישיון יצרן בר תוקף",
+        "בשר/דגים/עוף יגיעו עם תעודות וטרינריות כנדרש",
+        "דגים הנצרכים ללא טיפול תרמי מלא – יסומנו 'מיועד לאכילה ללא טיפול תרמי מלא', ויירכשו רק ממפעל עם תוכנית אבטחת בטיחות (GMP)",
+        "לבדוק אצל המוביל עמידה בטמפרטורות הנדרשות ולרשום את המידע בעת קבלת הסחורה (ולשמר חודש אחד לפחות). אין לקבל מזון שלא בטמפרטורת האחסון המומלצת"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R001",
+      "title": "איסור קבלת בשר, דגים, עופות ומוצריהם שלא הובלו לפי הוראות",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "food_truck",
+          "cafe",
+          "supermarket",
+          "butcher"
+        ],
+        "food_type": [
+          "בשר",
+          "דגים",
+          "עופות",
+          "מוצריהם"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "לא לקבל בשר, בשר עופות, דגים או מוצריהם לעסק אלא אם הובלו בהתאם לתקנות רישוי עסקים (תנאים תברואיים להובלת בשר, דגים, עופות ומוצריהם), התשל\"ב – 1971 ות\"י 1291"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R002",
+      "title": "איסור קבלת לחם ודברי מאפה בלתי ארוזים מראש אלא לפי הוראות הובלה",
+      "applies_when": {
+        "business_type": [
+          "supermarket"
+        ],
+        "food_type": [
+          "לחם",
+          "מאפים"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "לא לקבל לחם ודברי מאפה אפויים בלתי ארוזים מראש אלא אם הובלו אל המרכול לפי צו הפיקוח על מצרכים ושירותים (הובלת לחם), התשכ\"א - 1961"
+      ],
+      "priority": "גבוה"
+    },
+    {
+      "id": "R003",
+      "title": "איסור קבלת מזון שלא הובל ברכב עם רישיון עסק מתאים",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "food_truck",
+          "cafe",
+          "supermarket"
+        ],
+        "food_type": [
+          "כל סוגי המזון"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "לא לקבל מזון שלא הובל ברכב עם רישיון עסק לפי פרט 4.6(ד) לצו רישוי עסקים (עסקים טעוני רישוי), התשע\"ג - 2013"
+      ],
+      "priority": "גבוה"
+    },
+    {
+      "id": "R004",
+      "title": "איסור החזקת מזון שפג התאריך לשימוש",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "food_truck",
+          "cafe",
+          "supermarket"
+        ],
+        "food_type": [
+          "כל סוגי המזון"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "לא להחזיק מזון שפג התאריך האחרון לשימוש או התאריך האחרון המומלץ לשימוש"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R005",
+      "title": "התנהלות עם בשר, דגים, עופות לאחר התאריך המומלץ",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "food_truck",
+          "cafe",
+          "supermarket",
+          "butcher"
+        ],
+        "food_type": [
+          "בשר",
+          "דגים",
+          "עופות",
+          "מוצריהם"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "לא להחזיק בשר, דגים, עופות או מוצריהם יותר מ-7 ימים מתום התאריך האחרון המומלץ לשימוש",
+        "לאחר התאריך האחרון המומלץ לשימוש, יש לאחסן את המזון במקרר נפרד עם סימון 'לא למאכל אדם - להשמדה'"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R006",
+      "title": "הפרדת טובין שאינם מזון ואחסונם",
+      "applies_when": {
+        "business_type": [
+          "supermarket",
+          "restaurant",
+          "cafe"
+        ],
+        "food_type": [
+          "כל סוגי המזון",
+          "טובין שאינם מזון"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "לאחסן טובין שאינם מזון, לרבות מזון לבעלי חיים, במקום נפרד ועל מדפים ייעודיים שלא עלולים לזהם את המזון"
+      ],
+      "priority": "גבוה"
+    },
+    {
+      "id": "R007",
+      "title": "הפרדת אריזות למזון ולא למזון",
+      "applies_when": {
+        "business_type": [
+          "factory",
+          "supermarket",
+          "restaurant",
+          "food_truck",
+          "cafe"
+        ],
+        "food_type": [
+          "כל סוגי המזון",
+          "טובין שאינם מזון"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "להחזיק אריזות נפרדות לכל סוג מזון",
+        "לבצע הפרדה באמצעות האריזה בין מוצרי מזון למוצרים שאינם מזון",
+        "האריזה צריכה להתבצע בסמוך להובלה",
+        "אריזות רב-פעמיות למזון וללא מזון יבוצעו בצבעים שונים ולשאת כיתוב המתאים: 'להובלת מזון בלבד' / 'לא להובלת מזון'"
+      ],
+      "priority": "גבוה"
+    },
+    {
+      "id": "R008",
+      "title": "שמירת תעודת משלוח ותיעודה",
+      "applies_when": {
+        "business_type": [
+          "factory",
+          "supermarket",
+          "restaurant",
+          "food_truck",
+          "cafe"
+        ],
+        "food_type": [
+          "כל סוגי המזון"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "לשמור תעודת משלוח עם ציון שעת המשלוח וטמפרטורת המזון למשך 90 יום לפחות ולהעמיד לרשות נציג משרד הבריאות במידת הצורך"
+      ],
+      "priority": "בינוני"
+    },
+    {
+      "id": "R009",
+      "title": "תנאים תברואיים לעובדים עם מזון",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "food_truck",
+          "cafe",
+          "supermarket",
+          "factory"
+        ],
+        "food_type": [
+          "כל סוגי המזון"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "עובד במזון חייב ללבוש חלוק נקי ובהיר המיועד לעבודה בלבד",
+        "יש לשמור על ידיים וציפורניים נקיות ולרחוץ ידיים בסבון ומברשת לפני תחילת עבודה וביציאה משירותים",
+        "עובד עם בשר, דגים, עופות, לא יטפל בהם עם תכשיטים/צמידים/טבעות למעט טבעת נישואין וחייב לחבוש כיסוי ראש",
+        "לא יעבוד אדם עם מזון אם הוא חולה במחלה מידבקת או נושא מחוללי מחלה כזו",
+        "לא יעבוד אדם אם יש חבורות, פצעים פתוחים או מוגלתיים גלויים על פניו, צווארו, זרועותיו או ידיו",
+        "עובד לא ייגש לבדיקות רפואיות כאשר נדרש לכך",
+        "אדם רשאי לעבוד עם טובין שאינם מזון ומזון לא רגיש ארוז מראש אם הפצעים מכוסים בתחבושת"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R010",
+      "title": "הקצאת רכב ייעודי ושליטה בתנאי הובלת מזון",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "food_truck",
+          "cafe",
+          "supermarket",
+          "delivery"
+        ],
+        "food_type": [
+          "כל סוגי המזון"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "רכב לשינוע מזון יהיה לתכלית זו בלבד",
+        "הרכב חייב להיות נקי ומתאים למטרה",
+        "משך הובלת מזון ללקוח לא יעלה על 3 שעות",
+        "הובלת המזון תעשה ברכב סגור, בציוד המבטיח טמפ' נאותה, מכלים מבודדים עם מכסה אטום",
+        "הרכב בהתאם לתקנות ההובלה הרלוונטיות ולתקן 1291",
+        "להבטיח יציבות האריזות ברכב",
+        "ציוד ומכלים למזון - מבודדים, מדופנים בפלסטיק נשלף חד-פעמי או ניתנים לניקוי לח",
+        "משטח הובלה ניתן לשטיפה",
+        "בזמן הובלה, שמירת טמפ' מתאימה: חם (65+), קר (4+), קפוא (18-) וביצים (20)",
+        "שמירה על טמפ' בהתאם להוראת יצרן במידת האפשר"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R011",
+      "title": "התנהלות בטיפול בפסולת",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "food_truck",
+          "cafe",
+          "supermarket",
+          "factory"
+        ],
+        "food_type": [
+          "כל סוגי המזון",
+          "פסולת מזון"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "איסוף פסולת מוצקה רק בכלי קיבול ייעודיים לפי דרישות הרשות המקומית",
+        "כלי הקיבול יהיו עשויים מחומר חלק, בלתי מחליד, אינם סופגים רטיבות וכוללים שקית ניילון",
+        "לכלי הקיבול יהיה מכסה",
+        "עם ריקון הפסולת - יש לנקות ולשטוף הכלי והאזור לידו",
+        "פסולת מזון רגיש תישמר בקירור ובנפרד עד לפינויה במכלים מסומנים 'לא ראוי למאכל אדם'",
+        "הרחקת פסולת מוצקה לכלי מרכזי – בכל סוף יום עבודה לפחות",
+        "הרשות המקומית תקבע תנאים לאחסון וטיפול בפסולת"
+      ],
+      "priority": "גבוה"
+    },
+    {
+      "id": "R012",
+      "title": "חדר שירותים ותנאי היגיינה",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "food_truck",
+          "cafe",
+          "supermarket"
+        ],
+        "food_type": [
+          "כל סוגי המזון"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "בכל עסק חייב להיות חדר/י שירותים עם מספר קבועות לפי הוראות",
+        "השירותים בצמוד או קרובים לעסק עם גישה נוחה",
+        "הפרדה פיזית מוחלטת בין השירותים לאזורי מזון ואריזה",
+        "קירות מצופים אריחים בהירים וטיח סיד עד גובה נדרש, לניקוי נוח",
+        "שלט בקירות חדר השירותים והפרוזדור בסמוך – חובת רחיצת ידיים",
+        "בית השימוש נקי, שלם, מצויד למשתמשים",
+        "בכיורים: שלמות, מים חמים/קרים, סבון נוזלי/דטרגנט, אמצעי ניגוב ידיים חד פעמי ומכל איסוף פסולת ליד"
+      ],
+      "priority": "גבוה"
+    },
+    {
+      "id": "R013",
+      "title": "איסור הכנסת בעלי חיים",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "food_truck",
+          "cafe",
+          "supermarket"
+        ],
+        "food_type": [
+          "כל סוגי המזון"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "אסור להכניס בעלי חיים לעסק מלבד כלב נחייה של עיוור"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R014",
+      "title": "איסור מגורים או לינה בעסק",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "food_truck",
+          "cafe",
+          "supermarket"
+        ],
+        "food_type": [
+          "כל סוגי המזון"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "לא יגור ולא ילון אדם בעסק ולא יהיה מעבר כלשהו בין העסק למבנה מגורים"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R001",
+      "title": "תחזוקת סידורי בטיחות אש והצלה",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "בית אוכל",
+          "food_delivery"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": 150,
+        "seating_capacity": 50
+      },
+      "actions": [
+        "להחזיק סידורי בטיחות אש והצלה במצב תקין בכל עת",
+        "לוודא ביצוע בדיקות, טיפולים ופעולות נדרשות לתחזוקת אמצעי כיבוי אש והצלה",
+        "ביצוע תחזוקה לפי הוראות תקן ישראלי ת\"י והוראות היצרן, ובהתאם להוראות נותן האישור אם ניתנו"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R002",
+      "title": "שילוט יציאה ותאורת חירום",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "בית אוכל",
+          "food_delivery"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": 150,
+        "seating_capacity": 50
+      },
+      "actions": [
+        "התקנת שלטים עם כיתוב 'יציאה' מעל פתחי העסק ובמיקומים בהם כיוון היציאה אינו נראה ברור",
+        "הקפדה שהכיתוב על השלטים יהיה בלבן על ירוק, גובה אותיות 15 ס\"מ לפחות, עובי 15 מ\"מ לפחות, מרווח בין אותיות 1 ס\"מ לפחות",
+        "התקנת תאורה לשלטים מרשת החשמל של הבניין וממקור חשמל עצמאי (סוללות נטענות) לזמן תאורה של 60 דקות לפחות",
+        "וידוא התאמת גוף התאורה לתקן ישראלי ת\"י 20, חלק 2.22, והפעלתו בעת הפסקת חשמל"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R003",
+      "title": "ציוד כיבוי אש",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "בית אוכל",
+          "food_delivery"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": 150,
+        "seating_capacity": 50
+      },
+      "actions": [
+        "הצבת מטפי כיבוי אבקה יבשה במשקל 6 ק\"ג בקרבת לוח החשמל",
+        "ביצוע בדיקה ותחזוקה של המטפים לפי תקן ישראלי ת\"י 129, חלק 1",
+        "הבטחת נגישות וזמינות ציוד כיבוי ותחזקתו במצב תקין בכל עת"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R004",
+      "title": "מערכת החשמל",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "בית אוכל",
+          "food_delivery"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": 150,
+        "seating_capacity": 50
+      },
+      "actions": [
+        "הקפדה שמערכת החשמל תבוצע לפי חוק החשמל ותקנותיו",
+        "התקנת שלט פולט אור על לוחות החשמל עם כיתוב 'חשמל, לא לכבות במים'",
+        "בדיקת מערכת החשמל אחת לחמש שנים"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R005",
+      "title": "מערכת גפ\"מ (גז)",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "בית אוכל",
+          "food_delivery"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": 150,
+        "seating_capacity": 50
+      },
+      "actions": [
+        "הבטחת עמידת מערכת הגפ\"מ לדרישות תקן ישראלי ת\"י 158",
+        "תחזוקת מערכת הגפ\"מ, המכשירים, האביזרים והמנדפים במצב תקין בכל עת"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R006",
+      "title": "שמירה והצגת אישורים",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "בית אוכל",
+          "food_delivery"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": 150,
+        "seating_capacity": 50
+      },
+      "actions": [
+        "שמירת האישורים הבאים בשטח העסק והצגתם לבדיקה: אישור בדיקת מטפי כיבוי לפי ת\"י 129; אישור תקינות מערכת החשמל לרבות מפסק ראשי וטבלת לוחות חשמל, חתום על ידי חשמלאי מוסמך; אישור תקינות התאמת מערכת הגז לת\"י 158 על ידי בעל רישיון לעבודת גפ\"מ (כאשר קיימת מערכת כזו)"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R001",
+      "title": "דרישת צירוף מסמכים לבקשת רישיון עסק או להיתר זמני",
+      "applies_when": {
+        "business_type": null,
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "יש לצרף לבקשה רישיון עסק/היתר זמני אפיון רשת המים המזינה את העסק לפי הטופס שבנספח 'בדיקת אופיין רשת מים', חתום על ידי מהנדס, הנדסאי או גורם מוסמך",
+        "יש לצרף נספח תיאור אמצעים לבטיחות אש (למעט לעסק ששטחו אינו עולה על 100 מ\"ר, ולא מיועד ליותר מ-50 איש או לאחסון חומרים מסוכנים)",
+        "אם מצורף נספח תיאור אמצעים לבטיחות אש מהבקשה להיתר בנייה - יש לצרף בנוסף: העתק מהיתר הבנייה והצהרת המבקש כי לא חל שינוי פנימי או בשימוש מהיום שבו הוכן הנספח"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R002",
+      "title": "דרישת הודעה לפני ניתוק יזום של מערכות כיבוי אש",
+      "applies_when": {
+        "business_type": null,
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "בעל העסק חייב להודיע לנותן האישור לפחות 7 ימים מראש על כל כוונה לניתוק יזום של מערכות כיבוי אש בעסק"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R003",
+      "title": "דיווח מיידי על השבתת מערכת כיבוי אש",
+      "applies_when": {
+        "business_type": null,
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "בעל העסק יודיע לנותן האישור מיידית בכל פעם שמערכת כיבוי אש חדלה לפעול"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R004",
+      "title": "הפעלת העסק והתקנת אמצעי בטיחות אש והצלה",
+      "applies_when": {
+        "business_type": null,
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "בעל העסק יפעיל את העסק תוך נקיטה והתקנת אמצעי בטיחות אש והצלה ההולמים את היקף הפעילות בעסק, רמת הסיכון הנובעת מאופי הפעילות, מספר השוהים, מיקום ושטח העסק ועל פי כל דין"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R005",
+      "title": "חובת שמירה על דרישות בטיחות אש תקפות בכל עת",
+      "applies_when": {
+        "business_type": null,
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "בעל העסק חייב להקפיד על קיום דרישות המפרט והדין לכל אורך תקופת פעילות העסק",
+        "בעל העסק אחראי לכך שלא יבוצעו כל שינויים בעסק הסותרים את הוראות המפרט ולתנאי הרישיון"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R006",
+      "title": "חובת תחזוקת אמצעי בטיחות אש והצלה",
+      "applies_when": {
+        "business_type": null,
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "אמצעי בטיחות אש והצלה ימצאו במצב תקין בכל עת",
+        "בעל רישיון העסק יוודא ביצוע בדיקות, טיפולים וכל פעולה נדרשת לשמירת תקינות האמצעים (תחזוקת אמצעי כיבוי אש והצלה)",
+        "תחזוקת אמצעי כיבוי אש והצלה תיעשה לפי הוראות התקן הישראלי והיצרן, ואם ניתנו הוראות נוספות – לפי הנחיות נותן האישור"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R001",
+      "title": "דרכי גישה לעסק לצורך כיבוי והצלה",
+      "applies_when": {
+        "business_type": [],
+        "food_type": [],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "בעל העסק יבטיח את קיומן של דרכי גישה לעסק לצורך פעילות כיבוי והצלה"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R002",
+      "title": "הפרדות ועמידות אש",
+      "applies_when": {
+        "business_type": [],
+        "food_type": [],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "ביצוע הפרדת אש ועשן בין שטח לאחסנה לשאר חלקי העסק ובין העסק לשאר הבניין",
+        "הקמת קירות עמידות אש למשך שעתיים לפחות מלבנים, בלוקים או בטון",
+        "התקנת דלתות/חלונות עמידות אש: 30 דקות עמידות אש, 90 דקות כשל תחילי ויציבות, עומדים בתקן ת\"י 1212 דלתות אש",
+        "שימוש בחומרי ציפוי וגימור (פנימי וחיצוני) לפי תקן ת\"י 921 ו-ת\"י 755 לבדיקת אי דליקות וסיווג חומרים"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R003",
+      "title": "התקנת ידית בהלה בדלת יציאה",
+      "applies_when": {
+        "business_type": [],
+        "food_type": [],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": 100
+      },
+      "actions": [
+        "בדלת ליציאה מחלק או קומה המיועדים להכיל מעל 100 איש תותקן ידית בהלה"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R004",
+      "title": "דרכי מוצא ופתחי יציאה",
+      "applies_when": {
+        "business_type": [],
+        "food_type": [],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "בעסק עד 50 איש: פתח יציאה אחד ברוחב 0.9 מ' לפחות",
+        "בעסק 51-500 איש: שני פתחי יציאה לפחות, כל פתח ברוחב 1.1 מ' וכל דלת נפתחת לכיוון המילוט",
+        "בעסק 501-1,000 איש: שלושה פתחי יציאה לפחות, כל פתח ברוחב 1.1 מ' ודלתות לכיוון המילוט",
+        "בעסק לאחסון/ייצור/שימוש בחומרים מסוכנים מעל 20 מ\"ר: שני פתחי יציאה 0.9 מ' לפחות, דלת אחת נפתחת ישירות החוצה",
+        "דרכי המוצא ופתחיהן יהיו פנויים ממכשולים בכל עת",
+        "אם מותקן מנעול, ניתן לפתוח מהכוון הפנימי ללא מפתח נשלף"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R005",
+      "title": "שילוט בעסק",
+      "applies_when": {
+        "business_type": [],
+        "food_type": [],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "התקנת שילוט וסימון בדרכי המוצא לפי סימן י\"ח לפרק ב' תוספת שנייה לתקנות התכנון והבניה",
+        "הצבת שלטים פולטי אור בהתאם להנחיות: 'חשמל, לא לכבות במים', 'מפסק זרם ראשי', 'עמדת כיבוי אש', וכד'",
+        "מספר קומה ליד חדר מדרגות ומעלית",
+        "מספר לזיהוי חדרי מדרגות בלובי",
+        "כיתוב בגוון אדום על לבן, אותיות גובה 3 ס\"מ לפחות, עובי 7 מ\"מ, שלט בגובה 1.5 מ' לפחות"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R006",
+      "title": "תאורת חירום",
+      "applies_when": {
+        "business_type": [],
+        "food_type": [],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "התקנת תאורת חירום שתתחיל לפעול במקרה של כשל/נפילת מתח החשמל ותאיר את נתיב המילוט",
+        "התקנת תאורת חירום מעל פתחי העסק, במעברים ליותר מ-6 אנשים או אורכם מעל 15 מ', בפרוזדורים, חדרי מדרגות ודרכי מילוט",
+        "מערכת תאורת חירום תתבסס על סוללות נטענות או מערכת גיבוי מרכזית עם מצבר טעון, שני מעגלי הזנה נפרדים",
+        "התאמת גופי התאורה לת\"י 20 חלק 2.22"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R007",
+      "title": "אספקת מים וברזי כיבוי",
+      "applies_when": {
+        "business_type": [],
+        "food_type": [],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "בעל העסק ינקוט בכל האמצעים לאספקת מים בכמות ובלחץ הדרושים לפעולת ציוד כיבוי",
+        "בעסק עד 500 מ\"ר: התקנת ברז כיבוי חיצוני בקוטר '3 בהתאם לת\"י 448, במרחק עד 80 מ' מהעסק",
+        "בעסק מעל 500 מ\"ר: התקנת ברזי כיבוי חיצוניים בקוטר '3 על זקף '4, ברז בכניסה וברזים סביב ההיקף, מרחק בין ברזים עד 80 מ'",
+        "בעסק מעל 800 מ\"ר: התקנת חיבור הסנקה חיצוני לברזי הכיבוי, במרחק עד 6 מ' מקצה העסק"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R008",
+      "title": "ציוד כיבוי",
+      "applies_when": {
+        "business_type": [],
+        "food_type": [],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "בעסק עד 120 מ\"ר: התקנת גלגלון כיבוי אש עם זרנוק '3/4 באורך לכיסוי השטח, תשתית צינורות ממתכת, אם קיימת הפרדת אש - ציוד דומה בכל אזור מופרד",
+        "בעסק מעל 120 מ\"ר: עמדות כיבוי אש (ברז כיבוי '2, שני זרנוקים '2 באורך 15 מ', מזנק '2, גלגלון '3/4 עם מזנק, מטפה אבקה 6 ק\"ג בארון בגובה 120, רוחב 80, עומק 30 ס\"מ)",
+        "על הארון ייכתב 'עמדת כיבוי אש', צנרת הברזים תהיה ממתכת",
+        "בעסק עד 50 מ\"ר, ובאישור נותן האישור: ניתן לפטור מהתקנת גלגלון, חובה התקנת מטפי אבקה יבשה 6 ק\"ג",
+        "בעסק יותקנו מטפי אבקה יבשה 6 ק\"ג כמספר לפי ת\"י 129 חלק 2",
+        "בדיקות ותחזוקת מטפים תבוצע לפי ת\"י 129 חלק 1",
+        "עמדות כיבוי האש יותקנו ליד פתחי יציאה ובמקומות נוספים לכיסוי כל העסק"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R001",
+      "title": "התקנת מערכת כיבוי אש אוטומטית (מתזים)",
+      "applies_when": {
+        "business_type": [],
+        "food_type": [],
+        "min_area": 301,
+        "max_area": null,
+        "seating_capacity": 300
+      },
+      "actions": [
+        "להתקין מערכת כיבוי אש אוטומטית במים (מתזים) לפי תקן ת\"י 1596",
+        "לקבל אישור בכתב על התאמת תכניות מערכת המתזים והצהרת מהנדס",
+        "להגיש העתק מתעודת בדיקה והצהרת מהנדס לנותן האישור",
+        "לתחזק את מערכת המתזים במצב תקין בכל עת",
+        "לבדוק את מערכת המתזים לפי תקן ת\"י 1928 ולהעביר תעודה לנותן האישור"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R002",
+      "title": "התקנת מערכת גילוי אש ועשן",
+      "applies_when": {
+        "business_type": [],
+        "food_type": [],
+        "min_area": 51,
+        "max_area": null,
+        "seating_capacity": 50
+      },
+      "actions": [
+        "להתקין מערכת גילוי אש ועשן לפי תקן ת\"י 1220 חלק 3",
+        "לתחזק את המערכת במצב תקין בכל עת",
+        "לבדוק את המערכת לפי תקן ת\"י 1220 חלק 11 ולהעביר תעודה לנותן האישור"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R003",
+      "title": "התקנת רכיבים במערכות החשמל בלוחות חשמל בעסק",
+      "applies_when": {
+        "business_type": [],
+        "food_type": [],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "בלוח חשמל 63 אמפר: אם נדרשת מערכת גילוי אש, יש להתקין גלאי עשן בלוח",
+        "בלוח חשמל 80 אמפר: אם נדרשת מערכת גילוי אש, יש להתקין גלאי עשן ומערכת ניתוק מקור הזנה",
+        "בלוח חשמל 100 אמפר ומעלה: יש להתקין מערכת גילוי אש או עשן, מערכת כיבוי אוטומטית יבשה ומערכת ניתוק מקור הזנה",
+        "אם הלוח עומד בתקן 1419, מותקן גלאי עשן, מערכת ניתוק וממוקם באזור כיסוי של מערכת כיבוי אוטומטית – אין חובה להתקין מערכת כיבוי אוטומטית",
+        "לתחזק את מערכות גילוי האש/עשן בלוח במצב תקין בכל עת",
+        "לבצע בדיקות תקופתיות למתקני החשמל לפי הנחיית רשות הכבאות וכל דין"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R004",
+      "title": "מערכת שליטה בעשן לעסק בתפוסה 200 איש ומעלה",
+      "applies_when": {
+        "business_type": [],
+        "food_type": [],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": 200
+      },
+      "actions": [
+        "להתקין סידורי שליטה בעשן לפי תקנות התכנון והבניה",
+        "לתחזק את מערכת השליטה בעשן במצב תקין בכל עת"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R005",
+      "title": "התקנת מפסק חשמל חירום לעסק בתפוסה 200 איש ומעלה",
+      "applies_when": {
+        "business_type": [],
+        "food_type": [],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": 200
+      },
+      "actions": [
+        "להתקין מפסק חשמל חירום בולט ונגיש לניתוק זרם לכל המבנה בחירום"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R006",
+      "title": "תקינות מערכת מיזוג אוויר",
+      "applies_when": {
+        "business_type": [],
+        "food_type": [],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "על מערכת מיזוג האוויר בעסק לעמוד בדרישות ת\"י 1001 בטיחות אש בבניינים"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R007",
+      "title": "התקנת מערכת מסירת הודעות (כריזת חירום)",
+      "applies_when": {
+        "business_type": [],
+        "food_type": [],
+        "min_area": 301,
+        "max_area": null,
+        "seating_capacity": 300
+      },
+      "actions": [
+        "להתקין מערכת מסירת הודעות (כריזת חירום) לפי תקנות התכנון והבנייה",
+        "לתחזק מערכת הכריזה במצב תקין בכל עת"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R008",
+      "title": "התקנת גנרטור חירום למערכות חיוניות",
+      "applies_when": {
+        "business_type": [],
+        "food_type": [],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "להתקין גנרטור בעסק בו נדרשות משאבות מים לכיבוי אש או מפוחי יניקת עשן",
+        "להתקין הגנרטור לפי תקנות התכנון והבנייה",
+        "לתחזק את הגנרטור במצב תקין בכל עת"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R009",
+      "title": "התקנת לוח פיקוד כבאים",
+      "applies_when": {
+        "business_type": [],
+        "food_type": [],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "להתקין לוח פיקוד כבאים הכולל לוח בקרה של מערכות גילוי וכיבוי, ממסרי שליטה, ומכשור נוסף, אם נדרשות מערכות מתזים, גלאים וניהול עשן"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R010",
+      "title": "ביצוע בדיקת משטר הפעלות ואינטגרציה במערכות בטיחות אש",
+      "applies_when": {
+        "business_type": [],
+        "food_type": [],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "בעסק בו מותקנים שניים או יותר מאמצעי בטיחות אש יש לבצע בדיקת אינטגרציה לפי הוראה 536",
+        "לקבל אישור בכתב מהנדס או גורם מוסמך ולהעביר העתק לנותן האישור",
+        "במערכת שחרור עשן מאולצת – יש לצרף טבלת משטר בדיקה"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R011",
+      "title": "התקנת מערכת גז תקנית ובטוחה",
+      "applies_when": {
+        "business_type": [],
+        "food_type": [],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "על מערכת הגז לעמוד בת\"י 158 למתקנים לגזים במכלים מיטלטלים",
+        "להתקין לכל צרכן גז התקנים להפסקת זרימת גז במקרה של דליפה, כולל ניתוק מקורות אנרגיה",
+        "הצנרת תהיה עשויה מצינור פלב\"מ גמיש ומחוזק ברשת פלב\"מ",
+        "אם קיימים מנדפים – יש להתקין מערכת כיבוי במנדפים בהתאם לתקן ישראלי"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R001",
+      "title": "התקנת מערכת כיבוי אש בכימיקלים רטובים וניתוקה ממקור אנרגיה בהתאם לת״י 5356, חלק 2",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "להתקין מערכת כיבוי אש בכימיקלים רטובים הכוללת ניתוק ממקור אנרגיה",
+        "להציג אישור בכתב על התאמת המערכת לתקנות הת״י הרלוונטי (5356, חלק 2)",
+        "להגיש העתק מתעודת הבדיקה לנותן האישור"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R002",
+      "title": "תחזוקת מערכת הגז, מכשירי הגז, מנדפים ואביזרים במצב תקין",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "להחזיק את כל מערכות הגז, המכשירים, האביזרים והמנדפים במצב תקין כל העת"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R003",
+      "title": "המצאת אישורי תקינות לציוד כיבוי לפי דרישת נותן האישור",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "להמציא אישורים ומסמכים על תקינות ציוד כיבוי לכל דרישת נותן האישור"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R004",
+      "title": "שימוש בחומרי ציפוי וגימור העומדים בת״י 921",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "לקבל אישור ממוסד מוסמך שחומרי הציפוי והגימור עומדים בת״י 921 לשימוש במבנה"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R005",
+      "title": "בדיקת ותחזוקת ציוד כיבוי מים",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "לקבל אישור שכל ציוד הכיבוי במים (עמדות, גלגלונים, ברזים, זרנוקים, מזנקים) נבדקו ונמצאו תקינים"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R006",
+      "title": "בדיקת מטפי כיבוי בהתאם לת״י 129, חלק 1",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "לקבל אישור שכל מטפי הכיבוי נבדקו לפי ת״י 129, חלק 1, ע״י אדם מוסמך מטעם רשות הכבאות"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R007",
+      "title": "בדיקת תקינות מערכת החשמל בהתאם לחוק החשמל ותאורות חירום",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "לקבל אישור ממוסמך לעבודות חשמל על תקינות מערכת החשמל והחירום לפי חוק החשמל",
+        "האישור יכלול: מיקום המפסק הראשי, טבלת לוחות החשמל עם מספר וגודל האמפר"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R008",
+      "title": "בדיקת מערכת הגז ועמידה בת״י 158",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "לקבל אישור על בדיקת תקינות והתאמת מערכת הגז לת״י 158",
+        "להבטיח התייחסות לגלאי גפ״מ",
+        "האישור יינתן ע״י בעל רישיון גפ״מ בהתאם לחוק הגז"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R009",
+      "title": "בדיקת תקינות מערכת גילוי אש אוטומטית לפי ת״י 1220, חלק 11",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "לקבל אישור ממוסד מוסמך על תקינות מערכת גילוי אש אוטומטית בטופס המיועד",
+        "הכולל גם התייחסות למערכת כיבוי וניתוק אוטומטי בארונות חשמל במידת הצורך"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R010",
+      "title": "בדיקת מערכת כיבוי אש בארון חשמל – עמידה בת״י 5210 או ת״י 1597",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "לקבל אישור ממוסד מוסמך כי מערכת כיבוי באירוסול/גז בארון חשמל נבדקה ונמצאה תקינה לפי התקן הרלוונטי (5210/1597)"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R011",
+      "title": "בדיקת מערכת כריזת חירום והבטחת פעולתה",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "לקבל אישור ממוסמך לעבודות חשמל על תקינות מערכת כריזת החירום, כולל ספק כוח עצמאי, נקודת שליטה ורמקולים"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R012",
+      "title": "בדיקת מערכת ספרינקלרים בהתאם לת״י 1928",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "לקבל אישור ממוסד מוסמך כי המערכת האוטומטית לכיבוי אש (ספרינקלרים) נבדקה ונמצאה תקינה בהתאמה מלאה לת״י 1928. האישור יכלול מפרט בדיקה"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R013",
+      "title": "בדיקת תקינות גנרטור החירום ע״י מוסמך לחשמל",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "לקבל אישור ממוסד מוסמך לעבודות חשמל כי גנרטור החירום נבדק ונמצא תקין"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R014",
+      "title": "בדיקת מערכת כיבוי במנדפים (אם קיימים) לפי ת״י 5356, חלק 2",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "לקבל אישור ממוסד מוסמך כי מערכת הכיבוי במנדפים נבדקה ונמצאה תקינה בהתאם לת״י 5356, חלק 2",
+        "כלול ניתוק ממקור אנרגיה"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R015",
+      "title": "בדיקת מערכות בטיחות האש והצלה – עמידה בהוראה 536",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "לקבל אישור גורם מוסמך על תאימות מערכות בטיחות האש להוראה 536",
+        "לצרף טבלת משטר בדיקה ופירוט סוג המערכת כאשר קיימת מערכת שחרור עשן מאולצת"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R016",
+      "title": "בדיקת מערכת שחרור עשן",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "לקבל אישור ממוסד מוסמך/מהנדס כי מערכת שחרור העשן נבדקה ונמצאה תקינה, תוך פירוט סוג המערכת"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R017",
+      "title": "בדיקת מערכת מיזוג אוויר – עמידה בת״י 1001",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "לקבל אישור גורם מוסמך כי מערכת מיזוג האוויר נבדקה ונמצאה תקינה בהתאם לדרישות ת״י 1001"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R018",
+      "title": "ניקוי ארובות ומנדפים לפי ת״י 1001, חלק 6",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "לבצע ניקוי ארובות ומנדפים בהתאם לתקן ת״י 1001, חלק 6 (אוורור והגנה מסחרית)"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R019",
+      "title": "איסור הפעלת זיקוקין דינור ואמצעים פירוטכניים",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck",
+          "kitchen"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "לא להפעיל ולא לאפשר לאחרים להפעיל זיקוקין דינור/אמצעים פירוטכניים במקום",
+        "לנקוט באמצעים למניעת הפעלה כאמור"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R001",
+      "title": "ניקוי מנדף (קולט אדים)",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "ניקוי יתבצע על-ידי צוות התחזוקה",
+        "הניקוי ייעשה בהתאם לניסיון והוראות מנהל התחזוקה"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R002",
+      "title": "ניקוי דלתות",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "ניקוי דלתות ייעשה בתהליך בסיסי פעם ביום"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R003",
+      "title": "ניקוי מעליות",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "ניקוי מעליות ייעשה בתהליך בסיסי פעם ביום"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R004",
+      "title": "פינוי תכולת מפריד שומן לאתר מאושר",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "פינוי תכולת מפריד שומן יבוצע לאתר מאושר"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R005",
+      "title": "איסוף שמן טיגון ופינויו",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck"
+        ],
+        "food_type": [
+          "שמן"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "לאסוף שמן טיגון ולפנות אותו כראוי"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R006",
+      "title": "קבלת מזון - רכב מתאים להובלת מזון",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "יש לקבל מזון רק מרכב מתאים להובלת מזון"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R007",
+      "title": "טמפרטורה בהובלה (קפוא, קירור, מזון חם)",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck"
+        ],
+        "food_type": [
+          "בשר",
+          "דגים",
+          "מזון קפוא",
+          "מזון קר",
+          "מזון חם"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "יש להקפיד על טמפרטורה תקינה בהובלת המזון בהתאם לסוג (קפוא, קירור, חם)"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R008",
+      "title": "הקפדה על מקור המזון - ספקים מאושרים בלבד",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck"
+        ],
+        "food_type": null,
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "רכישת מזון תיעשה מספקים מאושרים בלבד",
+        "יש לקבל מסמכי משלוח עבור כל רכישה"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R009",
+      "title": "בשר ודגים – נדרש אישור וטרינרי",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "food_truck"
+        ],
+        "food_type": [
+          "בשר",
+          "דגים"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "לקבל בשר ודגים רק עם אישור וטרינרי"
+      ],
+      "priority": "קריטי"
+    },
+    {
+      "id": "R010",
+      "title": "ביצים - סימון ובקרה",
+      "applies_when": {
+        "business_type": [
+          "restaurant",
+          "cafe",
+          "food_truck"
+        ],
+        "food_type": [
+          "ביצים"
+        ],
+        "min_area": null,
+        "max_area": null,
+        "seating_capacity": null
+      },
+      "actions": [
+        "יש לוודא סימון על ביצים",
+        "יש לקיים נוהל בקרת ירקות ופירות"
+      ],
+      "priority": "קריטי"
+    }
+  ]
+}
