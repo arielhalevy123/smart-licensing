@@ -2,21 +2,22 @@
 const finalData = JSON.parse(localStorage.getItem("finalBusinessData")) || {};
 const aiReportCache = JSON.parse(localStorage.getItem("aiReport")) || null;
 
-// פונקציית קריאה ל-API
 async function fetchReport() {
   try {
-    let data = aiReportCache;
-
-    if (!data) {
-      const res = await fetch("/api/generate-report", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(finalData)
-      });
-      if (!res.ok) throw new Error("שגיאה בשרת");
-      data = await res.json();
-      localStorage.setItem("aiReport", JSON.stringify(data));
+    // אם כבר יש cache – נאפס אותו לפני שליחה חדשה
+    if (localStorage.getItem("aiReport")) {
+      localStorage.removeItem("aiReport");
     }
+
+    const res = await fetch("/api/generate-report", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(finalData)
+    });
+    if (!res.ok) throw new Error("שגיאה בשרת");
+
+    const data = await res.json();
+    localStorage.setItem("aiReport", JSON.stringify(data));
 
     renderReport(data);
   } catch (err) {
