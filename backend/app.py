@@ -87,7 +87,10 @@ def generate_report():
             messages=[{"role": "user", "content": prompt}]
         )
 
-        ai_text = response.choices[0].message.content
+        ai_text = response.choices[0].message.content.strip()
+        if ai_text.startswith("```"):
+            ai_text = ai_text.strip("`")        # מוריד את כל ה־`
+            ai_text = ai_text.replace("json", "", 1).strip()  # מסיר json בהתחלה אם קיים
         try:
             ai_data = json.loads(ai_text)
         except json.JSONDecodeError:
