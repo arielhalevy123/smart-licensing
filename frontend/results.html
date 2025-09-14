@@ -1,38 +1,48 @@
 <!doctype html>
 <html lang="he" dir="rtl">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>דוח רישוי מותאם</title>
+  <meta charset="utf-8">
+  <title>דוח רישוי</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="static/css/style.css">
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-50 text-gray-900">
+  <main class="max-w-6xl mx-auto p-6 space-y-8">
 
-  <main class="max-w-5xl mx-auto p-6">
     <!-- כותרת -->
-    <h1 class="text-3xl font-bold mb-6 text-center">דוח מותאם לעסק שלך</h1>
-
-    <!-- סיכום AI -->
-    <section id="aiSummary" class="mb-6 p-6 bg-white rounded-xl border shadow"></section>
-
-    <!-- הערכות (עלות / זמן) -->
-    <section id="aiEstimates" class="grid grid-cols-2 gap-6 mb-6"></section>
-
-    <!-- דרישות רגולטוריות -->
-    <section id="requirementsList" class="bg-white rounded-xl border p-6 shadow"></section>
-
-    <!-- כפתורים -->
-    <div class="mt-6 flex gap-3 justify-center">
-      <a href="index.html" class="px-4 py-2 border rounded-lg bg-white hover:bg-gray-50">שאלון חדש</a>
-      <button onclick="window.print()" class="px-4 py-2 rounded-lg text-white bg-blue-600 hover:bg-blue-700">
-        הדפס דוח
-      </button>
+    <div class="bg-white p-6 shadow rounded-lg flex justify-between items-center">
+      <div>
+        <h1 id="reportTitle" class="text-2xl font-bold"></h1>
+        <p id="reportDate" class="text-gray-500"></p>
+      </div>
+      <span id="businessTypeTag" class="px-4 py-1 bg-blue-100 text-blue-700 rounded-lg text-sm"></span>
     </div>
-  </main>
 
-  <script src="static/js/results.js"></script>
-  <script>lucide.createIcons();</script>
+    <!-- תגובות AI -->
+    <section class="bg-white p-6 rounded-lg shadow space-y-6">
+      <h2 class="font-bold text-xl">תגובות AI</h2>
+      <div id="aiSections" class="space-y-4"></div>
+    </section>
+
+    <!-- עלויות ולוחות זמנים -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="p-6 bg-white shadow rounded-lg">
+        <h3 class="font-semibold mb-2">עלות כוללת משוערת</h3>
+        <p id="estimatedCost" class="text-lg font-bold text-orange-600"></p>
+      </div>
+      <div class="p-6 bg-white shadow rounded-lg">
+        <h3 class="font-semibold mb-2">לוח זמנים משוער</h3>
+        <p id="estimatedTimeline" class="text-lg font-bold text-green-600"></p>
+      </div>
+    </div>
+
+    <!-- רשימת דרישות -->
+    <section class="bg-white p-6 rounded-lg shadow">
+      <h2 class="font-bold text-xl mb-4">רשימת דרישות רישוי מפורטת</h2>
+      <div id="requirementsList" class="space-y-4"></div>
+    </section>
+
+  </main>
+  <script src="results.js"></script>
 </body>
 </html>

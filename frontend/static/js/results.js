@@ -1,51 +1,46 @@
-// --- שליפת נתוני המשתמש מה-localStorage ---
-const finalData = JSON.parse(localStorage.getItem("finalBusinessData")) || {};
+// שליפת הדוח מה-localStorage
+const report = JSON.parse(localStorage.getItem("aiReport")) || {};
 
-// --- קריאה ל-API ---
-async function fetchReport() {
-  try {
-    const res = await fetch("/api/generate-report", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(finalData)
-    });
+// כותרת
+document.getElementById("reportTitle").textContent = `דוח רישוי עבור: ${report.business_name || "-"}`;
+document.getElementById("reportDate").textContent = `הופק בתאריך: ${new Date().toLocaleDateString("he-IL")}`;
+document.getElementById("businessTypeTag").textContent = report.business_type || "-";
 
-    if (!res.ok) throw new Error("שגיאה בשרת");
+// חלקי AI
+const aiSections = [
+  { title: "המלצות מנהלים", content: report.executive_summary || "" },
+  { title: "דרישות בעדיפות עליונה", content: (report.priority_requirements || []).join("<br>") },
+  { title: "המלצות לצעדים הבאים", content: report.next_steps || "" }
+];
+document.getElementById("aiSections").innerHTML = aiSections.map(s => `
+  <div>
+    <h3 class="font-semibold text-purple-700 mb-1">${s.title}</h3>
+    <p class="text-gray-700">${s.content || "לא נמצאו נתונים"}</p>
+  </div>
+`).join("");
 
-    const data = await res.json();
+// עלות ולו"ז
+document.getElementById("estimatedCost").textContent = report.estimated_total_cost || "לא הוגדר";
+document.getElementById("estimatedTimeline").textContent = report.estimated_timeline || "לא הוגדר";
 
-    // הצגת תמצית מנהלים
-    const aiSumEl = document.getElementById("aiSummary");
-    aiSumEl.innerHTML = `
-      <h2 class="font-bold text-xl mb-2">תמצית מנהלים</h2>
-      <p>${data.executive_summary}</p>
-    `;
+// דרישות מפורטות (Accordion)
+const requirementsList = document.getElementById("requirementsList");
+(requirementsList.innerHTML = (report.matched_rules || []).map((r, i) => `
+  <div class="border rounded-lg">
+    <button class="w-full flex justify-between items-center p-4 font-semibold hover:bg-gray-50"
+      onclick="toggleReq(${i})">
+      <span>${r.title}</span>
+      <span class="text-sm text-gray-500">עדיפות: ${r.priority || "רגיל"}</span>
+    </button>
+    <div id="req-${i}" class="hidden p-4 border-t space-y-2">
+      ${(r.actions || []).map(a => `<p>• ${a}</p>`).join("")}
+      ${r.cost ? `<p class="text-orange-600"><b>עלות משוערת:</b> ${r.cost}</p>` : ""}
+      ${r.timeline ? `<p class="text-green-600"><b>זמן טיפול:</b> ${r.timeline}</p>` : ""}
+    </div>
+  </div>
+`).join(""));
 
-    // הצגת הערכות כלליות (בשלב ראשון GPT נותן תקציר כולל המלצות)
-    const aiEstEl = document.getElementById("aiEstimates");
-    aiEstEl.innerHTML = `
-      <div class="p-4 bg-white border rounded-lg shadow"><b>סוג עסק:</b> ${data.business_type}</div>
-      <div class="p-4 bg-white border rounded-lg shadow"><b>שם עסק:</b> ${data.business_name}</div>
-    `;
-
-    // הצגת דרישות רגולטוריות שחזרו מה-json_rules
-    const listEl = document.getElementById("requirementsList");
-    if (data.matched_rules && data.matched_rules.length > 0) {
-      listEl.innerHTML = `
-        <h2 class="font-bold text-xl mb-2">דרישות רגולטוריות</h2>
-        <ul class="list-disc pr-6 space-y-1">
-          ${data.matched_rules.map(r => `<li><b>${r.title}:</b> ${r.actions.join(", ")}</li>`).join("")}
-        </ul>
-      `;
-    } else {
-      listEl.innerHTML = `<p>לא נמצאו דרישות רלוונטיות</p>`;
-    }
-
-  } catch (err) {
-    console.error("שגיאה:", err);
-    document.getElementById("aiSummary").innerHTML = `<p class="text-red-600">נכשלה שליפת הדוח</p>`;
-  }
+function toggleReq(i) {
+  const el = document.getElementById(`req-${i}`);
+  el.classList.toggle("hidden");
 }
-
-// קריאה לפונקציה בהטענת הדף
-fetchReport();
