@@ -84,17 +84,13 @@ def generate_report():
 
         response = client.chat.completions.create(
             model="gpt-4o-mini",
-            messages=[{"role": "user", "content": prompt}]
+            messages=[{"role": "user", "content": prompt}],
+            response_format={"type": "json_object"}   # 🔑 מבטיח חזרת JSON אמיתי
         )
 
-        ai_text = response.choices[0].message.content.strip()
-        if ai_text.startswith("```"):
-            ai_text = ai_text.strip("`")        # מוריד את כל ה־`
-            ai_text = ai_text.replace("json", "", 1).strip()  # מסיר json בהתחלה אם קיים
-        try:
-            ai_data = json.loads(ai_text)
-        except json.JSONDecodeError:
-            ai_data = {"executive_summary": ai_text}  # fallback
+        ai_text = response.choices[0].message.content
+        ai_data = json.loads(ai_text)
+
         print("✅ תשובה התקבלה מה-OpenAI (tokens):", response.usage.total_tokens, flush=True)
 
         return jsonify({
