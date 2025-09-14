@@ -1,46 +1,80 @@
-// שליפת הדוח מה-localStorage
-const report = JSON.parse(localStorage.getItem("aiReport")) || {};
+// --- שליפת נתוני המשתמש מה-localStorage ---
+const finalData = JSON.parse(localStorage.getItem("finalBusinessData")) || {};
+const aiReportCache = JSON.parse(localStorage.getItem("aiReport")) || null;
 
-// כותרת
-document.getElementById("reportTitle").textContent = `דוח רישוי עבור: ${report.business_name || "-"}`;
-document.getElementById("reportDate").textContent = `הופק בתאריך: ${new Date().toLocaleDateString("he-IL")}`;
-document.getElementById("businessTypeTag").textContent = report.business_type || "-";
+// פונקציית קריאה ל-API
+async function fetchReport() {
+  try {
+    let data = aiReportCache;
 
-// חלקי AI
-const aiSections = [
-  { title: "המלצות מנהלים", content: report.executive_summary || "" },
-  { title: "דרישות בעדיפות עליונה", content: (report.priority_requirements || []).join("<br>") },
-  { title: "המלצות לצעדים הבאים", content: report.next_steps || "" }
-];
-document.getElementById("aiSections").innerHTML = aiSections.map(s => `
-  <div>
-    <h3 class="font-semibold text-purple-700 mb-1">${s.title}</h3>
-    <p class="text-gray-700">${s.content || "לא נמצאו נתונים"}</p>
-  </div>
-`).join("");
+    if (!data) {
+      const res = await fetch("/api/generate-report", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(finalData)
+      });
+      if (!res.ok) throw new Error("שגיאה בשרת");
+      data = await res.json();
+      localStorage.setItem("aiReport", JSON.stringify(data));
+    }
 
-// עלות ולו"ז
-document.getElementById("estimatedCost").textContent = report.estimated_total_cost || "לא הוגדר";
-document.getElementById("estimatedTimeline").textContent = report.estimated_timeline || "לא הוגדר";
-
-// דרישות מפורטות (Accordion)
-const requirementsList = document.getElementById("requirementsList");
-(requirementsList.innerHTML = (report.matched_rules || []).map((r, i) => `
-  <div class="border rounded-lg">
-    <button class="w-full flex justify-between items-center p-4 font-semibold hover:bg-gray-50"
-      onclick="toggleReq(${i})">
-      <span>${r.title}</span>
-      <span class="text-sm text-gray-500">עדיפות: ${r.priority || "רגיל"}</span>
-    </button>
-    <div id="req-${i}" class="hidden p-4 border-t space-y-2">
-      ${(r.actions || []).map(a => `<p>• ${a}</p>`).join("")}
-      ${r.cost ? `<p class="text-orange-600"><b>עלות משוערת:</b> ${r.cost}</p>` : ""}
-      ${r.timeline ? `<p class="text-green-600"><b>זמן טיפול:</b> ${r.timeline}</p>` : ""}
-    </div>
-  </div>
-`).join(""));
-
-function toggleReq(i) {
-  const el = document.getElementById(`req-${i}`);
-  el.classList.toggle("hidden");
+    renderReport(data);
+  } catch (err) {
+    console.error("שגיאה:", err);
+    document.getElementById("executiveSummary").innerHTML =
+      `<p class="text-red-600">נכשלה שליפת הדוח</p>`;
+  }
 }
+
+// --- עיבוד התוצאה למסך ---
+function renderReport(data) {
+  // כותרת
+  document.getElementById("reportTitle").innerHTML =
+    `דוח רישוי עבור: <span class="text-blue-600">${data.business_name}</span>`;
+  document.getElementById("reportDate").textContent =
+    `הופק בתאריך: ${new Date().toLocaleDateString("he-IL")}, סוג עסק: ${data.business_type}`;
+
+  // תמצית מנהלים
+  document.getElementById("executiveSummary").innerHTML = `
+    <p>${data.executive_summary || "לא התקבל תקציר מה-AI"}</p>
+  `;
+
+  // הערכת עלות (אפשר לשפר – כרגע נתון לדוגמה או מתוך AI)
+  document.getElementById("costEstimate").innerHTML = `
+    <h3 class="font-bold text-lg mb-2 flex items-center gap-2">
+      <i data-lucide="dollar-sign" class="text-green-600"></i> עלות כוללת משוערת
+    </h3>
+    <p>${data.estimated_cost || "2,500 ₪ - 8,000 ₪ (הערכה בלבד)"}</p>
+  `;
+
+  // הערכת זמן
+  document.getElementById("timeEstimate").innerHTML = `
+    <h3 class="font-bold text-lg mb-2 flex items-center gap-2">
+      <i data-lucide="clock" class="text-blue-600"></i> לוח זמנים משוער
+    </h3>
+    <p>${data.estimated_time || "6-20 שבועות (הערכה בלבד)"}</p>
+  `;
+
+  // דרישות רגולטוריות
+  const listEl = document.getElementById("requirementsList");
+  if (data.matched_rules && data.matched_rules.length > 0) {
+    listEl.innerHTML = data.matched_rules.map((r, i) => `
+      <details class="py-3">
+        <summary class="cursor-pointer font-semibold flex justify-between items-center">
+          <span>${r.title}</span>
+          <span class="text-sm text-gray-500">עדיפות: ${r.priority || "לא צוינה"}</span>
+        </summary>
+        <ul class="list-disc pr-6 mt-2 space-y-1 text-gray-700">
+          ${r.actions.map(a => `<li>${a}</li>`).join("")}
+        </ul>
+      </details>
+    `).join("");
+  } else {
+    listEl.innerHTML = `<p>לא נמצאו דרישות רלוונטיות</p>`;
+  }
+
+  lucide.createIcons();
+}
+
+// --- קריאה בהטענת הדף ---
+fetchReport();
