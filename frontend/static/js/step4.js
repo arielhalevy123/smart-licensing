@@ -1,40 +1,35 @@
-// שליפת הנתונים מה-localStorage
+// טוען את כל המידע מהשלבים הקודמים
 const step1 = JSON.parse(localStorage.getItem("step1")) || {};
 const step2 = JSON.parse(localStorage.getItem("step2")) || {};
 const step3 = JSON.parse(localStorage.getItem("step3")) || {};
 
-// מילוי הסיכום
-document.getElementById("summaryName").textContent = step1.business_name || "-";
-document.getElementById("summaryType").textContent = step1.business_type || "-";
-document.getElementById("summaryArea").textContent = step2.area_sqm || "-";
-document.getElementById("summarySeats").textContent = step2.seating_capacity || "-";
-document.getElementById("summaryLocation").textContent = step2.location_type || "אזור מגורים";
+// מאחד הכל
+const finalData = { ...step1, ...step2, ...step3 };
 
-const featuresList = document.getElementById("summaryFeatures");
-featuresList.innerHTML = (step3.features || []).map(f => `<li>${f}</li>`).join("");
+// מציג את הנתונים על המסך
+const summaryEl = document.getElementById("summaryCard");
+summaryEl.innerHTML = `
+  <h2 class="text-xl font-bold mb-4">פרטי העסק:</h2>
+  <ul class="space-y-2 text-gray-700">
+    <li><b>שם העסק:</b> ${finalData.business_name || "-"}</li>
+    <li><b>סוג העסק:</b> ${finalData.business_type || "-"}</li>
+    <li><b>שטח:</b> ${finalData.area_sqm || "-"} מ"ר</li>
+    <li><b>מקומות ישיבה:</b> ${finalData.seating_capacity || "-"}</li>
+    <li><b>עובדים:</b> ${finalData.employees || "-"}</li>
+    <li><b>עיר:</b> ${finalData.city || "-"}</li>
+    <li><b>מאפיינים:</b>
+      <ul class="list-disc pr-6">
+        ${finalData.has_gas ? "<li>שימוש בגז</li>" : ""}
+        ${finalData.serves_meat ? "<li>הגשת בשר</li>" : ""}
+        ${finalData.has_delivery ? "<li>משלוחים</li>" : ""}
+        ${finalData.has_alcohol ? "<li>מכירת אלכוהול</li>" : ""}
+      </ul>
+    </li>
+  </ul>
+`;
 
-// כפתור יצירת דוח
-document.getElementById("generateBtn").addEventListener("click", async () => {
-  const finalData = {
-    ...step1,
-    ...step2,
-    ...step3
-  };
-
-  // שמור ב-localStorage
+// כפתור אישור → מעבר ל-results.html
+document.getElementById("confirmBtn").addEventListener("click", () => {
   localStorage.setItem("finalBusinessData", JSON.stringify(finalData));
-
-  try {
-    const res = await fetch("/api/generate-report", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(finalData)
-    });
-    const data = await res.json();
-
-    localStorage.setItem("aiReport", JSON.stringify(data));
-    window.location.href = "results.html";
-  } catch (err) {
-    alert("שגיאה ביצירת הדוח: " + err.message);
-  }
+  window.location.href = "results.html";
 });
