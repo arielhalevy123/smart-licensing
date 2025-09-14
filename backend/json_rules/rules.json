@@ -1,7 +1,7 @@
 {
   "rules": [
     {
-      "id": "R001",
+      "id": "R0001",
       "title": "הגשת מסמכים לרישוי עסק בתחום בתי אוכל",
       "applies_when": {
         "business_type": [
@@ -21,7 +21,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R002",
+      "id": "R0002",
       "title": "מגבלת תוקף רישיון לעסק עם היתר לשימוש חורג",
       "applies_when": {
         "business_type": [
@@ -40,7 +40,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R003",
+      "id": "R0003",
       "title": "חובת הצגת רישיון במקום העסק",
       "applies_when": {
         "business_type": [
@@ -59,7 +59,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R004",
+      "id": "R0004",
       "title": "דיווח על שינוי בעסק המשפיע על תנאי הרישיון",
       "applies_when": {
         "business_type": [
@@ -78,7 +78,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R005",
+      "id": "R0005",
       "title": "ביטול רישיון והעדר תוקף בשל שינוי מהותי",
       "applies_when": {
         "business_type": [
@@ -98,7 +98,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R001",
+      "id": "R0006",
       "title": "דרישת בדיקת רקע פלילי ופסילת בקשת רישיון על סמך ממצאים",
       "applies_when": {
         "business_type": [
@@ -119,7 +119,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R002",
+      "id": "R0007",
       "title": "פטור מדרישות אם אין מכירת, הגשה וצריכת משקאות משכרים בעסק עד 200 מקומות ישיבה",
       "applies_when": {
         "business_type": [
@@ -142,7 +142,7 @@
       "priority": "גבוה"
     },
     {
-      "id": "R003",
+      "id": "R0008",
       "title": "התקנת מערכת מצלמות טלוויזיה במעגל סגור (טמ\"ס) בעסק",
       "applies_when": {
         "business_type": [
@@ -164,7 +164,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R004",
+      "id": "R0009",
       "title": "מיקום ותכונות מצלמות טמ\"ס בעסק",
       "applies_when": {
         "business_type": [
@@ -189,7 +189,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R005",
+      "id": "R0010",
       "title": "ניהול הקלטות ודרישות ציוד הקלטה לטמ\"ס",
       "applies_when": {
         "business_type": [
@@ -212,7 +212,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R006",
+      "id": "R0011",
       "title": "דרישות תאורה חיצונית בשעות החשיכה",
       "applies_when": {
         "business_type": [
@@ -233,7 +233,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R007",
+      "id": "R0012",
       "title": "איסור העסקת קטינים במכירת משקאות משכרים",
       "applies_when": {
         "business_type": [
@@ -255,7 +255,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R008",
+      "id": "R0013",
       "title": "שילוט והודעות בנוגע לאיסור מכירה/הגשה משקאות משכרים לקטינים",
       "applies_when": {
         "business_type": [
@@ -281,7 +281,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R009",
+      "id": "R0014",
       "title": "דרישת זיהוי גיל בצריכת משקאות משכרים",
       "applies_when": {
         "business_type": [
@@ -303,7 +303,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R010",
+      "id": "R0015",
       "title": "שימוש בכוסות פלסטיק לא קשיח בלבד באירועים בשטח פתוח",
       "applies_when": {
         "business_type": [
@@ -326,7 +326,7 @@
       "priority": "גבוה"
     },
     {
-      "id": "R011",
+      "id": "R0016",
       "title": "העברת כספים מהעסק בסכומים גבוהים",
       "applies_when": {
         "business_type": [
@@ -349,7 +349,7 @@
       "priority": "גבוה"
     },
     {
-      "id": "R012",
+      "id": "R0017",
       "title": "חובת אחזקת מידע ומסמכים בעסק",
       "applies_when": {
         "business_type": [
@@ -371,7 +371,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R001",
+      "id": "R0018",
       "title": "הגשת מסמכים לבקשה לרישיון עסק",
       "applies_when": {
         "business_type": [
@@ -394,7 +394,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R002",
+      "id": "R0019",
       "title": "מסמכים נדרשים לחידוש רישיון עסק",
       "applies_when": {
         "business_type": [
@@ -414,7 +414,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R003",
+      "id": "R0020",
       "title": "קיום נהלים ותקנות טיפול במזון",
       "applies_when": {
         "business_type": [
@@ -433,7 +433,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R004",
+      "id": "R0021",
       "title": "שמירת מסמכים והעברה לרשות הבריאות",
       "applies_when": {
         "business_type": [
@@ -452,7 +452,7 @@
       "priority": "גבוה"
     },
     {
-      "id": "R005",
+      "id": "R0022",
       "title": "איסור עישון בעסק",
       "applies_when": {
         "business_type": [
@@ -473,7 +473,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R006",
+      "id": "R0023",
       "title": "אספקת מי שתייה ותכנון מערכת המים בעסק",
       "applies_when": {
         "business_type": [
@@ -494,7 +494,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R001",
+      "id": "R0024",
       "title": "ניקוי וחיטוי מערכת אספקת מים",
       "applies_when": {
         "business_type": [
@@ -515,7 +515,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R002",
+      "id": "R0025",
       "title": "התקנת מערכת חיטוי משלימה לאספקת מים",
       "applies_when": {
         "business_type": [
@@ -536,7 +536,7 @@
       "priority": "חשוב"
     },
     {
-      "id": "R003",
+      "id": "R0026",
       "title": "בדיקות לגילוי חיידקי ליגיונלה במערכות ערפול/מזרקה/מגדלי קירור",
       "applies_when": {
         "business_type": [
@@ -557,7 +557,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R004",
+      "id": "R0027",
       "title": "הפרדה בין מערכת אספקת מי שתייה למערכות מים אחרות",
       "applies_when": {
         "business_type": [
@@ -578,7 +578,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R005",
+      "id": "R0028",
       "title": "מניעת זרימה חוזרת בין מערכות מים",
       "applies_when": {
         "business_type": [
@@ -599,7 +599,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R006",
+      "id": "R0029",
       "title": "תחלופת מים בבריכה",
       "applies_when": {
         "business_type": [
@@ -620,7 +620,7 @@
       "priority": "חשוב"
     },
     {
-      "id": "R007",
+      "id": "R0030",
       "title": "סילוק שפכים רק דרך מערכת ביוב מאושרת",
       "applies_when": {
         "business_type": [
@@ -641,7 +641,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R008",
+      "id": "R0031",
       "title": "התקנת ותפעול מערכות סילוק שפכים לפי התקנים",
       "applies_when": {
         "business_type": [
@@ -662,7 +662,7 @@
       "priority": "חשוב"
     },
     {
-      "id": "R009",
+      "id": "R0032",
       "title": "קווי איסוף שפכים לא יעברו מתחת לעסקי מזון/בריכות/מי שתייה",
       "applies_when": {
         "business_type": [
@@ -683,7 +683,7 @@
       "priority": "חשוב"
     },
     {
-      "id": "R010",
+      "id": "R0033",
       "title": "מערכת סילוק שפכים תחובר למפריד שומן",
       "applies_when": {
         "business_type": [
@@ -704,7 +704,7 @@
       "priority": "חשוב"
     },
     {
-      "id": "R011",
+      "id": "R0034",
       "title": "מניעת הצפה עקב סתימה בביב הציבורי",
       "applies_when": {
         "business_type": [
@@ -725,7 +725,7 @@
       "priority": "חשוב"
     },
     {
-      "id": "R012",
+      "id": "R0035",
       "title": "ניהול הצפה של שפכים",
       "applies_when": {
         "business_type": [
@@ -746,7 +746,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R013",
+      "id": "R0036",
       "title": "הגנה על אזורי פריקת מזון",
       "applies_when": {
         "business_type": [
@@ -766,7 +766,7 @@
       "priority": "חשוב"
     },
     {
-      "id": "R014",
+      "id": "R0037",
       "title": "שיטת עבודה בבית אוכל - 'בשל-הגש' בלבד אלא אם קיבל אישור",
       "applies_when": {
         "business_type": [
@@ -786,7 +786,7 @@
       "priority": "חשוב"
     },
     {
-      "id": "R015",
+      "id": "R0038",
       "title": "חישוב שירותים ציבוריים לפי הל\"ת",
       "applies_when": {
         "business_type": [
@@ -807,7 +807,7 @@
       "priority": "חשוב"
     },
     {
-      "id": "R016",
+      "id": "R0039",
       "title": "הכוונה לשירותים",
       "applies_when": {
         "business_type": [
@@ -828,7 +828,7 @@
       "priority": "נדרש"
     },
     {
-      "id": "R017",
+      "id": "R0040",
       "title": "ציוד ליד הכיורים בשירותים",
       "applies_when": {
         "business_type": [
@@ -849,7 +849,7 @@
       "priority": "חשוב"
     },
     {
-      "id": "R018",
+      "id": "R0041",
       "title": "שמירה על ניקיון השירותים במשך כל שעות הפעילות",
       "applies_when": {
         "business_type": [
@@ -870,7 +870,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R019",
+      "id": "R0042",
       "title": "תחזוקת מערכות שרברבות",
       "applies_when": {
         "business_type": [
@@ -891,7 +891,7 @@
       "priority": "חשוב"
     },
     {
-      "id": "R020",
+      "id": "R0043",
       "title": "סילוק פסולת לפי תקנות הבנייה ועמידה בתנאים סביבתיים ותברואתיים",
       "applies_when": {
         "business_type": [
@@ -913,7 +913,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R021",
+      "id": "R0044",
       "title": "הצבת מכלי קיבול לפסולת מוצקה",
       "applies_when": {
         "business_type": [
@@ -934,7 +934,7 @@
       "priority": "חשוב"
     },
     {
-      "id": "R022",
+      "id": "R0045",
       "title": "דרישות למכלי אשפה בעסק",
       "applies_when": {
         "business_type": [
@@ -957,7 +957,7 @@
       "priority": "חשוב"
     },
     {
-      "id": "R023",
+      "id": "R0046",
       "title": "שמירה על מצב תברואי תקין בחדר האשפה",
       "applies_when": {
         "business_type": [
@@ -978,7 +978,7 @@
       "priority": "חשוב"
     },
     {
-      "id": "R001",
+      "id": "R0047",
       "title": "רכישת מזון מעסק בעל רישיון תקף וסימון מזון מתאים",
       "applies_when": {
         "business_type": [
@@ -999,7 +999,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R002",
+      "id": "R0048",
       "title": "פיקוח וטרינרי מלא למזון מן החי",
       "applies_when": {
         "business_type": [
@@ -1025,7 +1025,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R003",
+      "id": "R0049",
       "title": "שירות להחלפת מוצר פגום",
       "applies_when": {
         "business_type": [
@@ -1045,7 +1045,7 @@
       "priority": "בינוני"
     },
     {
-      "id": "R004",
+      "id": "R0050",
       "title": "הקפדה על טמפרטורת המזון המתקבל",
       "applies_when": {
         "business_type": [
@@ -1074,7 +1074,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R005",
+      "id": "R0051",
       "title": "דרישות להובלת בשר, עופות ודגים",
       "applies_when": {
         "business_type": [
@@ -1098,7 +1098,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R006",
+      "id": "R0052",
       "title": "דרישות קבלה ובדיקת רכבים להובלת מזון",
       "applies_when": {
         "business_type": [
@@ -1122,7 +1122,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R007",
+      "id": "R0053",
       "title": "בדיקת ביצים ותנאי קבלתן",
       "applies_when": {
         "business_type": [
@@ -1146,7 +1146,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R008",
+      "id": "R0054",
       "title": "קליטה, רישום ופסילת מזון על ידי גורם מוסמך",
       "applies_when": {
         "business_type": [
@@ -1168,7 +1168,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R009",
+      "id": "R0055",
       "title": "הובלת מזון – רכבים ותנאים מיוחדים",
       "applies_when": {
         "business_type": [
@@ -1191,7 +1191,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R010",
+      "id": "R0056",
       "title": "תקינות מיכלי קופסאות שימורים",
       "applies_when": {
         "business_type": [
@@ -1213,7 +1213,7 @@
       "priority": "גבוה"
     },
     {
-      "id": "R001",
+      "id": "R0057",
       "title": "הפרדה בין מזון גולמי, מוכן ומוכן למחצה",
       "applies_when": {
         "business_type": [
@@ -1245,7 +1245,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R002",
+      "id": "R0058",
       "title": "שמירה על טמפרטורה נכונה של המזון",
       "applies_when": {
         "business_type": [
@@ -1275,7 +1275,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R003",
+      "id": "R0059",
       "title": "טיפול בציוד וכלים",
       "applies_when": {
         "business_type": [
@@ -1300,7 +1300,7 @@
       "priority": "חשוב"
     },
     {
-      "id": "R004",
+      "id": "R0060",
       "title": "ארגון המטבח לשמירה על הניקיון",
       "applies_when": {
         "business_type": [
@@ -1325,7 +1325,7 @@
       "priority": "חשוב"
     },
     {
-      "id": "R005",
+      "id": "R0061",
       "title": "טיפול במזון שלא יצא מתחום המטבח (שאריות מזון)",
       "applies_when": {
         "business_type": [
@@ -1347,7 +1347,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R006",
+      "id": "R0062",
       "title": "הכשרת עובדי המטבח והיגיינה אישית",
       "applies_when": {
         "business_type": [
@@ -1371,7 +1371,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R007",
+      "id": "R0063",
       "title": "אחסון, הכנה ועיבוד המזון – ארגון מחסנים ומתקנים",
       "applies_when": {
         "business_type": [
@@ -1394,7 +1394,7 @@
       "priority": "חשוב"
     },
     {
-      "id": "R001",
+      "id": "R0064",
       "title": "חובה להפריד באחסון בין סוגי בשר שונים (בעלי כנף, בהמות, דגים)",
       "applies_when": {
         "business_type": [
@@ -1417,7 +1417,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R002",
+      "id": "R0065",
       "title": "חובה על חדרי הקפאה, מקררים ומתקן הפשרה לבשר",
       "applies_when": {
         "business_type": [
@@ -1441,7 +1441,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R003",
+      "id": "R0066",
       "title": "חובת הפרדה מוחלטת בין אזור הכנת דגים ובשר",
       "applies_when": {
         "business_type": [
@@ -1464,7 +1464,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R004",
+      "id": "R0067",
       "title": "התנהלות קירור ושמירת מזון לאחר בישול",
       "applies_when": {
         "business_type": [
@@ -1494,7 +1494,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R005",
+      "id": "R0068",
       "title": "חובה על אזור טיפול והכנת ירקות ופירות",
       "applies_when": {
         "business_type": [
@@ -1518,7 +1518,7 @@
       "priority": "בינוני"
     },
     {
-      "id": "R006",
+      "id": "R0069",
       "title": "אזור הכנת מזון חלבי ומוצרי חלב",
       "applies_when": {
         "business_type": [
@@ -1541,7 +1541,7 @@
       "priority": "בינוני"
     },
     {
-      "id": "R007",
+      "id": "R0070",
       "title": "הפרדת אזורי הדחת כלים בשריים וחלביים",
       "applies_when": {
         "business_type": [
@@ -1564,7 +1564,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R008",
+      "id": "R0071",
       "title": "אזורים נוספים הנדרשים במבנה",
       "applies_when": {
         "business_type": [
@@ -1588,7 +1588,7 @@
       "priority": "נמוך"
     },
     {
-      "id": "R009",
+      "id": "R0072",
       "title": "אחסון ובקרה על קירור מזון",
       "applies_when": {
         "business_type": [
@@ -1624,7 +1624,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R010",
+      "id": "R0073",
       "title": "יישום שיטת F.I.F.O באחסון מזון (ראשון נכנס ראשון יוצא)",
       "applies_when": {
         "business_type": [
@@ -1651,7 +1651,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R011",
+      "id": "R0074",
       "title": "שמירה על תקינות וניקיון מתקני קירור",
       "applies_when": {
         "business_type": [
@@ -1676,7 +1676,7 @@
       "priority": "בינוני"
     },
     {
-      "id": "R001",
+      "id": "R0075",
       "title": "סימון תאריכי ייצור ותפוגה על מזון מעובד",
       "applies_when": {
         "business_type": [
@@ -1698,7 +1698,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R002",
+      "id": "R0076",
       "title": "שמירה על טמפרטורת קירור במקררים ומקפיאים",
       "applies_when": {
         "business_type": [
@@ -1723,7 +1723,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R003",
+      "id": "R0077",
       "title": "דיווח ללשכת הבריאות במקרי הפסקת חשמל ממושכת",
       "applies_when": {
         "business_type": [
@@ -1748,7 +1748,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R004",
+      "id": "R0078",
       "title": "שמירת מזון מקורר בטמפרטורה מוגדרת",
       "applies_when": {
         "business_type": [
@@ -1773,7 +1773,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R005",
+      "id": "R0079",
       "title": "השמדת מזון מקורר שבטמפרטורה מעל 10+ מעלות",
       "applies_when": {
         "business_type": [
@@ -1795,7 +1795,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R006",
+      "id": "R0080",
       "title": "אחסון מזון חם להגשה בטמפרטורה נאותה",
       "applies_when": {
         "business_type": [
@@ -1817,7 +1817,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R007",
+      "id": "R0081",
       "title": "הפרדת אזורי הכנה בין מזון גולמי למעובד",
       "applies_when": {
         "business_type": [
@@ -1845,7 +1845,7 @@
       "priority": "גבוה"
     },
     {
-      "id": "R008",
+      "id": "R0082",
       "title": "שטיפה ראשונית של פירות וירקות באזור ייעודי בלבד",
       "applies_when": {
         "business_type": [
@@ -1869,7 +1869,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R009",
+      "id": "R0083",
       "title": "הפשרת בשר/עופות/דגים גולמיים בתנאים מבוקרים",
       "applies_when": {
         "business_type": [
@@ -1895,7 +1895,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R010",
+      "id": "R0084",
       "title": "הכנת מזונות ייחודיים (פורמולות) במקום וציוד מיוחד",
       "applies_when": {
         "business_type": [
@@ -1919,7 +1919,7 @@
       "priority": "גבוה"
     },
     {
-      "id": "R011",
+      "id": "R0085",
       "title": "בישול וצלייה בטמפרטורות בטוחות",
       "applies_when": {
         "business_type": [
@@ -1946,7 +1946,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R012",
+      "id": "R0086",
       "title": "קירור מהיר למזון חם שמוגש קר",
       "applies_when": {
         "business_type": [
@@ -1968,7 +1968,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R013",
+      "id": "R0087",
       "title": "צינון ואחסון של מזון שעבר עיבוד בחום עד 4 ימים",
       "applies_when": {
         "business_type": [
@@ -1991,7 +1991,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R014",
+      "id": "R0088",
       "title": "הנחיות לטיפול בביצים",
       "applies_when": {
         "business_type": [
@@ -2022,7 +2022,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R015",
+      "id": "R0089",
       "title": "אחסון מזון קר שלא עבר טיפול טרמי",
       "applies_when": {
         "business_type": [
@@ -2047,7 +2047,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R016",
+      "id": "R0090",
       "title": "אחסון מזון חם וקר לפני ואחרי חלוקה",
       "applies_when": {
         "business_type": [
@@ -2072,7 +2072,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R017",
+      "id": "R0091",
       "title": "חימום מחדש של מזון קר",
       "applies_when": {
         "business_type": [
@@ -2095,7 +2095,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R018",
+      "id": "R0092",
       "title": "חלוקה והעברה בטוחה של מזון שאינו דורש קירור או חימום",
       "applies_when": {
         "business_type": [
@@ -2117,7 +2117,7 @@
       "priority": "גבוה"
     },
     {
-      "id": "R019",
+      "id": "R0093",
       "title": "טיפול בשאריות מזון",
       "applies_when": {
         "business_type": [
@@ -2146,7 +2146,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R001",
+      "id": "R0094",
       "title": "ניקיון ובריאות העובד במטבח",
       "applies_when": {
         "business_type": [
@@ -2180,7 +2180,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R002",
+      "id": "R0095",
       "title": "ניקיון ושליטה בזיהום במטבחים – תהליך בסיסי",
       "applies_when": {
         "business_type": [
@@ -2205,7 +2205,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R003",
+      "id": "R0096",
       "title": "ארגון וניהול ניקיון המטבח",
       "applies_when": {
         "business_type": [
@@ -2233,7 +2233,7 @@
       "priority": "גבוה"
     },
     {
-      "id": "R004",
+      "id": "R0097",
       "title": "נהלי ניקיון ציוד וכלים במטבח",
       "applies_when": {
         "business_type": [
@@ -2265,7 +2265,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R001",
+      "id": "R0098",
       "title": "ניקוי עגלות להובלת מזון",
       "applies_when": {
         "business_type": [
@@ -2288,7 +2288,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R002",
+      "id": "R0099",
       "title": "ניקוי ציוד (טרמופורטים, גסטרונומים, מיקסרים ניידים, עגלות שירות, לוחות חיתוך, כלים לרג'יטרמיק, כלים למיניהם)",
       "applies_when": {
         "business_type": [
@@ -2308,7 +2308,7 @@
       "priority": "גבוה"
     },
     {
-      "id": "R003",
+      "id": "R0100",
       "title": "החלפת ציוד מטבח וכלי אוכל",
       "applies_when": {
         "business_type": [
@@ -2328,7 +2328,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R004",
+      "id": "R0101",
       "title": "ניקוי ציוד וכלים בסיום יום העבודה",
       "applies_when": {
         "business_type": [
@@ -2349,7 +2349,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R005",
+      "id": "R0102",
       "title": "התאמת אופן ותדירות הניקוי",
       "applies_when": {
         "business_type": [
@@ -2369,7 +2369,7 @@
       "priority": "גבוה"
     },
     {
-      "id": "R006",
+      "id": "R0103",
       "title": "איסור טאטוא בקרבת מזון לא מוגן",
       "applies_when": {
         "business_type": [
@@ -2389,7 +2389,7 @@
       "priority": "גבוה"
     },
     {
-      "id": "R007",
+      "id": "R0104",
       "title": "ביקורת ותיקון תקלות מיידי",
       "applies_when": {
         "business_type": [
@@ -2410,7 +2410,7 @@
       "priority": "גבוה"
     },
     {
-      "id": "R008",
+      "id": "R0105",
       "title": "ניקיון פחי אשפה",
       "applies_when": {
         "business_type": [
@@ -2432,7 +2432,7 @@
       "priority": "גבוה"
     },
     {
-      "id": "R009",
+      "id": "R0106",
       "title": "סידור וניקיון מדפים",
       "applies_when": {
         "business_type": [
@@ -2453,7 +2453,7 @@
       "priority": "סטנדרטי"
     },
     {
-      "id": "R010",
+      "id": "R0107",
       "title": "איסור השארת מזון בחוץ בלילה",
       "applies_when": {
         "business_type": [
@@ -2473,7 +2473,7 @@
       "priority": "גבוה"
     },
     {
-      "id": "R011",
+      "id": "R0108",
       "title": "דרישות אחסון מחסן מזון",
       "applies_when": {
         "business_type": [
@@ -2497,7 +2497,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R012",
+      "id": "R0109",
       "title": "אוורור מעבר בין קיר למדפים",
       "applies_when": {
         "business_type": [
@@ -2517,7 +2517,7 @@
       "priority": "גבוה"
     },
     {
-      "id": "R013",
+      "id": "R0110",
       "title": "מבנה מחסן קשיח",
       "applies_when": {
         "business_type": [
@@ -2537,7 +2537,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R014",
+      "id": "R0111",
       "title": "חוק תחלופה נכונה של מוצרים",
       "applies_when": {
         "business_type": [
@@ -2557,7 +2557,7 @@
       "priority": "גבוה"
     },
     {
-      "id": "R015",
+      "id": "R0112",
       "title": "ביקורת שוטפת למניעת קינון מזיקים",
       "applies_when": {
         "business_type": [
@@ -2577,7 +2577,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R016",
+      "id": "R0113",
       "title": "שטיפת מחסן בקביעות",
       "applies_when": {
         "business_type": [
@@ -2597,7 +2597,7 @@
       "priority": "גבוה"
     },
     {
-      "id": "R017",
+      "id": "R0114",
       "title": "אחסון חומרי ניקיון במקום נפרד",
       "applies_when": {
         "business_type": [
@@ -2618,7 +2618,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R018",
+      "id": "R0115",
       "title": "סימון חומרי ניקיון",
       "applies_when": {
         "business_type": [
@@ -2639,7 +2639,7 @@
       "priority": "גבוה"
     },
     {
-      "id": "R019",
+      "id": "R0116",
       "title": "תחזוקת מבנה – תיקון מיידי",
       "applies_when": {
         "business_type": [
@@ -2661,7 +2661,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R020",
+      "id": "R0117",
       "title": "סדר וניקיון בחצר וסביבת העסק",
       "applies_when": {
         "business_type": [
@@ -2683,7 +2683,7 @@
       "priority": "גבוה"
     },
     {
-      "id": "R021",
+      "id": "R0118",
       "title": "איסוף אשפה – פעמיים בשבוע",
       "applies_when": {
         "business_type": [
@@ -2704,7 +2704,7 @@
       "priority": "סטנדרטי"
     },
     {
-      "id": "R022",
+      "id": "R0119",
       "title": "הצבת מכל האשפה על עגלה מתאימה",
       "applies_when": {
         "business_type": [
@@ -2725,7 +2725,7 @@
       "priority": "גבוה"
     },
     {
-      "id": "R023",
+      "id": "R0120",
       "title": "תחזוקת השירותים",
       "applies_when": {
         "business_type": [
@@ -2751,7 +2751,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R024",
+      "id": "R0121",
       "title": "סטנדרטים לאחסון מוצרים שאינם דורשים קירור",
       "applies_when": {
         "business_type": [
@@ -2780,7 +2780,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R025",
+      "id": "R0122",
       "title": "ניהול הדברה בעסקי מזון",
       "applies_when": {
         "business_type": [
@@ -2803,7 +2803,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R001",
+      "id": "R0123",
       "title": "ביצוע הדברה בעסקי מזון",
       "applies_when": {
         "business_type": [
@@ -2830,7 +2830,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R002",
+      "id": "R0124",
       "title": "הדברת מכרסמים בעסקי מזון",
       "applies_when": {
         "business_type": [
@@ -2856,7 +2856,7 @@
       "priority": "גבוה"
     },
     {
-      "id": "R003",
+      "id": "R0125",
       "title": "סימון אזור הדברה ואיסוף ציוד",
       "applies_when": {
         "business_type": [
@@ -2878,7 +2878,7 @@
       "priority": "בינוני"
     },
     {
-      "id": "R004",
+      "id": "R0126",
       "title": "ביצוע איוד",
       "applies_when": {
         "business_type": [
@@ -2900,7 +2900,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R005",
+      "id": "R0127",
       "title": "ניהול רישום הדברה ותיק הדברה",
       "applies_when": {
         "business_type": [
@@ -2923,7 +2923,7 @@
       "priority": "גבוה"
     },
     {
-      "id": "R006",
+      "id": "R0128",
       "title": "עיון ברשומות הדברה",
       "applies_when": {
         "business_type": [
@@ -2944,7 +2944,7 @@
       "priority": "בינוני"
     },
     {
-      "id": "R007",
+      "id": "R0129",
       "title": "טיפול בליקויים בהדברה",
       "applies_when": {
         "business_type": [
@@ -2965,7 +2965,7 @@
       "priority": "גבוה"
     },
     {
-      "id": "R008",
+      "id": "R0130",
       "title": "קבלת רישיון עסק לשליחת מזון",
       "applies_when": {
         "business_type": [
@@ -2983,7 +2983,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R009",
+      "id": "R0131",
       "title": "דרישת תכניות מפורטות לאזור הכנת משלוחים ורכב",
       "applies_when": {
         "business_type": [
@@ -3000,7 +3000,7 @@
       "priority": "גבוה"
     },
     {
-      "id": "R010",
+      "id": "R0132",
       "title": "הקלות לחידוש רישיון עסק לשליחת מזון",
       "applies_when": {
         "business_type": [
@@ -3017,7 +3017,7 @@
       "priority": "בינוני"
     },
     {
-      "id": "R011",
+      "id": "R0133",
       "title": "דרישות למקום הכנת משלוחים – שטח ותשתיות נפרדות",
       "applies_when": {
         "business_type": [
@@ -3036,7 +3036,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R001",
+      "id": "R0134",
       "title": "אספקת מים לשימוש בעסק",
       "applies_when": {
         "business_type": [
@@ -3057,7 +3057,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R002",
+      "id": "R0135",
       "title": "תנאי מדור משלוחים",
       "applies_when": {
         "business_type": [
@@ -3078,7 +3078,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R003",
+      "id": "R0136",
       "title": "אוורור ומיזוג שטחי העסק",
       "applies_when": {
         "business_type": [
@@ -3099,7 +3099,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R004",
+      "id": "R0137",
       "title": "אחסון מזון – דרישות כלליות",
       "applies_when": {
         "business_type": [
@@ -3123,7 +3123,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R005",
+      "id": "R0138",
       "title": "אחסון מזון רגיש",
       "applies_when": {
         "business_type": [
@@ -3160,7 +3160,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R006",
+      "id": "R0139",
       "title": "תנאים לציוד ורהיטים באחסון מזון",
       "applies_when": {
         "business_type": [
@@ -3182,7 +3182,7 @@
       "priority": "גבוה"
     },
     {
-      "id": "R007",
+      "id": "R0140",
       "title": "דרישות איכות מזון ומקור אספקה",
       "applies_when": {
         "business_type": [
@@ -3208,7 +3208,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R001",
+      "id": "R0141",
       "title": "איסור קבלת בשר, דגים, עופות ומוצריהם שלא הובלו לפי הוראות",
       "applies_when": {
         "business_type": [
@@ -3234,7 +3234,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R002",
+      "id": "R0142",
       "title": "איסור קבלת לחם ודברי מאפה בלתי ארוזים מראש אלא לפי הוראות הובלה",
       "applies_when": {
         "business_type": [
@@ -3254,7 +3254,7 @@
       "priority": "גבוה"
     },
     {
-      "id": "R003",
+      "id": "R0143",
       "title": "איסור קבלת מזון שלא הובל ברכב עם רישיון עסק מתאים",
       "applies_when": {
         "business_type": [
@@ -3276,7 +3276,7 @@
       "priority": "גבוה"
     },
     {
-      "id": "R004",
+      "id": "R0144",
       "title": "איסור החזקת מזון שפג התאריך לשימוש",
       "applies_when": {
         "business_type": [
@@ -3298,7 +3298,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R005",
+      "id": "R0145",
       "title": "התנהלות עם בשר, דגים, עופות לאחר התאריך המומלץ",
       "applies_when": {
         "business_type": [
@@ -3325,7 +3325,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R006",
+      "id": "R0146",
       "title": "הפרדת טובין שאינם מזון ואחסונם",
       "applies_when": {
         "business_type": [
@@ -3347,7 +3347,7 @@
       "priority": "גבוה"
     },
     {
-      "id": "R007",
+      "id": "R0147",
       "title": "הפרדת אריזות למזון ולא למזון",
       "applies_when": {
         "business_type": [
@@ -3374,7 +3374,7 @@
       "priority": "גבוה"
     },
     {
-      "id": "R008",
+      "id": "R0148",
       "title": "שמירת תעודת משלוח ותיעודה",
       "applies_when": {
         "business_type": [
@@ -3397,7 +3397,7 @@
       "priority": "בינוני"
     },
     {
-      "id": "R009",
+      "id": "R0149",
       "title": "תנאים תברואיים לעובדים עם מזון",
       "applies_when": {
         "business_type": [
@@ -3426,7 +3426,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R010",
+      "id": "R0150",
       "title": "הקצאת רכב ייעודי ושליטה בתנאי הובלת מזון",
       "applies_when": {
         "business_type": [
@@ -3458,7 +3458,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R011",
+      "id": "R0151",
       "title": "התנהלות בטיפול בפסולת",
       "applies_when": {
         "business_type": [
@@ -3488,7 +3488,7 @@
       "priority": "גבוה"
     },
     {
-      "id": "R012",
+      "id": "R0152",
       "title": "חדר שירותים ותנאי היגיינה",
       "applies_when": {
         "business_type": [
@@ -3516,7 +3516,7 @@
       "priority": "גבוה"
     },
     {
-      "id": "R013",
+      "id": "R0153",
       "title": "איסור הכנסת בעלי חיים",
       "applies_when": {
         "business_type": [
@@ -3538,7 +3538,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R014",
+      "id": "R0154",
       "title": "איסור מגורים או לינה בעסק",
       "applies_when": {
         "business_type": [
@@ -3560,7 +3560,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R001",
+      "id": "R0155",
       "title": "תחזוקת סידורי בטיחות אש והצלה",
       "applies_when": {
         "business_type": [
@@ -3581,7 +3581,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R002",
+      "id": "R0156",
       "title": "שילוט יציאה ותאורת חירום",
       "applies_when": {
         "business_type": [
@@ -3603,7 +3603,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R003",
+      "id": "R0157",
       "title": "ציוד כיבוי אש",
       "applies_when": {
         "business_type": [
@@ -3624,7 +3624,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R004",
+      "id": "R0158",
       "title": "מערכת החשמל",
       "applies_when": {
         "business_type": [
@@ -3645,7 +3645,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R005",
+      "id": "R0159",
       "title": "מערכת גפ\"מ (גז)",
       "applies_when": {
         "business_type": [
@@ -3665,7 +3665,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R006",
+      "id": "R0160",
       "title": "שמירה והצגת אישורים",
       "applies_when": {
         "business_type": [
@@ -3684,7 +3684,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R001",
+      "id": "R0161",
       "title": "דרישת צירוף מסמכים לבקשת רישיון עסק או להיתר זמני",
       "applies_when": {
         "business_type": null,
@@ -3701,7 +3701,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R002",
+      "id": "R0162",
       "title": "דרישת הודעה לפני ניתוק יזום של מערכות כיבוי אש",
       "applies_when": {
         "business_type": null,
@@ -3716,7 +3716,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R003",
+      "id": "R0163",
       "title": "דיווח מיידי על השבתת מערכת כיבוי אש",
       "applies_when": {
         "business_type": null,
@@ -3731,7 +3731,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R004",
+      "id": "R0164",
       "title": "הפעלת העסק והתקנת אמצעי בטיחות אש והצלה",
       "applies_when": {
         "business_type": null,
@@ -3746,7 +3746,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R005",
+      "id": "R0165",
       "title": "חובת שמירה על דרישות בטיחות אש תקפות בכל עת",
       "applies_when": {
         "business_type": null,
@@ -3762,7 +3762,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R006",
+      "id": "R0166",
       "title": "חובת תחזוקת אמצעי בטיחות אש והצלה",
       "applies_when": {
         "business_type": null,
@@ -3779,7 +3779,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R001",
+      "id": "R0167",
       "title": "דרכי גישה לעסק לצורך כיבוי והצלה",
       "applies_when": {
         "business_type": [],
@@ -3794,7 +3794,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R002",
+      "id": "R0168",
       "title": "הפרדות ועמידות אש",
       "applies_when": {
         "business_type": [],
@@ -3812,7 +3812,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R003",
+      "id": "R0169",
       "title": "התקנת ידית בהלה בדלת יציאה",
       "applies_when": {
         "business_type": [],
@@ -3827,7 +3827,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R004",
+      "id": "R0170",
       "title": "דרכי מוצא ופתחי יציאה",
       "applies_when": {
         "business_type": [],
@@ -3847,7 +3847,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R005",
+      "id": "R0171",
       "title": "שילוט בעסק",
       "applies_when": {
         "business_type": [],
@@ -3866,7 +3866,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R006",
+      "id": "R0172",
       "title": "תאורת חירום",
       "applies_when": {
         "business_type": [],
@@ -3884,7 +3884,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R007",
+      "id": "R0173",
       "title": "אספקת מים וברזי כיבוי",
       "applies_when": {
         "business_type": [],
@@ -3902,7 +3902,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R008",
+      "id": "R0174",
       "title": "ציוד כיבוי",
       "applies_when": {
         "business_type": [],
@@ -3923,7 +3923,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R001",
+      "id": "R0175",
       "title": "התקנת מערכת כיבוי אש אוטומטית (מתזים)",
       "applies_when": {
         "business_type": [],
@@ -3942,7 +3942,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R002",
+      "id": "R0176",
       "title": "התקנת מערכת גילוי אש ועשן",
       "applies_when": {
         "business_type": [],
@@ -3959,7 +3959,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R003",
+      "id": "R0177",
       "title": "התקנת רכיבים במערכות החשמל בלוחות חשמל בעסק",
       "applies_when": {
         "business_type": [],
@@ -3979,7 +3979,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R004",
+      "id": "R0178",
       "title": "מערכת שליטה בעשן לעסק בתפוסה 200 איש ומעלה",
       "applies_when": {
         "business_type": [],
@@ -3995,7 +3995,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R005",
+      "id": "R0179",
       "title": "התקנת מפסק חשמל חירום לעסק בתפוסה 200 איש ומעלה",
       "applies_when": {
         "business_type": [],
@@ -4010,7 +4010,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R006",
+      "id": "R0180",
       "title": "תקינות מערכת מיזוג אוויר",
       "applies_when": {
         "business_type": [],
@@ -4025,7 +4025,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R007",
+      "id": "R0181",
       "title": "התקנת מערכת מסירת הודעות (כריזת חירום)",
       "applies_when": {
         "business_type": [],
@@ -4041,7 +4041,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R008",
+      "id": "R0182",
       "title": "התקנת גנרטור חירום למערכות חיוניות",
       "applies_when": {
         "business_type": [],
@@ -4058,7 +4058,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R009",
+      "id": "R0183",
       "title": "התקנת לוח פיקוד כבאים",
       "applies_when": {
         "business_type": [],
@@ -4073,7 +4073,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R010",
+      "id": "R0184",
       "title": "ביצוע בדיקת משטר הפעלות ואינטגרציה במערכות בטיחות אש",
       "applies_when": {
         "business_type": [],
@@ -4090,7 +4090,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R011",
+      "id": "R0185",
       "title": "התקנת מערכת גז תקנית ובטוחה",
       "applies_when": {
         "business_type": [],
@@ -4108,7 +4108,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R001",
+      "id": "R0186",
       "title": "התקנת מערכת כיבוי אש בכימיקלים רטובים וניתוקה ממקור אנרגיה בהתאם לת״י 5356, חלק 2",
       "applies_when": {
         "business_type": [
@@ -4130,7 +4130,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R002",
+      "id": "R0187",
       "title": "תחזוקת מערכת הגז, מכשירי הגז, מנדפים ואביזרים במצב תקין",
       "applies_when": {
         "business_type": [
@@ -4150,7 +4150,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R003",
+      "id": "R0188",
       "title": "המצאת אישורי תקינות לציוד כיבוי לפי דרישת נותן האישור",
       "applies_when": {
         "business_type": [
@@ -4170,7 +4170,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R004",
+      "id": "R0189",
       "title": "שימוש בחומרי ציפוי וגימור העומדים בת״י 921",
       "applies_when": {
         "business_type": [
@@ -4190,7 +4190,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R005",
+      "id": "R0190",
       "title": "בדיקת ותחזוקת ציוד כיבוי מים",
       "applies_when": {
         "business_type": [
@@ -4210,7 +4210,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R006",
+      "id": "R0191",
       "title": "בדיקת מטפי כיבוי בהתאם לת״י 129, חלק 1",
       "applies_when": {
         "business_type": [
@@ -4230,7 +4230,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R007",
+      "id": "R0192",
       "title": "בדיקת תקינות מערכת החשמל בהתאם לחוק החשמל ותאורות חירום",
       "applies_when": {
         "business_type": [
@@ -4251,7 +4251,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R008",
+      "id": "R0193",
       "title": "בדיקת מערכת הגז ועמידה בת״י 158",
       "applies_when": {
         "business_type": [
@@ -4273,7 +4273,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R009",
+      "id": "R0194",
       "title": "בדיקת תקינות מערכת גילוי אש אוטומטית לפי ת״י 1220, חלק 11",
       "applies_when": {
         "business_type": [
@@ -4294,7 +4294,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R010",
+      "id": "R0195",
       "title": "בדיקת מערכת כיבוי אש בארון חשמל – עמידה בת״י 5210 או ת״י 1597",
       "applies_when": {
         "business_type": [
@@ -4314,7 +4314,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R011",
+      "id": "R0196",
       "title": "בדיקת מערכת כריזת חירום והבטחת פעולתה",
       "applies_when": {
         "business_type": [
@@ -4334,7 +4334,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R012",
+      "id": "R0197",
       "title": "בדיקת מערכת ספרינקלרים בהתאם לת״י 1928",
       "applies_when": {
         "business_type": [
@@ -4354,7 +4354,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R013",
+      "id": "R0198",
       "title": "בדיקת תקינות גנרטור החירום ע״י מוסמך לחשמל",
       "applies_when": {
         "business_type": [
@@ -4374,7 +4374,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R014",
+      "id": "R0199",
       "title": "בדיקת מערכת כיבוי במנדפים (אם קיימים) לפי ת״י 5356, חלק 2",
       "applies_when": {
         "business_type": [
@@ -4395,7 +4395,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R015",
+      "id": "R0200",
       "title": "בדיקת מערכות בטיחות האש והצלה – עמידה בהוראה 536",
       "applies_when": {
         "business_type": [
@@ -4416,7 +4416,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R016",
+      "id": "R0201",
       "title": "בדיקת מערכת שחרור עשן",
       "applies_when": {
         "business_type": [
@@ -4436,7 +4436,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R017",
+      "id": "R0202",
       "title": "בדיקת מערכת מיזוג אוויר – עמידה בת״י 1001",
       "applies_when": {
         "business_type": [
@@ -4456,7 +4456,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R018",
+      "id": "R0203",
       "title": "ניקוי ארובות ומנדפים לפי ת״י 1001, חלק 6",
       "applies_when": {
         "business_type": [
@@ -4476,7 +4476,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R019",
+      "id": "R0204",
       "title": "איסור הפעלת זיקוקין דינור ואמצעים פירוטכניים",
       "applies_when": {
         "business_type": [
@@ -4497,7 +4497,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R001",
+      "id": "R0205",
       "title": "ניקוי מנדף (קולט אדים)",
       "applies_when": {
         "business_type": [
@@ -4517,7 +4517,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R002",
+      "id": "R0206",
       "title": "ניקוי דלתות",
       "applies_when": {
         "business_type": [
@@ -4536,7 +4536,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R003",
+      "id": "R0207",
       "title": "ניקוי מעליות",
       "applies_when": {
         "business_type": [
@@ -4555,7 +4555,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R004",
+      "id": "R0208",
       "title": "פינוי תכולת מפריד שומן לאתר מאושר",
       "applies_when": {
         "business_type": [
@@ -4574,7 +4574,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R005",
+      "id": "R0209",
       "title": "איסוף שמן טיגון ופינויו",
       "applies_when": {
         "business_type": [
@@ -4595,7 +4595,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R006",
+      "id": "R0210",
       "title": "קבלת מזון - רכב מתאים להובלת מזון",
       "applies_when": {
         "business_type": [
@@ -4614,7 +4614,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R007",
+      "id": "R0211",
       "title": "טמפרטורה בהובלה (קפוא, קירור, מזון חם)",
       "applies_when": {
         "business_type": [
@@ -4639,7 +4639,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R008",
+      "id": "R0212",
       "title": "הקפדה על מקור המזון - ספקים מאושרים בלבד",
       "applies_when": {
         "business_type": [
@@ -4659,7 +4659,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R009",
+      "id": "R0213",
       "title": "בשר ודגים – נדרש אישור וטרינרי",
       "applies_when": {
         "business_type": [
@@ -4680,7 +4680,7 @@
       "priority": "קריטי"
     },
     {
-      "id": "R010",
+      "id": "R0214",
       "title": "ביצים - סימון ובקרה",
       "applies_when": {
         "business_type": [
