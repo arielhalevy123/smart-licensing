@@ -42,54 +42,84 @@ def generate_report():
         area = data.get("area_sqm", "לא צויין")
         seats = data.get("seating_capacity", "לא צויין")
 
-        print("📥 בקשה התקבלה מה-Frontend:", data, flush=True)
-
-        # טען את כל החוקים
         rules = load_rules()
-
-        # סינון חוקים רלוונטיים
         matched = [
             r for r in rules
             if r.get("applies_when", {}).get("business_type", "") in [business_type, "", None]
         ]
 
-        # פרומפט ל-AI
-        prompt = f"""
-        צור דוח רישוי לעסק בשם "{business_name}".
-        סוג העסק: {business_type}, שטח: {area} מ"ר, מקומות ישיבה: {seats}.
-
-        דרישות רגולטוריות שנמצאו בקבצי JSON:
-        {json.dumps(matched, ensure_ascii=False, indent=2)}
-
-        אנא הפק דוח ברור עם:
-        - תקציר מנהלים
-        - דרישות חובה לפי עדיפות
-        - המלצות פעולה
-        - לוח זמנים להיערכות
-        - הערכת עלויות
-        """
-
-        print("📤 שולח ל-OpenAI...", flush=True)
-
-        response = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[{"role": "user", "content": prompt}]
+        system = (
+            "אתה מסייע רישוי עסקים. החזר אך ורק JSON חוקי, ללא טקסט נוסף, לפי הסכימה המדויקת להלן."
+            " אין להחזיר Markdown. אין שדות מיותרים. מותר להשאיר ערכים ריקים אם לא בטוח."
         )
 
-        ai_text = response.choices[0].message.content
-        print("✅ תשובה התקבלה מה-OpenAI (tokens):", response.usage.total_tokens, flush=True)
+        # סכימה: שים לב לשמות השדות — זה מה שה-frontend ירנדר
+        schema = {
+            "business": {
+                "name": business_name,
+                "type": business_type,
+                "area_sqm": area,
+                "seating_capacity": seats
+            },
+            "executive_summary_html": "",  # HTML קצר וסדור, לא Markdown
+            "recommendations": [],         # רשימת מחרוזות
+            "estimated_cost": "",          # טווח עלות כולל (מחרוזת)
+            "estimated_time": "",          # טווח זמן כולל (מחרוזת)
+            "requirements_by_priority": [  # רשימת דרישות מפורטות
+                # {
+                #   "category": "בריאות ותברואה",
+                #   "title": "רישיון בריאות",
+                #   "priority": "קריטי" | "גבוהה" | "בינונית" | "נמוכה",
+                #   "actions": ["...", "..."],
+                #   "related_to": "מטבח/מחסן/שירותים/בטיחות אש/רישוי עסק...",
+                #   "estimated_cost": "₪ ...",
+                #   "estimated_time": "..."
+                # }
+            ]
+        }
 
-        return jsonify({
-            "executive_summary": ai_text,
-            "business_name": business_name,
-            "business_type": business_type,
+        user_payload = {
+            "business": schema["business"],
             "matched_rules": matched
-        })
+        }
+
+        prompt = (
+            "קלט עסק וחוקי רישוי רלוונטיים בקובצי JSON.\n"
+            "בנה דוח תמציתי ומעשי. מלא את כל השדות בסכימה הבאה:\n"
+            + json.dumps(schema, ensure_ascii=False, indent=2) +
+            "\n\nדרישות:\n"
+            "- executive_summary_html יהיה HTML קצר, עם כותרות משנה קצרות, נקודות תבליט, וללא CSS inline.\n"
+            "- requirements_by_priority: קבץ לפי היגיון מהחוקים, עם עדיפות ('קריטי', 'גבוהה', 'בינונית').\n"
+            "- אל תחזיר Markdown.\n"
+            "- החזר JSON חוקי בלבד."
+        )
+
+        resp = client.chat.completions.create(
+            model="gpt-4o-mini",
+            response_format={"type": "json_object"},
+            messages=[
+                {"role": "system", "content": system},
+                {"role": "user", "content": "נתוני קלט:"},
+                {"role": "user", "content": json.dumps(user_payload, ensure_ascii=False)}
+            ],
+            temperature=0.4
+        )
+
+        raw = resp.choices[0].message.content
+        try:
+            ai = json.loads(raw)
+        except Exception:
+            # נפילה חכמה: אם משום מה לא JSON לגמרי, נחזיר את הטקסט כדי שלא תיחסם הזרימה
+            ai = {"executive_summary_html": raw}
+
+        # הוסף מידע שמיש ל-frontend גם אם ה-AI לא מילא הכל
+        ai.setdefault("business", schema["business"])
+        ai.setdefault("estimated_cost", "2,500 ₪ - 8,000 ₪ (הערכה בלבד)")
+        ai.setdefault("estimated_time", "6-20 שבועות (הערכה בלבד)")
+        ai.setdefault("requirements_by_priority", [])
+
+        return jsonify(ai)
 
     except Exception as e:
         print("❌ שגיאה בשרת:", str(e), flush=True)
         return jsonify({"error": str(e)}), 500
-
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
