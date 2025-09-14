@@ -4,31 +4,20 @@ import json
 from openai import OpenAI
 
 app = Flask(__name__)
-
-# יצירת לקוח OpenAI עם מפתח מה־ENV
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-# נתיב לקבצי החוקים
 DATA_DIR = os.path.join(os.path.dirname(__file__), "json_rules")
 
 def load_rules():
     rules = []
-    if not os.path.exists(DATA_DIR):
-        return rules
-
     for filename in os.listdir(DATA_DIR):
         if filename.endswith(".json"):
             with open(os.path.join(DATA_DIR, filename), encoding="utf-8") as f:
                 data = json.load(f)
-
-                # אם זה בפורמט {"rules": [...]}
                 if isinstance(data, dict) and "rules" in data:
                     rules.extend(data["rules"])
-
-                # אם זה בפורמט רשימה בלבד
                 elif isinstance(data, list):
                     rules.extend(data)
-
     return rules
 
 @app.route("/")
@@ -43,38 +32,52 @@ def generate_report():
     area = data.get("area_sqm", "לא צויין")
     seats = data.get("seating_capacity", "לא צויין")
 
-    # טען את כל החוקים מכל הקבצים
     rules = load_rules()
-
-    # סינון חוקים רלוונטיים לפי business_type
     matched = [
         r for r in rules
         if r.get("applies_when", {}).get("business_type", "") in [business_type, "", None]
     ]
 
-    # פרומפט ל־AI
     prompt = f"""
-    צור דוח רישוי לעסק בשם "{business_name}".
-    סוג העסק: {business_type}, שטח: {area} מ"ר, מקומות ישיבה: {seats}.
+    צור דוח רישוי בפורמט JSON בלבד.
+    פרטי העסק:
+    - שם: {business_name}
+    - סוג: {business_type}
+    - שטח: {area} מ"ר
+    - מקומות ישיבה: {seats}
 
-    דרישות רגולטוריות שנמצאו בקבצי JSON:
+    דרישות רגולטוריות:
     {json.dumps(matched, ensure_ascii=False, indent=2)}
 
-    אנא הפק דוח ברור עם:
-    - תקציר מנהלים
-    - דרישות חובה לפי עדיפות
-    - המלצות פעולה
-    - לוח זמנים להיערכות
+    החזר תשובה בפורמט JSON עם השדות:
+    {{
+      "executive_summary": "טקסט ברור עם תמצית מנהלים",
+      "estimated_cost": "טווח עלויות משוער",
+      "estimated_time": "טווח זמן משוער",
+      "recommendations": "המלצות מפורטות",
+      "requirements_by_priority": [
+        {{
+          "title": "שם הדרישה",
+          "priority": "גבוה/קריטי/בינוני",
+          "actions": ["פעולה 1", "פעולה 2"]
+        }}
+      ]
+    }}
     """
 
     try:
         response = client.chat.completions.create(
             model="gpt-4o-mini",
-            messages=[{"role": "user", "content": prompt}]
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.3
         )
 
+        # קבל טקסט מה-AI ופרסר ל-JSON
+        content = response.choices[0].message.content
+        report = json.loads(content)
+
         return jsonify({
-            "executive_summary": response.choices[0].message.content,
+            **report,
             "business_name": business_name,
             "business_type": business_type,
             "matched_rules": matched
