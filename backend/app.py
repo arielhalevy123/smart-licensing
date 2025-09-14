@@ -55,19 +55,30 @@ def generate_report():
 
         # פרומפט ל-AI
         prompt = f"""
-        צור דוח רישוי לעסק בשם "{business_name}".
-        סוג העסק: {business_type}, שטח: {area} מ"ר, מקומות ישיבה: {seats}.
+            צור דוח רישוי לעסק בשם "{business_name}".
+            סוג העסק: {business_type}, שטח: {area} מ"ר, מקומות ישיבה: {seats}.
 
-        דרישות רגולטוריות שנמצאו בקבצי JSON:
-        {json.dumps(matched, ensure_ascii=False, indent=2)}
+            דרישות רגולטוריות שנמצאו בקבצי JSON:
+            {json.dumps(matched, ensure_ascii=False, indent=2)}
 
-        אנא הפק דוח ברור עם:
-        - תקציר מנהלים
-        - דרישות חובה לפי עדיפות
-        - המלצות פעולה
-        - לוח זמנים להיערכות
-        - הערכת עלויות
-        """
+            החזר את התשובה אך ורק כ־JSON תקין עם המבנה הבא:
+            {{
+            "executive_summary": "תקציר מנהלים קצר",
+            "recommendations": ["המלצה 1", "המלצה 2"],
+            "requirements_by_priority": [
+                {{
+                "category": "בריאות ותברואה",
+                "title": "רישיון בריאות",
+                "priority": "קריטי",
+                "actions": ["פעולה 1", "פעולה 2"],
+                "estimated_cost": "800-2500 ₪",
+                "estimated_time": "4-8 שבועות"
+                }}
+            ],
+            "estimated_cost": "סה\"כ ~5000 ₪",
+            "estimated_time": "6-20 שבועות"
+            }}
+            """
 
         print("📤 שולח ל-OpenAI...", flush=True)
 
@@ -77,13 +88,17 @@ def generate_report():
         )
 
         ai_text = response.choices[0].message.content
+        try:
+            ai_data = json.loads(ai_text)
+        except json.JSONDecodeError:
+            ai_data = {"executive_summary": ai_text}  # fallback
         print("✅ תשובה התקבלה מה-OpenAI (tokens):", response.usage.total_tokens, flush=True)
 
         return jsonify({
-            "executive_summary": ai_text,
             "business_name": business_name,
             "business_type": business_type,
-            "matched_rules": matched
+            "matched_rules": matched,
+            **ai_data
         })
 
     except Exception as e:
