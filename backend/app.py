@@ -81,6 +81,8 @@ def generate_report():
             """
 
         print("📤 שולח ל-OpenAI...", flush=True)
+        print("📄 פרומפט שנשלח ל-OpenAI:", prompt, flush=True)
+        print("✅ חוקים שנמצאו לעסק:", json.dumps(matched, ensure_ascii=False, indent=2), flush=True)
 
         response = client.chat.completions.create(
             model="gpt-4o-mini",
