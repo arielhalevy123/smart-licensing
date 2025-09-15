@@ -5,14 +5,14 @@ from openai import OpenAI
 
 app = Flask(__name__)
 
-# הגדרת הלקוח של OpenAI
+# 🔑 הגדרת הלקוח של OpenAI
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 if not OPENAI_API_KEY:
     print("❌ שגיאה: לא נמצא OPENAI_API_KEY במשתני הסביבה!", flush=True)
 
 client = OpenAI(api_key=OPENAI_API_KEY)
 
-# נתיב לקבצי החוקים
+# 📂 נתיב לקבצי החוקים
 DATA_DIR = os.path.join(os.path.dirname(__file__), "json_rules")
 
 
@@ -29,38 +29,44 @@ def load_rules():
     return rules
 
 
-def rule_matches(rule, business_type, area, seats, food_type):
+def rule_matches(rule, user):
     cond = rule.get("applies_when", {})
 
     # סוג עסק
     if cond.get("business_type"):
-        if business_type not in cond["business_type"]:
+        if user.get("business_type") not in cond["business_type"]:
             return False
 
     # סוג מזון
     if cond.get("food_type"):
-        if food_type not in cond["food_type"]:
+        if user.get("food_type", "כל סוגי המזון") not in cond["food_type"]:
             return False
 
     # שטח
+    area = user.get("area_sqm")
     if cond.get("min_area") and area is not None and area < cond["min_area"]:
         return False
     if cond.get("max_area") and area is not None and area > cond["max_area"]:
         return False
 
     # מקומות ישיבה
+    seats = user.get("seating_capacity")
     if cond.get("seating_capacity") and seats is not None:
         try:
-            # אם בחוק יש ערך מספרי – נשווה
             if isinstance(cond["seating_capacity"], int) and seats > cond["seating_capacity"]:
                 return False
-            # אם זה טקסט כמו "עד 200"
             if isinstance(cond["seating_capacity"], str) and "עד" in cond["seating_capacity"]:
                 limit = int(cond["seating_capacity"].replace("עד", "").strip())
                 if seats > limit:
                     return False
         except Exception:
             pass
+
+    # שדות בוליאניים
+    for field in ["has_gas", "serves_meat", "has_delivery", "has_alcohol"]:
+        if field in cond:
+            if user.get(field) not in cond[field]:
+                return False
 
     return True
 
@@ -75,31 +81,37 @@ def generate_report():
     try:
         data = request.json or {}
         business_name = data.get("business_name", "עסק ללא שם")
-        business_type = data.get("business_type", "לא מוגדר")
-        area = int(data.get("area_sqm")) if str(data.get("area_sqm")).isdigit() else None
-        seats = int(data.get("seating_capacity")) if str(data.get("seating_capacity")).isdigit() else None
-        food_type = data.get("food_type") or "כל סוגי המזון"  # ברירת מחדל
 
-        print("📥 בקשה התקבלה מה-Frontend:", data, flush=True)
+        # המרה לערכים נכונים
+        user = {
+            "business_name": business_name,
+            "business_type": data.get("business_type", "לא מוגדר"),
+            "area_sqm": int(data.get("area_sqm")) if str(data.get("area_sqm")).isdigit() else None,
+            "seating_capacity": int(data.get("seating_capacity")) if str(data.get("seating_capacity")).isdigit() else None,
+            "food_type": data.get("food_type", "כל סוגי המזון"),
+            "has_gas": bool(data.get("has_gas")),
+            "serves_meat": bool(data.get("serves_meat")),
+            "has_delivery": bool(data.get("has_delivery")),
+            "has_alcohol": bool(data.get("has_alcohol")),
+        }
+
+        print("📥 בקשה התקבלה מה-Frontend:", user, flush=True)
 
         # טען את כל החוקים
         rules = load_rules()
         print("📚 סך כל החוקים בקובץ:", len(rules), flush=True)
 
         # סינון חוקים רלוונטיים
-        matched = [
-            r for r in rules
-            if rule_matches(r, business_type, area, seats, food_type)
-        ]
+        matched = [r for r in rules if rule_matches(r, user)]
 
         print("✅ חוקים שנמצאו לעסק:", len(matched), flush=True)
-        for r in matched[:5]:  # נדפיס רק 5 ראשונים לבדיקה
+        for r in matched[:5]:
             print("-", r["id"], r["title"], flush=True)
 
         # פרומפט ל-AI
         prompt = f"""
-        צור דוח רישוי לעסק בשם "{business_name}".
-        סוג העסק: {business_type}, שטח: {area or "לא צויין"} מ"ר, מקומות ישיבה: {seats or "לא צויין"}.
+        צור דוח רישוי לעסק בשם "{user['business_name']}".
+        סוג העסק: {user['business_type']}, שטח: {user['area_sqm'] or "לא צויין"} מ"ר, מקומות ישיבה: {user['seating_capacity'] or "לא צויין"}.
 
         דרישות רגולטוריות שנמצאו בקבצי JSON:
         {json.dumps(matched, ensure_ascii=False, indent=2)}
@@ -128,7 +140,7 @@ def generate_report():
         response = client.chat.completions.create(
             model="gpt-4o-mini",
             messages=[{"role": "user", "content": prompt}],
-            response_format={"type": "json_object"}  # JSON מובטח
+            response_format={"type": "json_object"}
         )
 
         ai_text = response.choices[0].message.content
@@ -137,8 +149,7 @@ def generate_report():
         print("✅ תשובה התקבלה מה-OpenAI (tokens):", response.usage.total_tokens, flush=True)
 
         return jsonify({
-            "business_name": business_name,
-            "business_type": business_type,
+            **user,
             "matched_rules_count": len(matched),
             "matched_rules": matched,
             **ai_data

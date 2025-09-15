@@ -6,20 +6,36 @@ from openai import OpenAI
 # 📌 ודא שיש לך משתנה סביבה OPENAI_API_KEY
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-# ⚙️ פרטי המשתמש – דוגמה
+# ⚙️ פרטי המשתמש – דוגמה ברורה
 user_input = {
-    "business_name": "ינתי",
-    "business_type": "bar",
-    "area_sqm": 110,
-    "seating_capacity": 220,
-    "employees": 11,
-    "city": "ביאליק",
-    "has_gas": False,
-    "serves_meat": True,
+    "business_name": "מאפיית חלום",
+    "business_type": "bakery",   # אפשרויות: cafe, food_truck, restaurant, bar, bakery, catering
+    "area_sqm": 80,
+    "seating_capacity": 12,
+    "employees": 5,
+    "city": "תל אביב",
+    "has_gas": True,
+    "serves_meat": False,
     "has_delivery": True,
     "has_alcohol": False
 }
 
+# 📝 סוגי העסקים האפשריים
+BUSINESS_TYPES = ["cafe", "food_truck", "restaurant", "bar", "bakery", "catering"]
+
+# 📝 טבלה של שדות אפשריים לחוקים
+FIELDS_TABLE = """
+שדות אפשריים לסיווג חוק:
+- business_type: cafe, food_truck, restaurant, bar, bakery, catering
+- has_gas: true / false
+- serves_meat: true / false
+- has_delivery: true / false
+- has_alcohol: true / false
+- area_sqm: מספר (טווחים לדוגמה: מתחת ל-50, מעל 200)
+- seating_capacity: מספר (טווחים לדוגמה: עד 20, מעל 100)
+- employees: מספר (טווחים לדוגמה: מעל 10 עובדים)
+- city: אפשר להתנות בעיר מסוימת, אם החוק קשור לרשות מקומית
+"""
 
 def extract_text_from_docx(docx_path):
     """קריאת כל הטקסט והטבלאות מקובץ Word"""
@@ -44,30 +60,53 @@ def extract_text_from_docx(docx_path):
 def convert_rules_with_ai(text, start_id=1):
     """שולח חלק טקסט ל-ChatGPT ומחזיר JSON"""
     prompt = f"""
-אתה מקבל קטע מתוך קובץ עם חוקים ודרישות (כולל טבלאות ופסקאות).
-עליך להחזיר JSON עם מבנה של חוקים רלוונטיים לנתוני העסק הבאים:
+אתה מקבל קטע מתוך קובץ עם חוקים ודרישות.
 
+נתוני העסק לדוגמה:
 {json.dumps(user_input, ensure_ascii=False, indent=2)}
 
-המבנה של כל חוק יהיה כך:
+סוגי עסקים אפשריים:
+{BUSINESS_TYPES}
 
+{FIELDS_TABLE}
+
+המבנה של כל חוק:
 {{
-  "id": "RXXX",   ← מספר רץ החל מ-{start_id}
+  "id": "RXXX",
   "title": "שם החוק",
   "applies_when": {{
-    "business_type": ["{user_input['business_type']}"],
-    "food_type": ["כל סוגי המזון"],
+    "business_type": ["restaurant", "bar"],   ← יכול להיות אחד, כמה או כולם
+    "has_gas": [true, false],
+    "serves_meat": [true, false],
+    "has_delivery": [true, false],
+    "has_alcohol": [true, false],
     "min_area": null,
     "max_area": null,
-    "seating_capacity": null
+    "seating_capacity": null,
+    "employees": null,
+    "city": null
   }},
   "actions": ["פעולה 1", "פעולה 2"],
-  "priority": "קריטי"
+  "priority": "קריטי/גבוה/בינוני/נמוך",
+  "estimated_cost": "עלות משוערת (₪ או 'ללא עלות נוספת')"
 }}
 
-חשוב:
-- למספר את החוקים ברצף (לא לאפס בין חלקים).
-- אם אין חוקים בקטע – החזר {{"rules": []}} בלבד.
+דוגמאות לסיווג נכון:
+1. חוק כללי → business_type כולל את כל {BUSINESS_TYPES}.
+2. חוק מצלמות → רק bar + restaurant (עלות 5,000–15,000 ₪).
+3. חוק גז → applies_when.has_gas = [true].
+4. חוק בשר → applies_when.serves_meat = [true].
+5. חוק משלוחים → applies_when.has_delivery = [true].
+6. חוק אלכוהול → applies_when.has_alcohol = [true].
+7. חוק עם סף → למשל seating_capacity מעל 100.
+
+הנחיות:
+- אל תכניס את כל סוגי העסקים אם זה לא באמת מתאים לכולם.
+- תחשוב בהיגיון איזה חוקים מתאימים לאיזה שדות.
+- חובה למספר ברצף (R0001, R0002...).
+- הוסף עלות משוערת ריאלית (או "ללא עלות נוספת").
+- החזר אך ורק JSON תקין.
+- אם אין חוקים בקטע → החזר {{"rules": []}} בלבד.
 
 קטע מתוך הקובץ:
 {text}
@@ -98,10 +137,6 @@ if __name__ == "__main__":
     chunks = split_text(text, chunk_size=5000)
     print(f"✂️ הקובץ פוצל ל-{len(chunks)} חלקים")
 
-    # 👇 קח רק חצי ראשון של הקובץ
-    half_index = len(chunks) // 2
-    chunks = chunks[:half_index]
-    print(f"📂 מעבד רק {len(chunks)} חלקים (חצי קובץ)")
 
     all_rules = {"rules": []}
     current_id = 1
@@ -124,3 +159,4 @@ if __name__ == "__main__":
         json.dump(all_rules, f, ensure_ascii=False, indent=2)
 
     print(f"✅ קובץ JSON נוצר בהצלחה: {output_file}")
+
