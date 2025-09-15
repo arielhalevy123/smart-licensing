@@ -120,23 +120,28 @@ def generate_report():
         {{
         "executive_summary": "תקציר מנהלים מפורט (3–5 משפטים לפחות, כולל מצב רגולטורי, סיכונים, יתרונות)",
         "recommendations": {{
-            "before_opening": ["שלב 1", "שלב 2"],
-            "during_setup": ["שלב 3", "שלב 4"],
-            "after_opening": ["שלב 5", "שלב 6"]
+            "before_opening": ["שלב 1", "שלב 2", "שלב 3"],
+            "during_setup": ["שלב 4", "שלב 5", "שלב 6"],
+            "after_opening": ["שלב 7", "שלב 8", "שלב 9"]
         }},
         "requirements_by_priority": [
             {{
-            "category": "בריאות ותברואה",
-            "title": "רישיון בריאות",
-            "priority": "קריטי",
-            "actions": ["פעולה 1", "פעולה 2"],
-            "estimated_cost": "טווח מחיר משוער ₪",
-            "estimated_time": "טווח זמן משוער"
+                "category": "בריאות ותברואה",
+                "title": "רישיון בריאות",
+                "priority": "קריטי",
+                "actions": ["פעולה 1", "פעולה 2"],
+                "estimated_cost": "טווח מחיר משוער ₪",
+                "estimated_time": "טווח זמן משוער"
             }}
         ],
         "estimated_cost": "סך הכל טווח מחיר משוער",
         "estimated_time": "סך הכל טווח זמן משוער"
         }}
+
+        הנחיות מחייבות:
+        - בכל אחד מהשלבים (before_opening, during_setup, after_opening) חובה להחזיר לפחות 2–3 פריטים. 
+        - אם אין דרישות מיוחדות לשלב מסוים, יש להחזיר רשימה עם הערך: ["אין דרישות מיוחדות בשלב זה"].
+        - אין להחזיר שדות ריקים או מחרוזות ריקות.
         """
 
         print("📤 שולח ל-OpenAI...", flush=True)
