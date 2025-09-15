@@ -4,13 +4,22 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>דוח רישוי לעסק</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="static/css/style.css">
-  <script src="https://unpkg.com/lucide@latest"></script>
-</head>
-<body class="bg-gray-50 text-gray-900">
 
-  <main class="max-w-6xl mx-auto p-6 space-y-8">
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- אייקונים -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Chart.js לגרפים -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- CSS שלך (לא חובה) -->
+  <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body class="bg-gray-50 text-gray-900 min-h-screen">
+
+  <main class="max-w-7xl mx-auto p-6 space-y-8">
     <!-- כותרת -->
     <div class="bg-white shadow rounded-xl p-6 flex items-center justify-between">
       <div>
@@ -29,26 +38,84 @@
       </div>
     </div>
 
+    <!-- סטריפ מידע כללי -->
+    <section id="businessHeader" class="bg-white shadow rounded-xl p-6 hidden">
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 text-sm">
+        <div><span class="text-gray-500">סוג עסק:</span> <span id="bhType" class="font-semibold"></span></div>
+        <div><span class="text-gray-500">שטח (מ"ר):</span> <span id="bhArea" class="font-semibold"></span></div>
+        <div><span class="text-gray-500">מקומות ישיבה:</span> <span id="bhSeats" class="font-semibold"></span></div>
+        <div><span class="text-gray-500">עיר:</span> <span id="bhCity" class="font-semibold"></span></div>
+      </div>
+      <div class="mt-3 text-sm text-gray-700" id="bhFlags"></div>
+    </section>
+
+    <!-- לואדר (ספינר) -->
+    <section id="loader" class="flex items-center justify-center py-24">
+      <div class="flex flex-col items-center gap-4">
+        <div class="h-12 w-12 rounded-full border-4 border-blue-200 border-t-blue-600 animate-spin"></div>
+        <div class="text-gray-600">מכין את הדוח…</div>
+      </div>
+    </section>
+
+    <!-- שגיאה כללית -->
+    <section id="globalError" class="hidden">
+      <div class="p-4 bg-red-50 border border-red-200 text-red-800 rounded-lg">
+        אירעה שגיאה בעת שליפת הדוח. נסו שוב מאוחר יותר.
+      </div>
+    </section>
+
     <!-- תגובות AI -->
-    <section class="bg-white shadow rounded-xl p-6 space-y-6">
-      <h2 class="text-xl font-bold mb-2">תגובות AI</h2>
+    <section id="aiSections" class="bg-white shadow rounded-xl p-6 space-y-6 hidden">
+      <h2 class="text-xl font-bold mb-2 flex items-center gap-2">
+        <i data-lucide="bot"></i> תובנות AI
+      </h2>
+
       <!-- תקציר מנהלים -->
-      <div id="executiveSummary" class="text-gray-700 leading-relaxed"></div>
+      <div>
+        <h3 class="font-semibold mb-2">תקציר מנהלים</h3>
+        <div id="executiveSummary" class="text-gray-700 leading-relaxed"></div>
+      </div>
+
       <!-- המלצות פעולה -->
-      <div id="recommendations" class="text-gray-700 leading-relaxed"></div>
+      <div>
+        <h3 class="font-semibold mb-2">המלצות לפעולה</h3>
+        <div id="recommendations" class="text-gray-700 leading-relaxed"></div>
+      </div>
     </section>
 
     <!-- עלות וזמן -->
-    <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <section id="costTime" class="grid grid-cols-1 md:grid-cols-2 gap-6 hidden">
       <div id="costEstimate" class="p-6 bg-white border rounded-lg shadow"></div>
       <div id="timeEstimate" class="p-6 bg-white border rounded-lg shadow"></div>
     </section>
 
-    <!-- דרישות רגולטוריות -->
-    <section class="bg-white shadow rounded-xl p-6 space-y-4">
-      <h2 class="text-xl font-bold">רשימת דרישות רישוי מפורטת</h2>
+    <!-- גרפים -->
+    <section id="charts" class="grid grid-cols-1 lg:grid-cols-2 gap-6 hidden">
+      <div class="bg-white p-6 rounded-lg shadow">
+        <h3 class="font-bold text-lg mb-4">התפלגות חוקים לפי קטגוריות</h3>
+        <canvas id="rulesPie" height="240"></canvas>
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow">
+        <h3 class="font-bold text-lg mb-4">חוקים לפי עדיפות</h3>
+        <canvas id="priorityBar" height="240"></canvas>
+      </div>
+    </section>
+
+    <!-- דרישות רגולטוריות (מקובצות לפי קטגוריה) -->
+    <section id="requirementsSection" class="bg-white shadow rounded-xl p-6 space-y-4 hidden">
+      <div class="flex items-center justify-between">
+        <h2 class="text-xl font-bold">רשימת דרישות רישוי מפורטת</h2>
+        <div id="rulesCount" class="text-sm text-gray-600"></div>
+      </div>
       <div id="requirementsList" class="divide-y"></div>
     </section>
+
+    <!-- כל החוקים הגולמיים -->
+    <section id="allRulesSection" class="bg-white shadow rounded-xl p-6 space-y-4 hidden">
+      <h2 class="text-xl font-bold">כל החוקים הרלוונטיים (RAW)</h2>
+      <div id="allRulesList" class="divide-y"></div>
+    </section>
+
   </main>
 
   <script src="static/js/results.js"></script>

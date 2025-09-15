@@ -23,6 +23,16 @@ user_input = {
 # 📝 סוגי העסקים האפשריים
 BUSINESS_TYPES = ["cafe", "food_truck", "restaurant", "bar", "bakery", "catering"]
 
+# 📝 קטגוריות אפשריות
+CATEGORIES = [
+    "בריאות ותברואה",
+    "בטיחות אש",
+    "רישוי ותכנון",
+    "סביבה ופסולת",
+    "תפעול וניהול עובדים",
+    "אחר"
+]
+
 # 📝 טבלה של שדות אפשריים לחוקים
 FIELDS_TABLE = """
 שדות אפשריים לסיווג חוק:
@@ -42,12 +52,10 @@ def extract_text_from_docx(docx_path):
     doc = Document(docx_path)
     full_text = []
 
-    # פסקאות רגילות
     for para in doc.paragraphs:
         if para.text.strip():
             full_text.append(para.text.strip())
 
-    # טבלאות
     for table in doc.tables:
         for row in table.rows:
             row_data = [cell.text.strip() for cell in row.cells if cell.text.strip()]
@@ -55,7 +63,6 @@ def extract_text_from_docx(docx_path):
                 full_text.append(" | ".join(row_data))
 
     return "\n".join(full_text)
-
 
 def convert_rules_with_ai(text, start_id=1):
     """שולח חלק טקסט ל-ChatGPT ומחזיר JSON"""
@@ -68,14 +75,18 @@ def convert_rules_with_ai(text, start_id=1):
 סוגי עסקים אפשריים:
 {BUSINESS_TYPES}
 
+קטגוריות אפשריות:
+{CATEGORIES}
+
 {FIELDS_TABLE}
 
 המבנה של כל חוק:
 {{
   "id": "RXXX",
   "title": "שם החוק",
+  "category": "בריאות ותברואה / בטיחות אש / רישוי ותכנון / סביבה ופסולת / תפעול וניהול עובדים / אחר",
   "applies_when": {{
-    "business_type": ["restaurant", "bar"],   ← יכול להיות אחד, כמה או כולם
+    "business_type": ["restaurant", "bar"],
     "has_gas": [true, false],
     "serves_meat": [true, false],
     "has_delivery": [true, false],
@@ -91,20 +102,14 @@ def convert_rules_with_ai(text, start_id=1):
   "estimated_cost": "עלות משוערת (₪ או 'ללא עלות נוספת')"
 }}
 
-דוגמאות לסיווג נכון:
-1. חוק כללי → business_type כולל את כל {BUSINESS_TYPES}.
-2. חוק מצלמות → רק bar + restaurant (עלות 5,000–15,000 ₪).
-3. חוק גז → applies_when.has_gas = [true].
-4. חוק בשר → applies_when.serves_meat = [true].
-5. חוק משלוחים → applies_when.has_delivery = [true].
-6. חוק אלכוהול → applies_when.has_alcohol = [true].
-7. חוק עם סף → למשל seating_capacity מעל 100.
-
-הנחיות:
-- אל תכניס את כל סוגי העסקים אם זה לא באמת מתאים לכולם.
-- תחשוב בהיגיון איזה חוקים מתאימים לאיזה שדות.
-- חובה למספר ברצף (R0001, R0002...).
+דגשים חשובים:
+- סווג כל חוק לקטגוריה רלוונטית אחת מתוך הרשימה.
+- ייתכן שחוק יתאים ליותר מסוג עסק אחד → רשום את כולם.
+- אם החוק תלוי בגז/בשר/אלכוהול/משלוחים → ציין זאת ב-applies_when.
+- אם זה כלל כללי (כמו תליית רישיון) → business_type = כל {BUSINESS_TYPES}.
 - הוסף עלות משוערת ריאלית (או "ללא עלות נוספת").
+- חובה למספר ברצף (R0001, R0002...).
+- אל תסתפק בדוגמה אחת, תסווג לפי ההיגיון שלך.
 - החזר אך ורק JSON תקין.
 - אם אין חוקים בקטע → החזר {{"rules": []}} בלבד.
 
@@ -121,14 +126,12 @@ def convert_rules_with_ai(text, start_id=1):
     ai_text = response.choices[0].message.content
     return json.loads(ai_text)
 
-
 def split_text(text, chunk_size=5000):
     """פיצול הטקסט לחתיכות קטנות יותר"""
     return [text[i:i+chunk_size] for i in range(0, len(text), chunk_size)]
 
-
 if __name__ == "__main__":
-    docx_file = "18-07-2022_4.2A.docx"   # ← שם הקובץ שלך
+    docx_file = "18-07-2022_4.2A.docx"
     output_file = "rules.json"
 
     print("📂 קורא את הקובץ...")
@@ -137,6 +140,10 @@ if __name__ == "__main__":
     chunks = split_text(text, chunk_size=5000)
     print(f"✂️ הקובץ פוצל ל-{len(chunks)} חלקים")
 
+    # ✂️ עיבוד רק חצי קובץ
+    half_index = max(1, len(chunks) // 2)
+    chunks = chunks[:half_index]
+    print(f"📂 מעבד רק {len(chunks)} חלקים (חצי קובץ)")
 
     all_rules = {"rules": []}
     current_id = 1
@@ -159,4 +166,3 @@ if __name__ == "__main__":
         json.dump(all_rules, f, ensure_ascii=False, indent=2)
 
     print(f"✅ קובץ JSON נוצר בהצלחה: {output_file}")
-
