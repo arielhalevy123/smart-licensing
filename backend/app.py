@@ -118,8 +118,12 @@ def generate_report():
 
         החזר את התשובה אך ורק כ־JSON תקין עם המבנה הבא:
         {{
-          "executive_summary": "תקציר מנהלים קצר",
-          "recommendations": ["המלצה 1", "המלצה 2"],
+          "executive_summary": "תקציר מנהלים מפורט (3–5 משפטים לפחות, כולל מצב רגולטורי, סיכונים, יתרונות)",
+          "recommendations": {
+            "before_opening": ["שלב 1", "שלב 2"],
+            "during_setup": ["שלב 3", "שלב 4"],
+            "after_opening": ["שלב 5", "שלב 6"]
+          },
           "requirements_by_priority": [
               {{
               "category": "בריאות ותברואה",
