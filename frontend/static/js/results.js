@@ -46,7 +46,6 @@ async function fetchReport() {
     hide(el.requirementsSection);
     hide(el.allRulesSection);
 
-    // נוודא שתמיד נשלחת בקשה חדשה
     localStorage.removeItem("aiReport");
 
     const res = await fetch("/api/generate-report", {
@@ -93,15 +92,19 @@ function renderReport(data) {
     <p>${data.executive_summary || "לא התקבל תקציר מה-AI"}</p>
   `;
 
-  // המלצות פעולה
-  if (Array.isArray(data.recommendations) && data.recommendations.length > 0) {
+  // המלצות פעולה בשלבים
+  if (data.recommendations && typeof data.recommendations === "object") {
+    const rec = data.recommendations;
     el.recommendations.innerHTML = `
-      <ul class="list-disc pl-6 space-y-1">
-        ${data.recommendations.map(r => `<li>${r}</li>`).join("")}
-      </ul>
+      <h3 class="font-bold text-lg mb-3">המלצות לפעולה לפי שלבים</h3>
+      <div class="grid md:grid-cols-3 gap-4">
+        ${renderRecColumn("לפני פתיחה", rec.before_opening)}
+        ${renderRecColumn("במהלך ההקמה", rec.during_setup)}
+        ${renderRecColumn("לאחר פתיחה", rec.after_opening)}
+      </div>
     `;
   } else {
-    el.recommendations.innerHTML = `<p>אין המלצות נוספות</p>`;
+    el.recommendations.innerHTML = `<p>לא התקבלו המלצות מה-AI</p>`;
   }
   show(el.aiSections);
 
@@ -134,29 +137,37 @@ function renderReport(data) {
     `).join("");
     show(el.requirementsSection);
 
-    // גרפים
     renderCharts(grouped, rules);
     show(el.charts);
 
-    // RAW list (אופציונלי להצלבה)
     el.allRulesList.innerHTML = rules.map(r => `
       <details class="py-3">
         <summary class="cursor-pointer font-semibold">${r.id || ""} – ${r.title || ""}</summary>
         <pre class="mt-2 bg-gray-50 p-3 rounded text-xs overflow-auto">${escapeHtml(JSON.stringify(r, null, 2))}</pre>
       </details>
     `).join("");
-    // אפשר להסתיר אם לא צריך:
-    // show(el.allRulesSection);
   } else {
     el.requirementsList.innerHTML = `<p>לא נמצאו חוקים</p>`;
     show(el.requirementsSection);
   }
 
-  // סוף טעינה
   hide(el.loader);
-
-  // אייקונים
   lucide.createIcons();
+}
+
+function renderRecColumn(title, items) {
+  if (!Array.isArray(items) || items.length === 0) {
+    return `<div class="p-4 bg-white border rounded shadow-sm">
+      <h4 class="font-semibold mb-2">${title}</h4>
+      <p class="text-gray-500 text-sm">—</p>
+    </div>`;
+  }
+  return `<div class="p-4 bg-white border rounded shadow-sm">
+    <h4 class="font-semibold mb-2">${title}</h4>
+    <ul class="list-disc pr-5 space-y-1 text-sm">
+      ${items.map(i => `<li>${i}</li>`).join("")}
+    </ul>
+  </div>`;
 }
 
 function groupByCategory(rules) {
@@ -171,8 +182,6 @@ function groupByCategory(rules) {
 
 function ruleDetails(r) {
   const actions = Array.isArray(r.actions) ? r.actions : [];
-  const steps = Array.isArray(r.steps) ? r.steps : []; // אם תוסיף later שלבי "לפני/במהלך/אחרי"
-
   return `
     <details class="mb-2 p-3 border rounded-lg bg-gray-50">
       <summary class="cursor-pointer font-semibold flex justify-between items-center">
@@ -188,58 +197,24 @@ function ruleDetails(r) {
             </ul>
           </div>
         ` : ""}
-
         ${r.estimated_cost ? `<p><b>עלות משוערת:</b> ${r.estimated_cost}</p>` : ""}
         ${r.estimated_time ? `<p><b>זמן משוער:</b> ${r.estimated_time}</p>` : ""}
-
-        ${steps.length ? `
-          <div class="mt-2">
-            <b>שלבים:</b>
-            <div class="grid md:grid-cols-3 gap-3 mt-2">
-              ${renderStepColumn("לפני פתיחה", steps.filter(s => s.phase === "before"))}
-              ${renderStepColumn("במהלך תהליך הרישוי", steps.filter(s => s.phase === "during"))}
-              ${renderStepColumn("אחרי פתיחה / תחזוקה שוטפת", steps.filter(s => s.phase === "after"))}
-            </div>
-          </div>
-        ` : ""}
       </div>
     </details>
   `;
 }
 
-function renderStepColumn(title, items) {
-  if (!items || items.length === 0) {
-    return `<div class="bg-white p-3 rounded border"><div class="text-sm text-gray-500">${title}</div><div class="text-xs text-gray-400 mt-1">—</div></div>`;
-  }
-  return `
-    <div class="bg-white p-3 rounded border">
-      <div class="text-sm font-semibold">${title}</div>
-      <ul class="list-disc pr-5 mt-2 text-sm">
-        ${items.map(i => `<li>${i.text}</li>`).join("")}
-      </ul>
-    </div>
-  `;
-}
-
 function renderCharts(grouped, rules) {
-  // Pie לפי קטגוריה
   const labels = Object.keys(grouped);
   const values = labels.map(l => grouped[l].length);
 
   const pieCtx = document.getElementById("rulesPie").getContext("2d");
   new Chart(pieCtx, {
     type: "pie",
-    data: {
-      labels,
-      datasets: [{
-        data: values,
-        backgroundColor: ["#2563eb","#16a34a","#f59e0b","#dc2626","#9333ea","#0d9488","#64748b"]
-      }]
-    },
+    data: { labels, datasets: [{ data: values, backgroundColor: ["#2563eb","#16a34a","#f59e0b","#dc2626","#9333ea","#0d9488","#64748b"] }] },
     options: { plugins: { legend: { position: "bottom" } } }
   });
 
-  // Bar לפי עדיפות
   const priorities = ["קריטי","גבוה","בינוני","נמוך","לא צויין"];
   const prCounts = { "קריטי":0,"גבוה":0,"בינוני":0,"נמוך":0,"לא צויין":0 };
   rules.forEach(r => { prCounts[r.priority || "לא צויין"] = (prCounts[r.priority || "לא צויין"] || 0) + 1; });
@@ -247,19 +222,8 @@ function renderCharts(grouped, rules) {
   const barCtx = document.getElementById("priorityBar").getContext("2d");
   new Chart(barCtx, {
     type: "bar",
-    data: {
-      labels: priorities,
-      datasets: [{
-        label: "מספר חוקים",
-        data: priorities.map(p => prCounts[p] || 0),
-        backgroundColor: "#2563eb"
-      }]
-    },
-    options: {
-      responsive: true,
-      plugins: { legend: { display: false } },
-      scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }
-    }
+    data: { labels: priorities, datasets: [{ label: "מספר חוקים", data: priorities.map(p => prCounts[p] || 0), backgroundColor: "#2563eb" }] },
+    options: { responsive: true, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, ticks: { precision: 0 } } } }
   });
 }
 
