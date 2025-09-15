@@ -118,24 +118,24 @@ def generate_report():
 
         החזר את התשובה אך ורק כ־JSON תקין עם המבנה הבא:
         {{
-          "executive_summary": "תקציר מנהלים מפורט (3–5 משפטים לפחות, כולל מצב רגולטורי, סיכונים, יתרונות)",
-          "recommendations": {
+        "executive_summary": "תקציר מנהלים מפורט (3–5 משפטים לפחות, כולל מצב רגולטורי, סיכונים, יתרונות)",
+        "recommendations": {{
             "before_opening": ["שלב 1", "שלב 2"],
             "during_setup": ["שלב 3", "שלב 4"],
             "after_opening": ["שלב 5", "שלב 6"]
-          },
-          "requirements_by_priority": [
-              {{
-              "category": "בריאות ותברואה",
-              "title": "רישיון בריאות",
-              "priority": "קריטי",
-              "actions": ["פעולה 1", "פעולה 2"],
-              "estimated_cost": "טווח מחיר משוער ₪",
-              "estimated_time": "טווח זמן משוער"
-              }}
-          ],
-          "estimated_cost": "סך הכל טווח מחיר משוער",
-          "estimated_time": "סך הכל טווח זמן משוער"
+        }},
+        "requirements_by_priority": [
+            {{
+            "category": "בריאות ותברואה",
+            "title": "רישיון בריאות",
+            "priority": "קריטי",
+            "actions": ["פעולה 1", "פעולה 2"],
+            "estimated_cost": "טווח מחיר משוער ₪",
+            "estimated_time": "טווח זמן משוער"
+            }}
+        ],
+        "estimated_cost": "סך הכל טווח מחיר משוער",
+        "estimated_time": "סך הכל טווח זמן משוער"
         }}
         """
 
