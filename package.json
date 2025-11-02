@@ -1,0 +1,27 @@
+{
+  "name": "a-impact",
+  "version": "1.0.0",
+  "description": "An interactive system designed to help business owners in Israel understand the relevant licensing requirements for their business.   The system collects data from the user (business type, size, seating capacity, additional features) and generates a personalized report by combining structured JSON rules with an AI language model (OpenAI GPT).",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arielhalevy123/smart-licensing.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/arielhalevy123/smart-licensing/issues"
+  },
+  "homepage": "https://github.com/arielhalevy123/smart-licensing#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.56.1"
+  }
+}
