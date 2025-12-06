@@ -59,7 +59,7 @@ async function handleQuestion() {
         sourceCard.className = "bg-white p-4 rounded-lg shadow-sm border text-sm text-gray-600";
         sourceCard.innerHTML = `
           <div class="font-bold mb-1 text-blue-600">קטע #${source.id}</div>
-          <p>${source.preview}</p>
+          <p class="leading-relaxed text-gray-700">${source.preview}</p>
         `;
         el.sourcesList.appendChild(sourceCard);
       });
@@ -88,4 +88,3 @@ el.questionInput.addEventListener("keydown", (e) => {
     handleQuestion();
   }
 });
-

@@ -7,29 +7,55 @@ from openai import OpenAI
 # Configuration
 DOCX_PATH = "18-07-2022_4.2A.docx"
 INDEX_OUTPUT_PATH = "backend/rag_index.json"
-CHUNK_SIZE = 800  # characters
-OVERLAP = 100
-EMBEDDING_MODEL = "text-embedding-3-small"  # Cost-effective and high performance
+CHUNK_SIZE = 1000  # characters
+OVERLAP = 150
+EMBEDDING_MODEL = "text-embedding-3-small"
 
 # Initialize OpenAI
 api_key = os.getenv("OPENAI_API_KEY")
 if not api_key:
     print("⚠️  Warning: OPENAI_API_KEY not found in environment variables.")
-    # You might want to exit here if strict, but for now we'll let it fail later if not set.
 
 client = OpenAI(api_key=api_key)
 
 def extract_text_from_docx(path):
-    """Extracts text from a DOCX file."""
+    """Extracts text from a DOCX file, including tables."""
     if not os.path.exists(path):
         raise FileNotFoundError(f"File not found: {path}")
     
     doc = Document(path)
     full_text = []
+
+    # Iterate over all elements in the document body
+    # python-docx doesn't easily expose order of paragraphs vs tables in a unified list
+    # So we'll iterate paragraphs and tables separately, but a better approach for RAG
+    # is often just extracting them as they come. 
+    # However, `doc.paragraphs` and `doc.tables` are separate lists.
+    # To get them in order, we can iterate over `doc.element.body` but that's low-level XML.
+    # For simplicity and robustness, we will extract all paragraphs first, then all tables,
+    # OR we can just join them. Often tables are appendices or specific data.
+    # Let's try to capture them reasonably.
+    
+    # Strategy: Read paragraphs. If we encounter a table, we read it.
+    # But `python-docx` doesn't interleave them in the API.
+    # We will read all paragraphs, then all tables, and join them. 
+    # Ideally, we'd want document order, but for a RAG knowledge base,
+    # as long as chunks are self-contained, it's okay.
+    
+    print("   ... Reading paragraphs ...")
     for para in doc.paragraphs:
         text = para.text.strip()
         if text:
             full_text.append(text)
+
+    print("   ... Reading tables ...")
+    for table in doc.tables:
+        for row in table.rows:
+            # Join cells with a pipe or space to keep structure
+            row_text = " | ".join(cell.text.strip() for cell in row.cells if cell.text.strip())
+            if row_text:
+                full_text.append(row_text)
+                
     return "\n".join(full_text)
 
 def chunk_text(text, chunk_size=CHUNK_SIZE, overlap=OVERLAP):
@@ -37,10 +63,15 @@ def chunk_text(text, chunk_size=CHUNK_SIZE, overlap=OVERLAP):
     chunks = []
     start = 0
     while start < len(text):
-        end = start + chunk_size
+        end = min(start + chunk_size, len(text))
         chunk = text[start:end]
         chunks.append(chunk)
+        # Move forward by chunk_size - overlap
         start += chunk_size - overlap
+        # Prevent infinite loop if overlap >= chunk_size (logic check)
+        if start >= end:
+            start = end
+            
     return chunks
 
 def generate_embeddings(chunks):
@@ -48,7 +79,6 @@ def generate_embeddings(chunks):
     data = []
     print(f"🚀 Generating embeddings for {len(chunks)} chunks...")
     
-    # Process in batches to avoid hitting rate limits or payload limits
     batch_size = 20
     for i in range(0, len(chunks), batch_size):
         batch = chunks[i:i+batch_size]
@@ -97,4 +127,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
