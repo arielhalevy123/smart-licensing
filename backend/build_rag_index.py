@@ -1,14 +1,13 @@
 import os
 import json
-import numpy as np
+import re
 from docx import Document
 from openai import OpenAI
 
 # Configuration
 DOCX_PATH = "18-07-2022_4.2A.docx"
 INDEX_OUTPUT_PATH = "backend/rag_index.json"
-CHUNK_SIZE = 1000  # characters
-OVERLAP = 150
+PREVIEW_PATH = "rag_sections_preview.txt"   # רק לצורך בדיקה אנושית
 EMBEDDING_MODEL = "text-embedding-3-small"
 
 # Initialize OpenAI
@@ -18,108 +17,152 @@ if not api_key:
 
 client = OpenAI(api_key=api_key)
 
-def extract_text_from_docx(path):
-    """Extracts text from a DOCX file, including tables."""
+# סעיף משפטי: 1.  / 1.1. / 1.2.3. / 2.10.4.1
+SECTION_RE = re.compile(r'^\s*(\d+(\.\d+)*\.?)\s+')
+
+def extract_blocks_from_docx(path):
+    """
+    מחזיר רשימה של בלוקים טקסטואליים (פסקאות ושורות מטבלאות).
+    כל בלוק הוא מחרוזת.
+    """
     if not os.path.exists(path):
         raise FileNotFoundError(f"File not found: {path}")
     
     doc = Document(path)
-    full_text = []
+    blocks = []
 
-    # Iterate over all elements in the document body
-    # python-docx doesn't easily expose order of paragraphs vs tables in a unified list
-    # So we'll iterate paragraphs and tables separately, but a better approach for RAG
-    # is often just extracting them as they come. 
-    # However, `doc.paragraphs` and `doc.tables` are separate lists.
-    # To get them in order, we can iterate over `doc.element.body` but that's low-level XML.
-    # For simplicity and robustness, we will extract all paragraphs first, then all tables,
-    # OR we can just join them. Often tables are appendices or specific data.
-    # Let's try to capture them reasonably.
-    
-    # Strategy: Read paragraphs. If we encounter a table, we read it.
-    # But `python-docx` doesn't interleave them in the API.
-    # We will read all paragraphs, then all tables, and join them. 
-    # Ideally, we'd want document order, but for a RAG knowledge base,
-    # as long as chunks are self-contained, it's okay.
-    
+    # פסקאות
     print("   ... Reading paragraphs ...")
     for para in doc.paragraphs:
         text = para.text.strip()
         if text:
-            full_text.append(text)
+            blocks.append(text)
 
+    # טבלאות
     print("   ... Reading tables ...")
     for table in doc.tables:
         for row in table.rows:
-            # Join cells with a pipe or space to keep structure
-            row_text = " | ".join(cell.text.strip() for cell in row.cells if cell.text.strip())
+            row_text = " | ".join(
+                cell.text.strip() for cell in row.cells if cell.text.strip()
+            )
             if row_text:
-                full_text.append(row_text)
-                
-    return "\n".join(full_text)
+                blocks.append(row_text)
 
-def chunk_text(text, chunk_size=CHUNK_SIZE, overlap=OVERLAP):
-    """Splits text into chunks with overlap."""
-    chunks = []
-    start = 0
-    while start < len(text):
-        end = min(start + chunk_size, len(text))
-        chunk = text[start:end]
-        chunks.append(chunk)
-        # Move forward by chunk_size - overlap
-        start += chunk_size - overlap
-        # Prevent infinite loop if overlap >= chunk_size (logic check)
-        if start >= end:
-            start = end
-            
-    return chunks
+    print(f"✅ Collected {len(blocks)} text blocks (paragraphs + tables)")
+    return blocks
 
-def generate_embeddings(chunks):
-    """Generates embeddings for a list of text chunks."""
-    data = []
-    print(f"🚀 Generating embeddings for {len(chunks)} chunks...")
-    
+def split_blocks_to_sections(blocks):
+    """
+    חותך את רשימת הבלוקים לסעיפים לפי מספור:
+    כל בלוק שמתחיל ב- 1. / 1.1. / 1.2.3. וכו' פותח סעיף חדש.
+    כל מה שבא אחר כך ולא מתחיל במספור – מצטרף לסעיף האחרון.
+    """
+    sections = []
+    current_id = None
+    current_parts = []
+
+    for block in blocks:
+        m = SECTION_RE.match(block)
+        if m:
+            # התחלה של סעיף חדש
+            # קודם נסגור את הקודם אם קיים
+            if current_id is not None and current_parts:
+                full_text = "\n".join(current_parts).strip()
+                if full_text:
+                    sections.append({
+                        "id": current_id,
+                        "chunk": full_text
+                    })
+
+            # חילוץ המספור (למשל "1.7.2.3")
+            sec_id = m.group(1).rstrip(".")
+            current_id = sec_id
+            current_parts = [block]
+        else:
+            # שורה שממשיכה את הסעיף האחרון
+            if current_id is None:
+                # טקסט לפני סעיף ראשון – אפשר לדלג, או לשמור לסעיף INTRO
+                # כאן מדלגים כדי לא ללכלך את האינדקס.
+                continue
+            current_parts.append(block)
+
+    # לסגור את הסעיף האחרון
+    if current_id is not None and current_parts:
+        full_text = "\n".join(current_parts).strip()
+        if full_text:
+            sections.append({
+                "id": current_id,
+                "chunk": full_text
+            })
+
+    print(f"✂️  Split into {len(sections)} numbered sections.")
+    return sections
+
+def save_preview(sections, path=PREVIEW_PATH):
+    """
+    שומר קובץ טקסט לקריאה אנושית, כדי שתראה איך הסקריפט חתך את הסעיפים.
+    לא חובה בשביל המערכת, אבל מאוד עוזר לבדיקה.
+    """
+    with open(path, "w", encoding="utf-8") as f:
+        for s in sections:
+            f.write(f"===== סעיף {s['id']} =====\n")
+            f.write(s["chunk"])
+            f.write("\n\n")
+    print(f"🔍 Preview saved to {path}")
+
+def generate_embeddings(sections):
+    """
+    מייצר embeddings לכל סעיף ומחזיר את אותה רשימת סעיפים
+    עם שדה נוסף "embedding" בכל אובייקט.
+    """
+    print(f"🚀 Generating embeddings for {len(sections)} sections...")
     batch_size = 20
-    for i in range(0, len(chunks), batch_size):
-        batch = chunks[i:i+batch_size]
+    idx = 0
+
+    for i in range(0, len(sections), batch_size):
+        batch = sections[i:i+batch_size]
+        texts = [s["chunk"] for s in batch]
+
         try:
             response = client.embeddings.create(
-                input=batch,
+                input=texts,
                 model=EMBEDDING_MODEL
             )
             for j, item in enumerate(response.data):
-                data.append({
-                    "id": i + j,
-                    "chunk": batch[j],
-                    "embedding": item.embedding
-                })
-            print(f"   Processed batch {i // batch_size + 1}/{(len(chunks) + batch_size - 1) // batch_size}")
+                sections[idx]["embedding"] = item.embedding
+                idx += 1
+            print(f"   Processed batch {i // batch_size + 1}/{(len(sections) + batch_size - 1) // batch_size}")
         except Exception as e:
             print(f"❌ Error processing batch starting at index {i}: {e}")
-            
-    return data
+
+    missing = [s for s in sections if "embedding" not in s]
+    if missing:
+        print(f"⚠️ Warning: {len(missing)} sections have no embedding")
+    return sections
 
 def main():
-    print("📂 Starting RAG Index Build Process...")
-    
+    print("📂 Starting RAG Index Build Process (by legal sections)...")
+
     try:
-        # 1. Load Data
+        # 1. Load raw blocks (paragraphs + tables)
         print(f"📖 Loading document: {DOCX_PATH}")
-        raw_text = extract_text_from_docx(DOCX_PATH)
-        print(f"✅ Loaded {len(raw_text)} characters.")
+        blocks = extract_blocks_from_docx(DOCX_PATH)
 
-        # 2. Chunk Data
-        chunks = chunk_text(raw_text)
-        print(f"✂️  Split into {len(chunks)} chunks.")
+        # 2. Split into logical sections by numbering
+        sections = split_blocks_to_sections(blocks)
 
-        # 3. Embed Data
-        index_data = generate_embeddings(chunks)
+        # 3. Save preview for manual inspection
+        save_preview(sections)
 
-        # 4. Save Index
+        # 4. Generate embeddings
+        sections_with_emb = generate_embeddings(sections)
+
+        # 5. Save final index
         print(f"💾 Saving index to {INDEX_OUTPUT_PATH}...")
+        os.makedirs(os.path.dirname(INDEX_OUTPUT_PATH), exist_ok=True)
         with open(INDEX_OUTPUT_PATH, "w", encoding="utf-8") as f:
-            json.dump(index_data, f, ensure_ascii=False, indent=2)
-        
+            json.dump(sections_with_emb, f, ensure_ascii=False, indent=2)
+
         print("🎉 RAG Index built successfully!")
 
     except Exception as e:
