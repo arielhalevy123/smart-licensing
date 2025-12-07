@@ -1,7 +1,17 @@
-// --- שליפת נתוני המשתמש מה-localStorage ---
-const finalData = JSON.parse(localStorage.getItem("finalBusinessData")) || {};
+// --- App State Management ---
+const AppState = {
+  wizardData: JSON.parse(localStorage.getItem("finalBusinessData")) || {},
+  reportData: JSON.parse(localStorage.getItem("saved_report_v1")) || null,
+  ragHistory: [] 
+};
 
+// --- DOM Elements ---
 const el = {
+  // Views
+  reportView: document.getElementById("report-view"),
+  ragView: document.getElementById("rag-view"),
+
+  // Report Elements
   loader: document.getElementById("loader"),
   globalError: document.getElementById("globalError"),
   aiSections: document.getElementById("aiSections"),
@@ -9,64 +19,76 @@ const el = {
   charts: document.getElementById("charts"),
   requirementsSection: document.getElementById("requirementsSection"),
   allRulesSection: document.getElementById("allRulesSection"),
-
   reportTitle: document.getElementById("reportTitle"),
   reportDate: document.getElementById("reportDate"),
-
   businessHeader: document.getElementById("businessHeader"),
   bhType: document.getElementById("bhType"),
   bhArea: document.getElementById("bhArea"),
   bhSeats: document.getElementById("bhSeats"),
   bhCity: document.getElementById("bhCity"),
   bhFlags: document.getElementById("bhFlags"),
-
   executiveSummary: document.getElementById("executiveSummary"),
   recommendations: document.getElementById("recommendations"),
-
   costEstimate: document.getElementById("costEstimate"),
   timeEstimate: document.getElementById("timeEstimate"),
-
   requirementsList: document.getElementById("requirementsList"),
   rulesCount: document.getElementById("rulesCount"),
+  allRulesList: document.getElementById("allRulesList"),
+  
+  // Navigation Buttons
+  goToRagBtn: document.getElementById("goToRagBtn"),
+  backToReportBtn: document.getElementById("backToReportBtn"),
+  regenerateBtn: document.getElementById("regenerateBtn"),
 
-  allRulesList: document.getElementById("allRulesList")
+  // RAG Elements
+  questionInput: document.getElementById("questionInput"),
+  askBtn: document.getElementById("askBtn"),
+  ragLoader: document.getElementById("ragLoader"),
+  ragResultArea: document.getElementById("ragResultArea"),
+  answerText: document.getElementById("answerText"),
+  sourcesList: document.getElementById("sourcesList"),
+  ragErrorBox: document.getElementById("ragErrorBox"),
+  ragErrorText: document.getElementById("ragErrorText"),
 };
 
-function show(node) { node.classList.remove("hidden"); }
-function hide(node) { node.classList.add("hidden"); }
+// --- Helper Functions ---
+function show(node) { if (node) node.classList.remove("hidden"); }
+function hide(node) { if (node) node.classList.add("hidden"); }
 
-// --- ניהול זיכרון דוח (Persistence) ---
-const ReportStore = {
-  KEY: "saved_report_v1",
-
-  get() {
-    try {
-      const saved = localStorage.getItem(this.KEY);
-      if (!saved) return null;
-      const parsed = JSON.parse(saved);
-      // בדיקה שתוקף הדוח לא פג (למשל 24 שעות) או שהנתונים תקינים
-      return parsed; 
-    } catch {
-      return null;
-    }
-  },
-
-  set(data) {
-    const obj = {
-      content: data,
-      createdAt: Date.now()
-    };
-    localStorage.setItem(this.KEY, JSON.stringify(obj));
-  },
-
-  clear() {
-    localStorage.removeItem(this.KEY);
+// --- View Switching Logic ---
+function showReportView() {
+  hide(el.ragView);
+  show(el.reportView);
+  // If no report loaded yet, fetch it (from memory or server)
+  if (!AppState.reportData) {
+    fetchReport();
   }
-};
+}
 
+function showRagView() {
+  hide(el.reportView);
+  show(el.ragView);
+}
+
+// --- Persistence ---
+function saveReport(data) {
+  const obj = {
+    content: data,
+    createdAt: Date.now()
+  };
+  localStorage.setItem("saved_report_v1", JSON.stringify(obj));
+  AppState.reportData = obj;
+}
+
+function clearReport() {
+  localStorage.removeItem("saved_report_v1");
+  AppState.reportData = null;
+}
+
+// --- Report Logic ---
 async function fetchReport(forceRefresh = false) {
   try {
-    // מצב טעינה
+    // UI Loading State
     show(el.loader);
     hide(el.globalError);
     hide(el.aiSections);
@@ -75,65 +97,62 @@ async function fetchReport(forceRefresh = false) {
     hide(el.requirementsSection);
     hide(el.allRulesSection);
 
-    // 1. בדיקה אם קיים דוח שמור (אם לא ביקשו רענון כפוי)
-    if (!forceRefresh) {
-      const savedReport = ReportStore.get();
-      // התיקון: בדיקת קיום של data object מלא, לא רק content
-      // הוספנו בדיקה ש-savedReport עצמו קיים ושאינו אובייקט ריק
-      if (savedReport && savedReport.content && Object.keys(savedReport.content).length > 0) {
-        renderReport(savedReport.content, true); // true = loaded from memory
-        return;
-      }
+    // 1. Check for existing report in AppState
+    if (!forceRefresh && AppState.reportData && AppState.reportData.content) {
+      console.log("Loading report from AppState/LocalStorage...");
+      renderReport(AppState.reportData.content, true);
+      return;
     }
 
-    // 2. אם אין שמור או ביקשו חדש -> קריאה לשרת
+    // 2. Fetch from API
+    console.log("Fetching new report from server...");
     const res = await fetch("/api/generate-report", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(finalData)
+      body: JSON.stringify(AppState.wizardData)
     });
     
     if (!res.ok) throw new Error("שגיאה בשרת");
 
     const data = await res.json();
     
-    // 3. שמירה בזיכרון
+    // 3. Save to Persistence
     if (data && !data.error) {
-       ReportStore.set(data);
+       saveReport(data);
     }
 
-    renderReport(data, false); // false = fresh from server
+    renderReport(data, false);
 
   } catch (err) {
-    console.error("שגיאה:", err);
-    // אם הייתה שגיאה בעת רענון יזום, נמחק את הדוח הישן כדי לא להציג מידע לא רלוונטי
+    console.error("fetchReport error:", err);
+    // If explicit regeneration failed, clear potentially stale data
     if (forceRefresh) {
-        ReportStore.clear();
+        clearReport();
     }
     hide(el.loader);
     show(el.globalError);
   }
 }
 
-// --- עיבוד התוצאה למסך ---
 function renderReport(data, fromMemory = false) {
-  // אינדיקטור לדיבאג / משתמש
+  // Debug Indicator
+  const existingIndicator = document.getElementById("memory-indicator");
+  if (existingIndicator) existingIndicator.remove();
+
   if (fromMemory) {
     const indicator = document.createElement("div");
+    indicator.id = "memory-indicator";
     indicator.className = "bg-green-100 text-green-800 text-sm px-4 py-2 rounded mb-4 text-center font-semibold border border-green-300";
     indicator.textContent = "✔ הדוח נטען מהזיכרון (לא נשלחה בקשה חדשה ל־GPT)";
     
-    // הוספה בראש הדף (מתחת לכותרת הראשית למשל)
-    const container = document.querySelector("main");
-    if (container) container.insertBefore(indicator, container.firstChild);
+    // Insert at top of report view
+    if (el.reportView) el.reportView.insertBefore(indicator, el.reportView.firstChild);
   }
-  // כותרת
-  el.reportTitle.innerHTML =
-    `דוח רישוי עבור: <span class="text-blue-600">${data.business_name || "—"}</span>`;
-  el.reportDate.textContent =
-    `הופק בתאריך: ${new Date().toLocaleDateString("he-IL")}, סוג עסק: ${data.business_type || "—"}`;
 
-  // סטריפ מידע כללי
+  // Populate Fields
+  el.reportTitle.innerHTML = `דוח רישוי עבור: <span class="text-blue-600">${data.business_name || "—"}</span>`;
+  el.reportDate.textContent = `הופק בתאריך: ${new Date().toLocaleDateString("he-IL")}, סוג עסק: ${data.business_type || "—"}`;
+
   el.bhType.textContent = data.business_type || "—";
   el.bhArea.textContent = data.area_sqm ?? "—";
   el.bhSeats.textContent = data.seating_capacity ?? "—";
@@ -146,12 +165,8 @@ function renderReport(data, fromMemory = false) {
   ].filter(Boolean).map(f => `<span class="inline-block text-xs bg-gray-100 px-2 py-1 rounded mr-1">${f}</span>`).join(" ");
   show(el.businessHeader);
 
-  // תמצית מנהלים
-  el.executiveSummary.innerHTML = `
-    <p>${data.executive_summary || "לא התקבל תקציר מה-AI"}</p>
-  `;
+  el.executiveSummary.innerHTML = `<p>${data.executive_summary || "לא התקבל תקציר מה-AI"}</p>`;
 
-  // המלצות פעולה בשלבים
   if (data.recommendations && typeof data.recommendations === "object") {
     const rec = data.recommendations;
     el.recommendations.innerHTML = `
@@ -167,7 +182,6 @@ function renderReport(data, fromMemory = false) {
   }
   show(el.aiSections);
 
-  // הערכת עלות/זמן
   el.costEstimate.innerHTML = `
     <h3 class="font-bold text-lg mb-2 flex items-center gap-2">
       <i data-lucide="dollar-sign" class="text-green-600"></i> עלות כוללת משוערת
@@ -182,7 +196,6 @@ function renderReport(data, fromMemory = false) {
   `;
   show(el.costTime);
 
-  // דרישות רגולטוריות - קיבוץ לפי קטגוריה
   const rules = Array.isArray(data.matched_rules) ? data.matched_rules : [];
   el.rulesCount.textContent = `נמצאו ${data.matched_rules_count ?? rules.length} חוקים רלוונטיים`;
 
@@ -211,9 +224,64 @@ function renderReport(data, fromMemory = false) {
   }
 
   hide(el.loader);
-  lucide.createIcons();
+  if (window.lucide) lucide.createIcons();
 }
 
+// --- RAG Logic ---
+async function handleQuestion() {
+  const question = el.questionInput.value.trim();
+  if (!question) {
+    alert("אנא הזן שאלה.");
+    return;
+  }
+
+  // UI Loading
+  hide(el.ragResultArea);
+  hide(el.ragErrorBox);
+  show(el.ragLoader);
+  el.askBtn.disabled = true;
+
+  try {
+    const response = await fetch("/api/rag", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ question }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) throw new Error(data.error || "שגיאה בתקשורת עם השרת");
+
+    el.answerText.textContent = data.answer;
+    el.sourcesList.innerHTML = "";
+    
+    if (data.sources && data.sources.length > 0) {
+      data.sources.forEach((source) => {
+        const sourceCard = document.createElement("div");
+        sourceCard.className = "bg-white p-4 rounded-lg shadow-sm border text-sm text-gray-600";
+        sourceCard.innerHTML = `
+          <div class="font-bold mb-1 text-blue-600">קטע #${source.id}</div>
+          <p class="leading-relaxed text-gray-700">${source.preview}</p>
+        `;
+        el.sourcesList.appendChild(sourceCard);
+      });
+    } else {
+      el.sourcesList.innerHTML = "<p class='text-gray-500'>לא נמצאו מקורות רלוונטיים.</p>";
+    }
+
+    show(el.ragResultArea);
+
+  } catch (error) {
+    console.error(error);
+    el.ragErrorText.textContent = error.message;
+    show(el.ragErrorBox);
+  } finally {
+    hide(el.ragLoader);
+    el.askBtn.disabled = false;
+  }
+}
+
+// --- Helpers ---
 function renderRecColumn(title, items) {
   if (!Array.isArray(items) || items.length === 0) {
     return `<div class="p-4 bg-white border rounded shadow-sm">
@@ -264,10 +332,13 @@ function ruleDetails(r) {
 }
 
 function renderCharts(grouped, rules) {
+  // Chart rendering logic remains same
   const labels = Object.keys(grouped);
   const values = labels.map(l => grouped[l].length);
 
   const pieCtx = document.getElementById("rulesPie").getContext("2d");
+  // Destroy existing chart if needed or just create new
+  // Simple check if chart instance exists on canvas could be good but we just create new for now
   new Chart(pieCtx, {
     type: "pie",
     data: { labels, datasets: [{ data: values, backgroundColor: ["#2563eb","#16a34a","#f59e0b","#dc2626","#9333ea","#0d9488","#64748b"] }] },
@@ -290,15 +361,34 @@ function escapeHtml(s) {
   return s.replace(/[&<>"']/g, m => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[m]));
 }
 
-// --- קריאה בהטענת הדף ---
+// --- Event Listeners ---
+
+// Initialize
 window.addEventListener("DOMContentLoaded", () => {
-  fetchReport();
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('view') === 'rag') {
+    showRagView();
+  } else {
+    fetchReport();
+  }
 });
 
-// כפתור רענון
-document.getElementById("regenerateBtn").addEventListener("click", () => {
+// Switch Views
+el.goToRagBtn.addEventListener("click", showRagView);
+el.backToReportBtn.addEventListener("click", showReportView);
+
+// Regenerate Report
+el.regenerateBtn.addEventListener("click", () => {
   if (confirm("האם אתה בטוח שברצונך ליצור דוח חדש? פעולה זו תשלח בקשה ל-GPT ותמחק את הדוח השמור.")) {
-    ReportStore.clear(); // מחיקת הדוח הישן לפני יצירת חדש
+    clearReport();
     fetchReport(true);
+  }
+});
+
+// RAG Actions
+el.askBtn.addEventListener("click", handleQuestion);
+el.questionInput.addEventListener("keydown", (e) => {
+  if (e.ctrlKey && e.key === "Enter") {
+    handleQuestion();
   }
 });
