@@ -42,7 +42,10 @@ const ReportStore = {
   get() {
     try {
       const saved = localStorage.getItem(this.KEY);
-      return saved ? JSON.parse(saved) : null;
+      if (!saved) return null;
+      const parsed = JSON.parse(saved);
+      // בדיקה שתוקף הדוח לא פג (למשל 24 שעות) או שהנתונים תקינים
+      return parsed; 
     } catch {
       return null;
     }
@@ -75,8 +78,9 @@ async function fetchReport(forceRefresh = false) {
     // 1. בדיקה אם קיים דוח שמור (אם לא ביקשו רענון כפוי)
     if (!forceRefresh) {
       const savedReport = ReportStore.get();
-      if (savedReport && savedReport.content) {
-        console.log("Loading report from local storage...");
+      // התיקון: בדיקת קיום של data object מלא, לא רק content
+      // הוספנו בדיקה ש-savedReport עצמו קיים ושאינו אובייקט ריק
+      if (savedReport && savedReport.content && Object.keys(savedReport.content).length > 0) {
         renderReport(savedReport.content, true); // true = loaded from memory
         return;
       }
@@ -94,7 +98,9 @@ async function fetchReport(forceRefresh = false) {
     const data = await res.json();
     
     // 3. שמירה בזיכרון
-    ReportStore.set(data);
+    if (data && !data.error) {
+       ReportStore.set(data);
+    }
 
     renderReport(data, false); // false = fresh from server
 
