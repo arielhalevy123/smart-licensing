@@ -100,6 +100,10 @@ async function fetchReport(forceRefresh = false) {
 
   } catch (err) {
     console.error("שגיאה:", err);
+    // אם הייתה שגיאה בעת רענון יזום, נמחק את הדוח הישן כדי לא להציג מידע לא רלוונטי
+    if (forceRefresh) {
+        ReportStore.clear();
+    }
     hide(el.loader);
     show(el.globalError);
   }
@@ -286,6 +290,7 @@ fetchReport();
 // כפתור רענון
 document.getElementById("regenerateBtn").addEventListener("click", () => {
   if (confirm("האם אתה בטוח שברצונך ליצור דוח חדש? פעולה זו תשלח בקשה ל-GPT ותמחק את הדוח השמור.")) {
+    ReportStore.clear(); // מחיקת הדוח הישן לפני יצירת חדש
     fetchReport(true);
   }
 });
