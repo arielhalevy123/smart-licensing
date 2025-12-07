@@ -291,7 +291,9 @@ function escapeHtml(s) {
 }
 
 // --- קריאה בהטענת הדף ---
-fetchReport();
+window.addEventListener("DOMContentLoaded", () => {
+  fetchReport();
+});
 
 // כפתור רענון
 document.getElementById("regenerateBtn").addEventListener("click", () => {
