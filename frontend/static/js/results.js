@@ -35,7 +35,33 @@ const el = {
 function show(node) { node.classList.remove("hidden"); }
 function hide(node) { node.classList.add("hidden"); }
 
-async function fetchReport() {
+// --- ניהול זיכרון דוח (Persistence) ---
+const ReportStore = {
+  KEY: "saved_report_v1",
+
+  get() {
+    try {
+      const saved = localStorage.getItem(this.KEY);
+      return saved ? JSON.parse(saved) : null;
+    } catch {
+      return null;
+    }
+  },
+
+  set(data) {
+    const obj = {
+      content: data,
+      createdAt: Date.now()
+    };
+    localStorage.setItem(this.KEY, JSON.stringify(obj));
+  },
+
+  clear() {
+    localStorage.removeItem(this.KEY);
+  }
+};
+
+async function fetchReport(forceRefresh = false) {
   try {
     // מצב טעינה
     show(el.loader);
@@ -46,19 +72,32 @@ async function fetchReport() {
     hide(el.requirementsSection);
     hide(el.allRulesSection);
 
-    localStorage.removeItem("aiReport");
+    // 1. בדיקה אם קיים דוח שמור (אם לא ביקשו רענון כפוי)
+    if (!forceRefresh) {
+      const savedReport = ReportStore.get();
+      if (savedReport && savedReport.content) {
+        console.log("Loading report from local storage...");
+        renderReport(savedReport.content, true); // true = loaded from memory
+        return;
+      }
+    }
 
+    // 2. אם אין שמור או ביקשו חדש -> קריאה לשרת
     const res = await fetch("/api/generate-report", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(finalData)
     });
+    
     if (!res.ok) throw new Error("שגיאה בשרת");
 
     const data = await res.json();
-    localStorage.setItem("aiReport", JSON.stringify(data));
+    
+    // 3. שמירה בזיכרון
+    ReportStore.set(data);
 
-    renderReport(data);
+    renderReport(data, false); // false = fresh from server
+
   } catch (err) {
     console.error("שגיאה:", err);
     hide(el.loader);
@@ -67,7 +106,17 @@ async function fetchReport() {
 }
 
 // --- עיבוד התוצאה למסך ---
-function renderReport(data) {
+function renderReport(data, fromMemory = false) {
+  // אינדיקטור לדיבאג / משתמש
+  if (fromMemory) {
+    const indicator = document.createElement("div");
+    indicator.className = "bg-green-100 text-green-800 text-sm px-4 py-2 rounded mb-4 text-center font-semibold border border-green-300";
+    indicator.textContent = "✔ הדוח נטען מהזיכרון (לא נשלחה בקשה חדשה ל־GPT)";
+    
+    // הוספה בראש הדף (מתחת לכותרת הראשית למשל)
+    const container = document.querySelector("main");
+    if (container) container.insertBefore(indicator, container.firstChild);
+  }
   // כותרת
   el.reportTitle.innerHTML =
     `דוח רישוי עבור: <span class="text-blue-600">${data.business_name || "—"}</span>`;
@@ -233,3 +282,10 @@ function escapeHtml(s) {
 
 // --- קריאה בהטענת הדף ---
 fetchReport();
+
+// כפתור רענון
+document.getElementById("regenerateBtn").addEventListener("click", () => {
+  if (confirm("האם אתה בטוח שברצונך ליצור דוח חדש? פעולה זו תשלח בקשה ל-GPT ותמחק את הדוח השמור.")) {
+    fetchReport(true);
+  }
+});
