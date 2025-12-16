@@ -1,17 +1,37 @@
-document.getElementById("businessFeaturesForm").addEventListener("submit", function (e) {
-  e.preventDefault();
+document.addEventListener("DOMContentLoaded", () => {
+  // Initialize Icons
+  if (window.lucide) window.lucide.createIcons();
 
-  const step2Data = JSON.parse(localStorage.getItem("step2")) || {};
+  // Handle Back Button
+  const backBtn = document.getElementById("backBtn");
+  if (backBtn) {
+    backBtn.addEventListener("click", () => {
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        window.location.href = "step2.html";
+      }
+    });
+  }
 
-  const data = {
-    ...step2Data,
-    has_gas: this.has_gas.checked,
-    serves_meat: this.serves_meat.checked,
-    has_delivery: this.has_delivery.checked,
-    has_alcohol: this.has_alcohol.checked
-  };
+  // Handle Form Submit
+  const form = document.getElementById("businessFeaturesForm");
+  if (form) {
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
 
-  localStorage.setItem("step3", JSON.stringify(data));
+      const step2Data = JSON.parse(localStorage.getItem("step2")) || {};
 
-  window.location.href = "step4.html";
+      const data = {
+        ...step2Data,
+        has_gas: this.has_gas.checked,
+        serves_meat: this.serves_meat.checked,
+        has_delivery: this.has_delivery.checked,
+        has_alcohol: this.has_alcohol.checked
+      };
+
+      localStorage.setItem("step3", JSON.stringify(data));
+      window.location.href = "step4.html";
+    });
+  }
 });
