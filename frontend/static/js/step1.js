@@ -29,4 +29,19 @@ document.addEventListener("DOMContentLoaded", () => {
       window.location.href = "step2.html";
     });
   }
+
+  // --- Readonly Shield Logic ---
+  // Select all inputs that have the 'readonly' attribute
+  const protectedInputs = document.querySelectorAll('input[readonly], textarea[readonly]');
+  
+  protectedInputs.forEach(input => {
+    // Function to remove readonly attribute
+    const unlockField = () => {
+      input.removeAttribute('readonly');
+    };
+
+    // Attach events to unlock the field on interaction
+    input.addEventListener('focus', unlockField);
+    input.addEventListener('click', unlockField);
+  });
 });
