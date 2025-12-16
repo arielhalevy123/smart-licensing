@@ -44,12 +44,12 @@
     <p class="text-center text-gray-600 mb-8">בחר את סוג העסק שלך כדי להמשיך</p>
 
     <!-- Form -->
-    <form id="businessTypeForm" class="space-y-6">
+    <form id="businessTypeForm" class="space-y-6" autocomplete="off">
 
       <!-- Business name -->
       <div>
         <label class="block mb-2 font-medium">שם העסק *</label>
-        <input type="text" name="business_name" id="business_name" autocomplete="off" required
+        <input type="text" name="business_name" id="business_name" autocomplete="off" data-lpignore="true" data-form-type="other" required
                class="w-full border p-3 rounded-lg focus:ring-2 focus:ring-blue-600" />
       </div>
 
