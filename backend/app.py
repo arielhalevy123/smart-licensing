@@ -200,56 +200,95 @@ def generate_report():
 def rag_endpoint():
     try:
         data = request.json or {}
-        question = data.get("question", "").strip()
+        question = (data.get("question") or "").strip()
 
         if not question:
             return jsonify({"error": "No question provided"}), 400
 
-        print(f"🤔 RAG Question: {question}", flush=True)
+        # 0) Expand query for retrieval (not for final answer)
+        retrieval_query = expand_query_for_retrieval(question)
 
-        # 1. Retrieve Context
-        relevant_chunks = retrieve_relevant_chunks(question, top_k=5)
-        
-        context_text = "\n\n".join([f"--- מקור {c['id']} ---\n{c['chunk']}" for c in relevant_chunks])
-        sources = [{"id": c["id"], "preview": c["chunk"][:200] + "..."} for c in relevant_chunks]
+        print(f"RAG Question: {question}", flush=True)
+        print(f"RAG Retrieval Query: {retrieval_query}", flush=True)
 
-        # 2. Build Prompt with Protection
-        system_message = (
-            "אתה עוזר מומחה לרישוי עסקים. עליך לענות רק על סמך הנתונים המופיעים ב-Context. "
-            "אם המידע לא מופיע ב-Context, כתוב 'לא נמצא מידע רלוונטי במאגר'."
+        # 1) Retrieve Context
+        relevant_chunks = retrieve_relevant_chunks(retrieval_query, top_k=5)
+
+        context_text = "\n\n".join(
+            [f"--- SOURCE_ID: {c['id']} ---\n{c['chunk']}" for c in relevant_chunks]
         )
+        sources = [{"id": c["id"], "preview": (c["chunk"][:200] + "...") if len(c["chunk"]) > 200 else c["chunk"]}
+                   for c in relevant_chunks]
 
-        user_prompt = f"""
-Context:
-{context_text}
+        # 2) Build Prompt (best practices + strict JSON)
+        system_message = """
+            אתה עוזר מומחה לרישוי עסקים בישראל.
 
-Question:
-{question}
+            מטרה:
+            לענות לשאלת המשתמש אך ורק על סמך ה-Context שסופק לך.
 
-אנא ענה בקצרה, בעברית, ורק על סמך המידע לעיל.
+            כללים מחייבים:
+            1) אסור להשתמש בידע כללי, ניחושים או ניסיון. מותר להשתמש רק במה שמופיע ב-Context.
+            2) אם אין ב-Context מידע שמאפשר לענות בצורה ברורה — החזר answer בדיוק:
+            "לא נמצא מידע רלוונטי במאגר"
+            3) אם יש מידע חלקי — תן מה שכן נמצא וציין מה חסר ב-missing_info.
+            4) אל תמציא חוקים/תקנות/מספרי סעיפים/דרישות שלא מופיעים ב-Context.
+            5) כתוב בעברית.
+
+            פלט מחייב:
+            החזר JSON בלבד (בלי טקסט מסביב) במבנה:
+            {
+            "answer": string,
+            "confidence": "high" | "medium" | "low",
+            "citations": [string],   // רשימת SOURCE_ID ששימשו בפועל
+            "missing_info": [string] // מה חסר כדי לענות טוב יותר (אפשר ריק)
+            }
         """
 
-        # 3. Call AI
+        user_prompt = f"""
+            # Context (מקורות מידע)
+            {context_text}
+
+            # Question
+            {question}
+
+            # Instructions
+            ענה לפי הכללים והחזר JSON בלבד לפי המבנה.
+        """
+
+        # 3) Call AI
         response = client.chat.completions.create(
             model="gpt-4o-mini",
             messages=[
                 {"role": "system", "content": system_message},
-                {"role": "user", "content": user_prompt}
+                {"role": "user", "content": user_prompt},
             ],
-            temperature=0.0  # Low temperature for factual accuracy
+            temperature=0.0,
         )
 
-        answer = response.choices[0].message.content.strip()
+        raw = response.choices[0].message.content.strip()
 
+        # 4) Parse JSON safely (in case model returns extra text)
+        try:
+            parsed = json.loads(raw)
+        except Exception:
+            # fallback: wrap as low confidence
+            parsed = {
+                "answer": raw if raw else "לא נמצא מידע רלוונטי במאגר",
+                "confidence": "low",
+                "citations": [],
+                "missing_info": ["המודל לא החזיר JSON תקין; יש להפעיל תיקון/JSON mode."]
+            }
+
+        # 5) If model forgot to cite, keep the original sources list anyway
         return jsonify({
-            "answer": answer,
+            "answer": parsed.get("answer", ""),
+            "confidence": parsed.get("confidence", "low"),
+            "citations": parsed.get("citations", []),
+            "missing_info": parsed.get("missing_info", []),
             "sources": sources
         })
 
     except Exception as e:
-        print(f" RAG Error: {e}", flush=True)
+        print(f"RAG Error: {e}", flush=True)
         return jsonify({"error": "An error occurred while processing your request."}), 500
-
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
