@@ -20,10 +20,10 @@ user_input = {
     "has_alcohol": False
 }
 
-# 📝 סוגי העסקים האפשריים
+#  סוגי העסקים האפשריים
 BUSINESS_TYPES = ["cafe", "food_truck", "restaurant", "bar", "bakery", "catering"]
 
-# 📝 קטגוריות אפשריות
+#  קטגוריות אפשריות
 CATEGORIES = [
     "בריאות ותברואה",
     "בטיחות אש",
@@ -33,7 +33,7 @@ CATEGORIES = [
     "אחר"
 ]
 
-# 📝 טבלה של שדות אפשריים לחוקים
+#  טבלה של שדות אפשריים לחוקים
 FIELDS_TABLE = """
 שדות אפשריים לסיווג חוק:
 - business_type: cafe, food_truck, restaurant, bar, bakery, catering
@@ -138,9 +138,9 @@ if __name__ == "__main__":
     text = extract_text_from_docx(docx_file)
 
     chunks = split_text(text, chunk_size=5000)
-    print(f"✂️ הקובץ פוצל ל-{len(chunks)} חלקים")
+    print(f" הקובץ פוצל ל-{len(chunks)} חלקים")
 
-    # ✂️ עיבוד רק חצי קובץ
+    #  עיבוד רק חצי קובץ
     half_index = max(1, len(chunks) // 2)
     chunks = chunks[:half_index]
     print(f"📂 מעבד רק {len(chunks)} חלקים (חצי קובץ)")
@@ -160,9 +160,9 @@ if __name__ == "__main__":
 
             all_rules["rules"].extend(rules)
         except Exception as e:
-            print(f"❌ שגיאה בחלק {i}: {e}")
+            print(f" שגיאה בחלק {i}: {e}")
 
     with open(output_file, "w", encoding="utf-8") as f:
         json.dump(all_rules, f, ensure_ascii=False, indent=2)
 
-    print(f"✅ קובץ JSON נוצר בהצלחה: {output_file}")
+    print(f"קובץ JSON נוצר בהצלחה: {output_file}")

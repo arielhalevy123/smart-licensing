@@ -1,135 +1,136 @@
-
 # Smart Licensing – Business Licensing Assessment System
 
 ## Project Description
-An interactive system designed to help business owners in Israel understand the relevant licensing requirements for their business.  
-The system collects data from the user (business type, size, seating capacity, additional features) and generates a personalized report by combining structured JSON rules with an AI language model (OpenAI GPT).
 
-![Homepage](docs/screenshots/homepage.png)
+Smart Licensing is a hybrid system designed to assess business licensing requirements in Israel. It combines deterministic rule-based logic with Generative AI to provide accurate, regulatory-compliant reports for business owners.
+
+The system operates in two main modes:
+1.  **Licensing Report Generation:** Matches business characteristics against a structured database of regulatory rules, then uses an LLM to generate an executive summary, action plan, and cost estimates.
+2.  **Regulatory Q&A (RAG):** A Retrieval-Augmented Generation system that allows users to ask free-text questions about licensing regulations, retrieving answers from indexed regulatory documents.
+
+## System Architecture
+
+The project follows a decoupled client-server architecture:
+
+*   **Frontend:** Static HTML, CSS (Tailwind), and vanilla JavaScript. Serves as a wizard for data collection and a dashboard for report viewing.
+*   **Backend:** Python Flask application. Handles API requests, rule matching logic, and OpenAI integrations.
+*   **Data Storage:**
+    *   `json_rules/`: Directory containing structured JSON files defining regulatory rules.
+    *   `rag_index.json`: A local vector index containing embedded chunks of regulatory documents for the RAG system.
+*   **AI Integration:** OpenAI `gpt-4o-mini` is used for:
+    *   Summarizing matched rules into a cohesive report.
+    *   Answering questions based strictly on retrieved context.
+
+### Logic Flow
+
+#### 1. Report Generation (`/api/generate-report`)
+The report generation process is a hybrid of deterministic and probabilistic logic:
+1.  **Input:** User provides business details (type, area, seating, boolean flags).
+2.  **Rule Matching (Deterministic):** The backend iterates through all rules in `json_rules/*.json`. A rule matches only if:
+    *   The business type is in the rule's `business_type` list.
+    *   Numeric constraints (area, seating) are met.
+    *   Boolean conditions (gas, meat, alcohol) match the input.
+3.  **AI Synthesis (Probabilistic):** The matched rules are injected into a prompt for `gpt-4o-mini`. The AI is instructed to:
+    *   Generate an executive summary.
+    *   Create a step-by-step recommendation plan (Pre-opening, Setup, Post-opening).
+    *   Estimate costs and timelines based on the rules provided.
+    *   **Note:** The AI does *not* invent regulations; it summarizes the provided matched rules.
+
+#### 2. RAG Q&A (`/api/rag`)
+1.  **Indexing (Offline):** The script `build_rag_index.py` parses the regulatory DOCX file, chunks the text, and generates embeddings using `text-embedding-3-small`.
+2.  **Retrieval (Online):** When a user asks a question:
+    *   The question is embedded.
+    *   The system calculates cosine similarity against the `rag_index.json`.
+    *   The top 5 most relevant text chunks are retrieved.
+3.  **Generation:** `gpt-4o-mini` answers the question using *only* the retrieved context, with strict instructions to state if information is missing.
 
 ## Installation & Setup
+
 ### Prerequisites
-- Python 3.11+
-- Docker + Docker Compose
-- OpenAI API Key (stored as environment variable `OPENAI_API_KEY`)
+*   Python 3.11+
+*   OpenAI API Key
 
-### Installation
+### Local Installation
+
+1.  **Clone the repository:**
+    ```bash
+    git clone <repository_url>
+    cd <repository_name>
+    ```
+
+2.  **Install dependencies:**
+    ```bash
+    pip install -r backend/requirements.txt
+    ```
+
+3.  **Set up environment variables:**
+    Export your OpenAI API key:
+    ```bash
+    export OPENAI_API_KEY=your_key_here
+    ```
+
+4.  **Run the application:**
+    ```bash
+    python backend/app.py
+    ```
+    The server will start at `http://localhost:5000`.
+
+### Building the RAG Index (Optional)
+If you modify the source documents (e.g., `18-07-2022_4.2A.docx`), you must rebuild the index:
 ```bash
-git clone https://github.com/username/smart-licensing.git
-cd smart-licensing
-docker-compose up --build
+python backend/build_rag_index.py
 ```
 
-### Local Run
-```bash
-export OPENAI_API_KEY=your_key_here
-python app.py
-```
+## API Documentation
 
-### Access
-- Frontend: https://smart-licensing.site  
-- Backend API: https://smart-licensing.site/api/generate-report
+### `POST /api/generate-report`
+Generates a full licensing report based on business parameters.
 
-![AI Report](docs/screenshots/report-ai.png)
-
-## Dependencies
-- Flask 3.0.3
-- Gunicorn 23.0.0
-- openai 1.3.5
-- TailwindCSS (CDN)
-- Lucide Icons
-
----
-
-## Technical Documentation
-
-### System Architecture
-- **Frontend** – Static HTML/CSS/JS served via Nginx
-- **Backend** – Flask API running with Gunicorn in Docker
-- **Database** – JSON files with rules and configurations
-- **AI Integration** – OpenAI GPT-4o-mini for customized reports
-
-Basic Diagram:
-```
-User ←→ Nginx ←→ Flask API ←→ OpenAI API
-                      ↑
-                   JSON Rules
-```
-
-### API Documentation
-- `GET /` – Health check
-- `POST /api/generate-report`
-  - Input: JSON with business details
-  - Output: Personalized report (executive summary, requirements, recommendations, cost/time estimates)
-
-### Data Structure (example from rules.json)
+**Request Body:**
 ```json
 {
-  "id": "R801",
-  "title": "Kitchen Cleaning Principles",
-  "applies_when": { "business_type": "Institutional Kitchen" },
-  "actions": [
-    "Perform basic cleaning process for tools and surfaces",
-    "Daily cleaning frequency"
-  ],
-  "priority": "Critical"
+  "business_name": "My Cafe",
+  "business_type": "cafe",
+  "area_sqm": 50,
+  "seating_capacity": 20,
+  "has_gas": false,
+  "serves_meat": false,
+  "has_delivery": true,
+  "has_alcohol": false
 }
 ```
 
-### Matching Algorithm
-1. Load rules from JSON files
-2. Filter rules by business type and features
-3. Build a prompt including business data + matched rules
-4. Send prompt to OpenAI
-5. Process AI response and display structured report
+**Response:**
+Returns a JSON object containing:
+*   `matched_rules`: Array of raw rule objects from the JSON database.
+*   `executive_summary`: AI-generated summary string.
+*   `recommendations`: AI-generated object with `before_opening`, `during_setup`, `after_opening` lists.
+*   `estimated_cost`: AI-generated cost estimate string.
+*   `estimated_time`: AI-generated timeline string.
 
-![Rules List](docs/screenshots/rules-list.png)
+### `POST /api/rag`
+Answers a specific question using the indexed regulatory documents.
 
----
-
-## AI Usage Documentation
-
-### Development Tools
-- ChatGPT / Cursor AI – for quick coding
-- GitHub Copilot – for code suggestions
-- Replit – for rapid testing
-
-### Main Language Model
-- GPT-4o-mini (OpenAI) – chosen for speed and strong performance
-
-### Example Prompts
-```
-Create a licensing report for a business named "On-the-Go Cafe".
-Business type: Cafe, Area: 45 sqm, Seating: 20.
-
-Regulatory requirements found in the file:
-[...]
-
-Please generate a clear report including:
-- Executive summary
-- Mandatory requirements by priority
-- Action recommendations
-- Preparation timeline
-- Cost estimates
+**Request Body:**
+```json
+{
+  "question": "What are the ventilation requirements for a kitchen?"
+}
 ```
 
----
+**Response:**
+```json
+{
+  "answer": "The answer based on the document context...",
+  "sources": [
+    { "id": "section_id", "preview": "Text snippet..." }
+  ]
+}
+```
 
-## Learnings & Improvements
+## Known Limitations
 
-### Development Log
-- Issue: JSON files not loaded in Docker → Solution: COPY into image
-- Issue: `openai.ChatCompletion` deprecated → Solution: update to `client.chat.completions.create`
-- Issue: 404 between Nginx and API → Solution: update `proxy_pass`
-
-### Future Improvements
-- Support additional business types
-- Replace JSON with PostgreSQL database
-- Multi-language support (Hebrew/English)
-- Admin panel for rule management
-
-### Key Takeaways
-- Using AI significantly accelerates development
-- Important to validate library version compatibility (openai 0.x → 1.x)
-- Docker/Nginx deployment enables smooth cloud migration
-
+1.  **Data Staticity:** The system relies on static JSON files and a pre-built RAG index. Changes in regulations require manually updating the JSON files or re-running the index builder.
+2.  **Rule Coverage:** The accuracy of the "Matched Rules" depends entirely on the completeness of the `json_rules` database.
+3.  **AI Hallucinations:** While the prompts are engineered to be grounded in the provided context, LLMs may still occasionally hallucinate or misinterpret complex regulatory nuances.
+4.  **Language:** The system is currently optimized for Hebrew input and output.

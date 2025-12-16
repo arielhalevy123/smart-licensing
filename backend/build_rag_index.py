@@ -1,6 +1,8 @@
 import os
 import json
 import re
+import sys
+import math
 from docx import Document
 from openai import OpenAI
 from docx.document import Document as _Document
@@ -20,7 +22,7 @@ MAX_CHARS = 2000
 # Initialize OpenAI
 api_key = os.getenv("OPENAI_API_KEY")
 if not api_key:
-    print("⚠️  Warning: OPENAI_API_KEY not found in environment variables.")
+    print("  Warning: OPENAI_API_KEY not found in environment variables.")
 
 client = OpenAI(api_key=api_key)
 
@@ -77,7 +79,7 @@ def extract_docx(path):
         process_block(block)
 
     full_text = "\n".join(lines)
-    print(f"✅ Extracted {len(full_text)} characters from {path}")
+    print(f"Extracted {len(full_text)} characters from {path}")
     return full_text
 
 def split_into_sections(full_text):
@@ -119,163 +121,151 @@ def split_into_sections(full_text):
     # Filter out empty intro if it's empty
     sections = [s for s in sections if s['text'].strip()]
     
-    print(f"✂️  Identified {len(sections)} logical sections.")
+    print(f"  Identified {len(sections)} logical sections.")
     return sections
 
-def build_chunks(sections):
-    """
-    Groups 2-3 sections into chunks based on character limits.
-    Returns list of dicts: {"id": "sec1;sec2", "chunk": "..."}
-    """
-    chunks = []
-    i = 0
-    total_sections = len(sections)
-
-    while i < total_sections:
-        # Start a new chunk with the current section
-        current_section = sections[i]
-        
-        # HANDLE LARGE SECTIONS: If a single section is too big, split it
-        if len(current_section['text']) > MAX_CHARS:
-            # Split this section into smaller parts
-            large_text = current_section['text']
-            parts = [large_text[j:j+MAX_CHARS] for j in range(0, len(large_text), MAX_CHARS)]
-            
-            for idx, part in enumerate(parts):
-                chunks.append({
-                    "id": f"{current_section['section_id']}_part{idx+1}",
-                    "chunk": part
-                })
-            i += 1
-            continue
-
-        chunk_ids = [current_section['section_id']]
-        chunk_text = current_section['text']
-        
-        # Try to add next section (i+1)
-        next_idx = i + 1
-        if next_idx < total_sections:
-            next_section = sections[next_idx]
-            combined_text = chunk_text + "\n\n" + next_section['text']
-            
-            # Condition: Always try to group at least 2 if under max limit
-            # OR if the first one was very short (under MIN_CHARS), we definitely want to add more.
-            if len(combined_text) <= MAX_CHARS:
-                chunk_text = combined_text
-                chunk_ids.append(next_section['section_id'])
-                
-                # Try to add a third section (i+2)
-                next_next_idx = i + 2
-                if next_next_idx < total_sections:
-                    third_section = sections[next_next_idx]
-                    combined_three = chunk_text + "\n\n" + third_section['text']
-                    
-                    if len(combined_three) <= MAX_CHARS:
-                        chunk_text = combined_three
-                        chunk_ids.append(third_section['section_id'])
-                        i += 3 # Consumed 3 sections
-                    else:
-                        i += 2 # Consumed 2 sections
-                else:
-                    i += 2 # Consumed 2 sections (end of list)
-            else:
-                # Next section makes it too big, stick with 1
-                i += 1
-        else:
-            # Last section alone
-            i += 1
-
-        chunks.append({
-            "id": ";".join(chunk_ids),
-            "chunk": chunk_text
+def split_large_section(section_id, text, max_chars=1200):
+    # פיצול גס לפי תווים (פשוט ומהיר). אפשר לשפר לפי טוקנים בהמשך.
+    if len(text) <= max_chars:
+        return [{"id": section_id, "chunk": text}]
+    parts = []
+    for idx in range(0, len(text), max_chars):
+        part_num = idx // max_chars + 1
+        parts.append({
+            "id": f"{section_id}_part{part_num}",
+            "chunk": text[idx:idx+max_chars]
         })
+    return parts
 
-    print(f"📦 Created {len(chunks)} chunks from {total_sections} sections.")
-    return chunks
 
-def generate_embeddings(chunks):
-    """
-    Generates embeddings for chunks using OpenAI API.
-    Updates chunks in-place with 'embedding' key.
-    """
-    print(f"🚀 Generating embeddings for {len(chunks)} chunks...")
-    
-    batch_size = 1  # Reduced to 1 to prevent token limit errors
-    for i in range(0, len(chunks), batch_size):
-        batch = chunks[i:i+batch_size]
-        texts = [item['chunk'] for item in batch]
-        
+def sections_to_items(sections, max_chars=1200):
+    items = []
+    for s in sections:
+        items.extend(split_large_section(s["section_id"], s["text"], max_chars=max_chars))
+    print(f" Created {len(items)} items (sections + split parts).")
+    return items
+
+
+def load_existing_index(path):
+    if not os.path.exists(path):
+        return [], set()
+    with open(path, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    existing_ids = {item["id"] for item in data if "id" in item}
+    return data, existing_ids
+
+
+def append_index(path, existing_data, new_items):
+    # Merge by id (no duplicates)
+    merged = {item["id"]: item for item in existing_data if "id" in item}
+    for item in new_items:
+        merged[item["id"]] = item  # overwrite/update
+
+    all_data = list(merged.values())
+
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(all_data, f, ensure_ascii=False, indent=2)
+    return all_data
+
+
+def embed_items_incremental(items, existing_ids, batch_size=5):
+    todo = [it for it in items if it["id"] not in existing_ids]
+    print(f" Remaining to embed: {len(todo)} (skipping {len(items)-len(todo)} already embedded)")
+
+    embedded = []
+    for i in range(0, len(todo), batch_size):
+        batch = todo[i:i+batch_size]
+        texts = [b["chunk"] for b in batch]
+
         try:
-            response = client.embeddings.create(
-                input=texts,
-                model=EMBEDDING_MODEL
-            )
-            
-            for j, data_item in enumerate(response.data):
-                batch[j]['embedding'] = data_item.embedding
-                
-            print(f"   Processed batch {i // batch_size + 1}/{(len(chunks) + batch_size - 1) // batch_size}")
-            
+            resp = client.embeddings.create(model=EMBEDDING_MODEL, input=texts)
         except Exception as e:
-            print(f"❌ Error generating embeddings for batch starting at {i}: {e}")
-            # Critical error - we don't want to save partial data with missing embeddings usually
-            # But for now let's raise so we notice
-            raise e
+            print(f" Embedding failed at batch {i//batch_size + 1}: {e}")
+            # Save partial progress before exiting
+            if embedded:
+                existing_data, _ = load_existing_index(INDEX_OUTPUT_PATH)
+                append_index(INDEX_OUTPUT_PATH, existing_data, embedded)
+                print(f" Saved partial progress: +{len(embedded)} items")
+            raise
 
-    # Validation
-    missing_embeddings = [c for c in chunks if 'embedding' not in c]
-    if missing_embeddings:
-        raise ValueError(f"❌ Failed: {len(missing_embeddings)} chunks are missing embeddings!")
+        for j, r in enumerate(resp.data):
+            embedded.append({
+                "id": batch[j]["id"],
+                "chunk": batch[j]["chunk"],
+                "embedding": r.embedding
+            })
 
-    return chunks
+        # checkpoint save every batch
+        existing_data, _ = load_existing_index(INDEX_OUTPUT_PATH)
+        append_index(INDEX_OUTPUT_PATH, existing_data, embedded)
+        embedded = []  # clear buffer after saving
 
-def save_preview(chunks):
-    """Saves a text preview of chunks for manual inspection."""
+        print(f"   Batch {i//batch_size + 1}/{(len(todo)+batch_size-1)//batch_size}")
+
+    return []  # because we already saved incrementally
+
+def save_preview(items):
+    """Saves a text preview of items for manual inspection."""
     with open(PREVIEW_OUTPUT_PATH, "w", encoding="utf-8") as f:
-        for c in chunks:
-            f.write(f"=== CHUNK ID: {c['id']} ===\n")
-            f.write(c['chunk'])
+        for it in items:
+            f.write(f"=== ITEM ID: {it['id']} ===\n")
+            f.write(it["chunk"])
             f.write("\n\n" + "-"*50 + "\n\n")
-    print(f"📝 Preview saved to {PREVIEW_OUTPUT_PATH}")
+    print(f" Preview saved to {PREVIEW_OUTPUT_PATH}")
+
 
 def main():
-    print("🎬 Starting RAG Index Build Process...")
+    print(" Starting RAG Index Build Process...")
 
     try:
-        # 1. Extract
+        # 0) Load existing index (resume support)
+        existing_data, existing_ids = load_existing_index(INDEX_OUTPUT_PATH)
+
+        # 1) Extract
         raw_text = extract_docx(DOCX_PATH)
-        
-        # 2. Sectioning
+
+        # 2) Sectioning
         sections = split_into_sections(raw_text)
+
+        # ---- PARTITION (run in 3 parts) ----
+        part = int(sys.argv[1]) if len(sys.argv) > 1 else 1     # 1..3
+        parts = int(sys.argv[2]) if len(sys.argv) > 2 else 3    # default 3
+
+        total = len(sections)
+        chunk_size = math.ceil(total / parts)
+        start = (part - 1) * chunk_size
+        end = min(part * chunk_size, total)
+
+        print(f" Running part {part}/{parts}: sections[{start}:{end}] out of {total}")
+        sections = sections[start:end]
+        # ------------------------------------
+
+        # 3) Convert sections -> items (split big sections if needed)
+        items = sections_to_items(sections, max_chars=1200)
+
+        # 4) Preview (Sanity Check)
+        save_preview(items)
+
         
-        # 3. Chunking
-        chunks = build_chunks(sections)
-        
-        # 4. Preview (Sanity Check)
-        save_preview(chunks)
+        # 5) Embed only missing items (saves incrementally to disk)
+        embed_items_incremental(items, existing_ids, batch_size=10)
 
-        # 5. Embedding
-        final_chunks = generate_embeddings(chunks)
+        # 6) Reload final index from disk (source of truth)
+        final, _ = load_existing_index(INDEX_OUTPUT_PATH)
+        print(f"Total saved items: {len(final)}")
 
-        # 6. Save
-        print(f"💾 Saving index to {INDEX_OUTPUT_PATH}...")
-        os.makedirs(os.path.dirname(INDEX_OUTPUT_PATH), exist_ok=True)
-        with open(INDEX_OUTPUT_PATH, "w", encoding="utf-8") as f:
-            json.dump(final_chunks, f, ensure_ascii=False, indent=2)
+        # 7) Final Verification
+        print("Sanity Check: Verifying output...")
+        if not final:
+            raise RuntimeError("Index file is empty after embedding. Something went wrong.")
+        print(f"   - Sample ID: {final[0].get('id')}")
+        print(f"   - Has embedding? {'yes' if 'embedding' in final[0] else 'NO'}")  
 
-        # 7. Final Verification
-        print("✅ Sanity Check: Verifying output...")
-        with open(INDEX_OUTPUT_PATH, "r", encoding="utf-8") as f:
-            saved_data = json.load(f)
-            print(f"   - Loaded {len(saved_data)} chunks from disk.")
-            first_chunk = saved_data[0]
-            print(f"   - Sample ID: {first_chunk.get('id')}")
-            print(f"   - Has embedding? {'yes' if 'embedding' in first_chunk else 'NO'}")
-            
-        print("🎉 RAG Index built successfully!")
+        print(" RAG Index built successfully!")
 
     except Exception as e:
-        print(f"❌ Critical Error: {e}")
+        print(f" Critical Error: {e}")
         exit(1)
 
 if __name__ == "__main__":

@@ -9,7 +9,7 @@ app = Flask(__name__)
 # 🔑 OpenAI Configuration
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 if not OPENAI_API_KEY:
-    print("❌ Error: OPENAI_API_KEY not found in environment variables!", flush=True)
+    print(" Error: OPENAI_API_KEY not found in environment variables!", flush=True)
 
 client = OpenAI(api_key=OPENAI_API_KEY)
 
@@ -24,11 +24,11 @@ if os.path.exists(RAG_INDEX_PATH):
     try:
         with open(RAG_INDEX_PATH, encoding="utf-8") as f:
             RAG_INDEX = json.load(f)
-        print(f"✅ RAG Index loaded: {len(RAG_INDEX)} chunks.", flush=True)
+        print(f"RAG Index loaded: {len(RAG_INDEX)} chunks.", flush=True)
     except Exception as e:
-        print(f"❌ Error loading RAG index: {e}", flush=True)
+        print(f" Error loading RAG index: {e}", flush=True)
 else:
-    print("⚠️  Warning: rag_index.json not found. Run 'build_rag_index.py' first.", flush=True)
+    print("  Warning: rag_index.json not found. Run 'build_rag_index.py' first.", flush=True)
 
 
 def load_rules():
@@ -121,7 +121,7 @@ def retrieve_relevant_chunks(question, top_k=5):
         return [item for score, item in top_items]
 
     except Exception as e:
-        print(f"❌ Retrieval error: {e}", flush=True)
+        print(f" Retrieval error: {e}", flush=True)
         return []
 
 
@@ -192,7 +192,7 @@ def generate_report():
         })
 
     except Exception as e:
-        print("❌ Error:", str(e), flush=True)
+        print(" Error:", str(e), flush=True)
         return jsonify({"error": str(e)}), 500
 
 
@@ -247,7 +247,7 @@ Question:
         })
 
     except Exception as e:
-        print(f"❌ RAG Error: {e}", flush=True)
+        print(f" RAG Error: {e}", flush=True)
         return jsonify({"error": "An error occurred while processing your request."}), 500
 
 
