@@ -35,6 +35,15 @@
 
     <!-- Question Form -->
     <section class="bg-white shadow rounded-xl p-6 mb-8 border-t-4 border-blue-600">
+      
+      <!-- Preset Questions -->
+      <div class="mb-6">
+        <h3 class="text-sm font-semibold text-gray-500 mb-3 uppercase tracking-wider">שאלות נפוצות</h3>
+        <div id="presetQuestions" class="flex flex-wrap gap-2">
+          <!-- Questions will be injected here via JS -->
+        </div>
+      </div>
+
       <label for="questionInput" class="block text-lg font-semibold mb-3">מה תרצה לדעת?</label>
       <textarea
         id="questionInput"
@@ -42,7 +51,6 @@
         autocomplete="off"
         data-lpignore="true"
         data-form-type="other"
-        readonly
         class="w-full border border-gray-300 rounded-lg p-4 text-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none resize-none"
         placeholder="לדוגמה: מהן דרישות האוורור למסעדה עם מטבח?"
       ></textarea>

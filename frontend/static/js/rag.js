@@ -12,7 +12,39 @@ document.addEventListener("DOMContentLoaded", () => {
     sourcesList: document.getElementById("sourcesList"),
     errorBox: document.getElementById("errorBox"),
     errorText: document.getElementById("errorText"),
+    presetQuestionsContainer: document.getElementById("presetQuestions")
   };
+
+  // Preset Questions Data
+  const presetQuestions = [
+    "אילו דרישות בטיחות אש חלות על העסק לפי התקנות?",
+    "האם העסק חייב במערכת גילוי אש ועשן? באילו תנאים?",
+    "אילו תקנים ישראליים חלים על מערכות המתזים בעסק?",
+    "אילו בדיקות תקופתיות נדרשות למערכות כיבוי האש?",
+    "האם חובה לספק מים חמים וקרים?",
+    "אילו תקנות חלות על איכות מי השתייה בעסק?",
+    "מה האחריות של בעל העסק לגבי תחזוקת מערכות המים?",
+    "באיזו טמפרטורה יש לאחסן מזון בקירור ובהקפאה?",
+    "כיצד יש להגן על המחסן מפני מזיקים ובעלי חיים?",
+    "איזה תקנים ישראליים חלים על העסק ומה תפקידם?"
+  ];
+
+  // Render Preset Questions
+  if (el.presetQuestionsContainer) {
+    presetQuestions.forEach(q => {
+      const chip = document.createElement("button");
+      chip.type = "button";
+      chip.className = "px-3 py-1.5 bg-blue-50 text-blue-700 text-sm font-medium rounded-full border border-blue-100 hover:bg-blue-100 hover:border-blue-200 transition-colors text-right";
+      chip.textContent = q;
+      chip.addEventListener("click", () => {
+        el.questionInput.value = q;
+        el.questionInput.focus();
+        // Optional: Auto-scroll to input smoothly
+        el.questionInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+      el.presetQuestionsContainer.appendChild(chip);
+    });
+  }
 
   function show(element) {
     if (element) element.classList.remove("hidden");
@@ -96,12 +128,4 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // --- Timed Unlock Logic ---
-  // Wait 500ms and then remove 'readonly' from all shielded inputs
-  setTimeout(() => {
-    const protectedInputs = document.querySelectorAll('input[readonly], textarea[readonly]');
-    protectedInputs.forEach(input => {
-      input.removeAttribute('readonly');
-    });
-  }, 500);
 });

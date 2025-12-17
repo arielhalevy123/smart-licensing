@@ -30,12 +30,4 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // --- Timed Unlock Logic ---
-  // Wait 500ms and then remove 'readonly' from all shielded inputs
-  setTimeout(() => {
-    const protectedInputs = document.querySelectorAll('input[readonly], textarea[readonly]');
-    protectedInputs.forEach(input => {
-      input.removeAttribute('readonly');
-    });
-  }, 500);
 });
