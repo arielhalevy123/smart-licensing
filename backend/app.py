@@ -100,13 +100,15 @@ def retrieve_relevant_chunks(question, top_k=5):
             model="text-embedding-3-small"
         )
         q_vec = np.array(resp.data[0].embedding)
+        q_vec = q_vec / (np.linalg.norm(q_vec) + 1e-12)
 
         # 2. Calculate Similarity
         results = []
         for item in RAG_INDEX:
             chunk_vec = np.array(item["embedding"])
+            chunk_vec = chunk_vec / (np.linalg.norm(chunk_vec) + 1e-12)
             # Cosine similarity for normalized vectors is just the dot product
-            score = np.dot(q_vec, chunk_vec)
+            score = float(np.dot(q_vec, chunk_vec))
             results.append((score, item))
 
         # 3. Sort and Select
