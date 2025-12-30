@@ -22,8 +22,11 @@ load_dotenv(env_path, override=True)
 print(f"📁 Loading .env from: {env_path}", flush=True)
 
 # Configuration
-DOCX_PATH = "18-07-2022_4.2A.docx"
-CHROMA_DB_PATH = "backend/chroma_db"
+# DOCX file should be in project root (one level up from backend)
+BACKEND_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.dirname(BACKEND_DIR)
+DOCX_PATH = os.path.join(PROJECT_ROOT, "18-07-2022_4.2A.docx")
+CHROMA_DB_PATH = os.path.join(BACKEND_DIR, "chroma_db")
 PREVIEW_OUTPUT_PATH = "backend/rag_preview.txt"
 EMBEDDING_MODEL = "text-embedding-3-small"
 MIN_CHARS = 500
