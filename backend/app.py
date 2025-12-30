@@ -12,7 +12,10 @@ from dotenv import load_dotenv
 BACKEND_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(BACKEND_DIR)
 env_path = os.path.join(PROJECT_ROOT, '.env')
+# Also try loading from current directory and common locations
 load_dotenv(env_path, override=True)
+load_dotenv('.env', override=False)  # Try current dir as fallback
+load_dotenv('/app/.env', override=False)  # Try /app as fallback (Docker)
 print(f"📁 Loading .env from: {env_path}", flush=True)
 
 app = Flask(__name__)
