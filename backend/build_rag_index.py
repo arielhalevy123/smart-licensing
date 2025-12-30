@@ -22,9 +22,10 @@ load_dotenv(env_path, override=True)
 print(f"📁 Loading .env from: {env_path}", flush=True)
 
 # Configuration
-DOCX_PATH = "18-07-2022_4.2A.docx"
-CHROMA_DB_PATH = "backend/chroma_db"
-PREVIEW_OUTPUT_PATH = "backend/rag_preview.txt"
+# Use absolute path based on project root
+DOCX_PATH = os.path.join(PROJECT_ROOT, "regulations.docx")
+CHROMA_DB_PATH = os.path.join(BACKEND_DIR, "chroma_db")
+PREVIEW_OUTPUT_PATH = os.path.join(BACKEND_DIR, "rag_preview.txt")
 EMBEDDING_MODEL = "text-embedding-3-small"
 MIN_CHARS = 500
 MAX_CHARS = 2000
@@ -271,6 +272,14 @@ def main():
         print(f"  Found {len(existing_ids)} existing items in ChromaDB")
 
         # 1) Extract
+        if not os.path.exists(DOCX_PATH):
+            raise FileNotFoundError(
+                f"DOCX file not found at: {DOCX_PATH}\n"
+                f"Current working directory: {os.getcwd()}\n"
+                f"Project root: {PROJECT_ROOT}\n"
+                f"Backend dir: {BACKEND_DIR}"
+            )
+        print(f"📄 Reading DOCX from: {DOCX_PATH}", flush=True)
         raw_text = extract_docx(DOCX_PATH)
 
         # 2) Sectioning
