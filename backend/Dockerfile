@@ -5,11 +5,12 @@ FROM python:3.11-slim
 WORKDIR /app
 
 # התקנת תלויות
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+COPY backend/requirements.txt backend/
+RUN pip install --no-cache-dir -r backend/requirements.txt
 
-# העתקת קוד
-COPY . .
+# העתקת קוד - כולל קובץ DOCX מהשורש
+COPY backend/ backend/
+COPY 18-07-2022_4.2A.docx .
 
 # חשיפת פורט Flask
 EXPOSE 5000
