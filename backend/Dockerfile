@@ -15,6 +15,8 @@ COPY 18-07-2022_4.2A.docx .
 # חשיפת פורט Flask
 EXPOSE 5000
 
-# הרצה עם Gunicorn - צריך לציין את הנתיב הנכון
+# הגדרת WORKDIR לתיקיית backend
 WORKDIR /app/backend
-CMD ["gunicorn", "-b", "0.0.0.0:5000", "app:app"]
+
+# הרצה עם Gunicorn
+CMD ["gunicorn", "-b", "0.0.0.0:5000", "--chdir", "/app/backend", "app:app"]
