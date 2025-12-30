@@ -169,7 +169,22 @@ def retrieve_relevant_chunks(question, top_k=5):
 
 @app.route("/")
 def health():
-    return jsonify({"status": "ok", "message": "Licensing API is running!"})
+    """Health check endpoint"""
+    try:
+        chroma_status = "loaded" if RAG_COLLECTION else "not loaded"
+        chroma_count = RAG_COLLECTION.count() if RAG_COLLECTION else 0
+        return jsonify({
+            "status": "ok", 
+            "message": "Licensing API is running!",
+            "chroma_db": chroma_status,
+            "chroma_chunks": chroma_count,
+            "openai_key": "loaded" if OPENAI_API_KEY else "missing"
+        })
+    except Exception as e:
+        return jsonify({
+            "status": "error",
+            "message": f"Health check failed: {str(e)}"
+        }), 500
 
 
 @app.route("/api/generate-report", methods=["POST"])

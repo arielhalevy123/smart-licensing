@@ -9,7 +9,7 @@ services:
     restart: always
     environment:
       - OPENAI_API_KEY=${OPENAI_API_KEY}
-    command: gunicorn -b 0.0.0.0:5000 --chdir /app/backend app:app --timeout 120
+    command: gunicorn -b 0.0.0.0:5000 --chdir /app/backend app:app --timeout 120 --access-logfile - --error-logfile - --log-level info
     volumes:
       - ./backend/json_rules:/app/backend/json_rules
       - ./backend/chroma_db:/app/backend/chroma_db
