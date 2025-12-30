@@ -7,33 +7,13 @@ import chromadb
 from chromadb.config import Settings
 from dotenv import load_dotenv
 
-# Load environment variables from .env file
-# In Docker: app.py is at /app/backend/app.py, so project root is /app
-# Try multiple locations
+# Load environment variables from .env file (look in parent directory)
+# Get the backend directory, then go up one level to project root
 BACKEND_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(BACKEND_DIR)
-
-# Try Docker location first (/app/.env), then calculated path
-env_paths = [
-    '/app/.env',  # Docker location
-    os.path.join(PROJECT_ROOT, '.env'),  # Calculated path
-    '.env',  # Current directory
-    os.path.join(BACKEND_DIR, '.env'),  # Backend directory
-]
-
-env_loaded = False
-for env_path in env_paths:
-    if os.path.exists(env_path):
-        load_dotenv(env_path, override=True)
-        print(f"📁 Loaded .env from: {env_path}", flush=True)
-        env_loaded = True
-        break
-
-if not env_loaded:
-    # Try loading without checking existence (dotenv will handle it)
-    load_dotenv('/app/.env', override=False)
-    load_dotenv(os.path.join(PROJECT_ROOT, '.env'), override=False)
-    print(f"📁 Attempted to load .env from: /app/.env and {os.path.join(PROJECT_ROOT, '.env')}", flush=True)
+env_path = os.path.join(PROJECT_ROOT, '.env')
+load_dotenv(env_path, override=True)
+print(f"📁 Loading .env from: {env_path}", flush=True)
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for local development
@@ -186,22 +166,7 @@ def retrieve_relevant_chunks(question, top_k=5):
 
 @app.route("/")
 def health():
-    """Health check endpoint"""
-    try:
-        chroma_status = "loaded" if RAG_COLLECTION else "not loaded"
-        chroma_count = RAG_COLLECTION.count() if RAG_COLLECTION else 0
-        return jsonify({
-            "status": "ok", 
-            "message": "Licensing API is running!",
-            "chroma_db": chroma_status,
-            "chroma_chunks": chroma_count,
-            "openai_key": "loaded" if OPENAI_API_KEY else "missing"
-        })
-    except Exception as e:
-        return jsonify({
-            "status": "error",
-            "message": f"Health check failed: {str(e)}"
-        }), 500
+    return jsonify({"status": "ok", "message": "Licensing API is running!"})
 
 
 @app.route("/api/generate-report", methods=["POST"])

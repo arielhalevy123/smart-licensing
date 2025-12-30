@@ -5,18 +5,14 @@ FROM python:3.11-slim
 WORKDIR /app
 
 # התקנת תלויות
-COPY backend/requirements.txt backend/
-RUN pip install --no-cache-dir -r backend/requirements.txt
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-# העתקת קוד - כולל קובץ DOCX מהשורש
-COPY backend/ backend/
-COPY 18-07-2022_4.2A.docx .
+# העתקת קוד
+COPY . .
 
 # חשיפת פורט Flask
 EXPOSE 5000
 
-# הגדרת WORKDIR לתיקיית backend
-WORKDIR /app/backend
-
-# הרצה עם Gunicorn
-CMD ["gunicorn", "-b", "0.0.0.0:5000", "--chdir", "/app/backend", "app:app"]
+# הרצה עם Gunicorn (עדיף מ-fla sk run)
+CMD ["gunicorn", "-b", "0.0.0.0:5000", "app:app"]
