@@ -186,3 +186,7 @@ The system includes a modern, user-friendly interface:
 3.  **AI Hallucinations:** While the prompts are engineered to be grounded in the provided context, LLMs may still occasionally hallucinate or misinterpret complex regulatory nuances.
 4.  **Language:** The system is currently optimized for Hebrew input and output.
 5.  **Vector Database:** The ChromaDB index must be rebuilt if the source document (`regulations.docx`) is updated.
+
+---
+
+**Made by Ariel Halevy**
