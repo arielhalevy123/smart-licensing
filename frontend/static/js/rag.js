@@ -77,10 +77,17 @@ document.addEventListener("DOMContentLoaded", () => {
         body: JSON.stringify({ question }),
       });
 
-      const data = await response.json();
+      let data;
+      try {
+        data = await response.json();
+      } catch (jsonError) {
+        // If response is not valid JSON, read as text
+        const text = await response.text();
+        throw new Error(`שגיאה בשרת: ${text || "תגובה לא תקינה"}`);
+      }
 
       if (!response.ok) {
-        throw new Error(data.error || "שגיאה בתקשורת עם השרת");
+        throw new Error(data.error || `שגיאה ${response.status}: ${response.statusText}`);
       }
 
       // Render Answer

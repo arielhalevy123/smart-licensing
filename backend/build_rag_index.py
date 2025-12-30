@@ -10,19 +10,33 @@ from docx.oxml.text.paragraph import CT_P
 from docx.oxml.table import CT_Tbl
 from docx.table import _Cell, Table
 from docx.text.paragraph import Paragraph
+import chromadb
+from chromadb.config import Settings
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+BACKEND_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.dirname(BACKEND_DIR)
+env_path = os.path.join(PROJECT_ROOT, '.env')
+load_dotenv(env_path, override=True)
+print(f"📁 Loading .env from: {env_path}", flush=True)
 
 # Configuration
 DOCX_PATH = "18-07-2022_4.2A.docx"
-INDEX_OUTPUT_PATH = "backend/rag_index.json"
+CHROMA_DB_PATH = "backend/chroma_db"
 PREVIEW_OUTPUT_PATH = "backend/rag_preview.txt"
 EMBEDDING_MODEL = "text-embedding-3-small"
 MIN_CHARS = 500
 MAX_CHARS = 2000
+COLLECTION_NAME = "rag_index"
 
 # Initialize OpenAI
 api_key = os.getenv("OPENAI_API_KEY")
 if not api_key:
-    print("  Warning: OPENAI_API_KEY not found in environment variables.")
+    print("  Error: OPENAI_API_KEY not found in environment variables.", flush=True)
+    sys.exit(1)
+else:
+    print(f"✅ OpenAI API key loaded (length: {len(api_key)})", flush=True)
 
 client = OpenAI(api_key=api_key)
 
@@ -146,30 +160,46 @@ def sections_to_items(sections, max_chars=1200):
     return items
 
 
-def load_existing_index(path):
-    if not os.path.exists(path):
-        return [], set()
-    with open(path, "r", encoding="utf-8") as f:
-        data = json.load(f)
-    existing_ids = {item["id"] for item in data if "id" in item}
-    return data, existing_ids
+def get_chroma_collection():
+    """Initialize and return ChromaDB collection."""
+    client = chromadb.PersistentClient(path=CHROMA_DB_PATH)
+    collection = client.get_or_create_collection(
+        name=COLLECTION_NAME,
+        metadata={"hnsw:space": "cosine"}
+    )
+    return collection
 
 
-def append_index(path, existing_data, new_items):
-    # Merge by id (no duplicates)
-    merged = {item["id"]: item for item in existing_data if "id" in item}
-    for item in new_items:
-        merged[item["id"]] = item  # overwrite/update
-
-    all_data = list(merged.values())
-
-    os.makedirs(os.path.dirname(path), exist_ok=True)
-    with open(path, "w", encoding="utf-8") as f:
-        json.dump(all_data, f, ensure_ascii=False, indent=2)
-    return all_data
+def load_existing_ids(collection):
+    """Load existing IDs from ChromaDB collection."""
+    try:
+        results = collection.get()
+        existing_ids = set(results.get("ids", []))
+        return existing_ids
+    except Exception as e:
+        print(f"  Warning: Could not load existing IDs: {e}")
+        return set()
 
 
-def embed_items_incremental(items, existing_ids, batch_size=5):
+def add_items_to_chroma(collection, items):
+    """Add items to ChromaDB collection."""
+    if not items:
+        return
+    
+    ids = [item["id"] for item in items]
+    embeddings = [item["embedding"] for item in items]
+    documents = [item["chunk"] for item in items]
+    metadatas = [{"id": item["id"]} for item in items]
+    
+    collection.add(
+        ids=ids,
+        embeddings=embeddings,
+        documents=documents,
+        metadatas=metadatas
+    )
+
+
+def embed_items_incremental(collection, items, existing_ids, batch_size=5):
     todo = [it for it in items if it["id"] not in existing_ids]
     print(f" Remaining to embed: {len(todo)} (skipping {len(items)-len(todo)} already embedded)")
 
@@ -184,8 +214,7 @@ def embed_items_incremental(items, existing_ids, batch_size=5):
             print(f" Embedding failed at batch {i//batch_size + 1}: {e}")
             # Save partial progress before exiting
             if embedded:
-                existing_data, _ = load_existing_index(INDEX_OUTPUT_PATH)
-                append_index(INDEX_OUTPUT_PATH, existing_data, embedded)
+                add_items_to_chroma(collection, embedded)
                 print(f" Saved partial progress: +{len(embedded)} items")
             raise
 
@@ -196,10 +225,27 @@ def embed_items_incremental(items, existing_ids, batch_size=5):
                 "embedding": r.embedding
             })
 
-        # checkpoint save every batch
-        existing_data, _ = load_existing_index(INDEX_OUTPUT_PATH)
-        append_index(INDEX_OUTPUT_PATH, existing_data, embedded)
-        embedded = []  # clear buffer after saving
+        # checkpoint save every batch to ChromaDB
+        if embedded:
+            # Check for duplicates within the batch
+            batch_ids = [item["id"] for item in embedded]
+            if len(batch_ids) != len(set(batch_ids)):
+                duplicates = [id for id in batch_ids if batch_ids.count(id) > 1]
+                print(f"  Warning: Found duplicate IDs in batch: {set(duplicates)}")
+                # Remove duplicates, keeping first occurrence
+                seen = set()
+                unique_embedded = []
+                for item in embedded:
+                    if item["id"] not in seen:
+                        seen.add(item["id"])
+                        unique_embedded.append(item)
+                embedded = unique_embedded
+                print(f"  Deduplicated: {len(embedded)} unique items")
+            
+            add_items_to_chroma(collection, embedded)
+            # Update existing_ids to avoid re-adding
+            existing_ids.update([item["id"] for item in embedded])
+            embedded = []  # clear buffer after saving
 
         print(f"   Batch {i//batch_size + 1}/{(len(todo)+batch_size-1)//batch_size}")
 
@@ -219,8 +265,10 @@ def main():
     print(" Starting RAG Index Build Process...")
 
     try:
-        # 0) Load existing index (resume support)
-        existing_data, existing_ids = load_existing_index(INDEX_OUTPUT_PATH)
+        # 0) Initialize ChromaDB collection
+        collection = get_chroma_collection()
+        existing_ids = load_existing_ids(collection)
+        print(f"  Found {len(existing_ids)} existing items in ChromaDB")
 
         # 1) Extract
         raw_text = extract_docx(DOCX_PATH)
@@ -248,19 +296,23 @@ def main():
         save_preview(items)
 
         
-        # 5) Embed only missing items (saves incrementally to disk)
-        embed_items_incremental(items, existing_ids, batch_size=10)
+        # 5) Embed only missing items (saves incrementally to ChromaDB)
+        embed_items_incremental(collection, items, existing_ids, batch_size=10)
 
-        # 6) Reload final index from disk (source of truth)
-        final, _ = load_existing_index(INDEX_OUTPUT_PATH)
-        print(f"Total saved items: {len(final)}")
+        # 6) Reload final count from ChromaDB
+        final_count = collection.count()
+        print(f"Total saved items in ChromaDB: {final_count}")
 
         # 7) Final Verification
         print("Sanity Check: Verifying output...")
-        if not final:
-            raise RuntimeError("Index file is empty after embedding. Something went wrong.")
-        print(f"   - Sample ID: {final[0].get('id')}")
-        print(f"   - Has embedding? {'yes' if 'embedding' in final[0] else 'NO'}")  
+        if final_count == 0:
+            raise RuntimeError("ChromaDB collection is empty after embedding. Something went wrong.")
+        
+        # Get a sample item
+        sample_results = collection.get(limit=1)
+        if sample_results["ids"]:
+            print(f"   - Sample ID: {sample_results['ids'][0]}")
+            print(f"   - Has embedding? yes (stored in ChromaDB)")
 
         print(" RAG Index built successfully!")
 

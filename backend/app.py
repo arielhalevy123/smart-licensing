@@ -1,34 +1,60 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import os
 import json
-import numpy as np
 from openai import OpenAI
+import chromadb
+from chromadb.config import Settings
+from dotenv import load_dotenv
+
+# Load environment variables from .env file (look in parent directory)
+# Get the backend directory, then go up one level to project root
+BACKEND_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.dirname(BACKEND_DIR)
+env_path = os.path.join(PROJECT_ROOT, '.env')
+load_dotenv(env_path, override=True)
+print(f"📁 Loading .env from: {env_path}", flush=True)
 
 app = Flask(__name__)
+CORS(app)  # Enable CORS for local development
 
 # 🔑 OpenAI Configuration
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 if not OPENAI_API_KEY:
     print(" Error: OPENAI_API_KEY not found in environment variables!", flush=True)
+    # Debug: check if .env file exists and what's in it
+    if os.path.exists(env_path):
+        print(f"  Debug: .env file exists at {env_path}", flush=True)
+        with open(env_path, 'r') as f:
+            first_line = f.readline().strip()
+            if 'OPENAI' in first_line.upper():
+                print(f"  Debug: Found OPENAI in .env: {first_line[:30]}...", flush=True)
+else:
+    print(f"✅ OpenAI API key loaded successfully (length: {len(OPENAI_API_KEY)})", flush=True)
 
 client = OpenAI(api_key=OPENAI_API_KEY)
 
 # 📂 Paths
 BASE_DIR = os.path.dirname(__file__)
 DATA_DIR = os.path.join(BASE_DIR, "json_rules")
-RAG_INDEX_PATH = os.path.join(BASE_DIR, "rag_index.json")
+CHROMA_DB_PATH = os.path.join(BASE_DIR, "chroma_db")
+COLLECTION_NAME = "rag_index"
 
-# 📚 Load RAG Index
-RAG_INDEX = []
-if os.path.exists(RAG_INDEX_PATH):
-    try:
-        with open(RAG_INDEX_PATH, encoding="utf-8") as f:
-            RAG_INDEX = json.load(f)
-        print(f"RAG Index loaded: {len(RAG_INDEX)} chunks.", flush=True)
-    except Exception as e:
-        print(f" Error loading RAG index: {e}", flush=True)
-else:
-    print("  Warning: rag_index.json not found. Run 'build_rag_index.py' first.", flush=True)
+# 📚 Initialize ChromaDB
+RAG_COLLECTION = None
+CHROMA_ERROR = None
+try:
+    chroma_client = chromadb.PersistentClient(path=CHROMA_DB_PATH)
+    RAG_COLLECTION = chroma_client.get_or_create_collection(
+        name=COLLECTION_NAME,
+        metadata={"hnsw:space": "cosine"}
+    )
+    count = RAG_COLLECTION.count()
+    print(f"ChromaDB collection loaded: {count} chunks.", flush=True)
+except Exception as e:
+    CHROMA_ERROR = str(e)
+    print(f" Error loading ChromaDB collection: {e}", flush=True)
+    print("  Warning: ChromaDB not initialized. Run 'build_rag_index.py' first.", flush=True)
 
 
 def load_rules():
@@ -89,8 +115,10 @@ def rule_matches(rule, user):
 
 
 def retrieve_relevant_chunks(question, top_k=5):
-    """Retrieves top-k relevant chunks using cosine similarity."""
-    if not RAG_INDEX:
+    """Retrieves top-k relevant chunks using ChromaDB vector search."""
+    if not RAG_COLLECTION:
+        if CHROMA_ERROR:
+            raise Exception(f"ChromaDB error: {CHROMA_ERROR}")
         return []
 
     try:
@@ -99,28 +127,37 @@ def retrieve_relevant_chunks(question, top_k=5):
             input=question,
             model="text-embedding-3-small"
         )
-        q_vec = np.array(resp.data[0].embedding)
-        q_vec = q_vec / (np.linalg.norm(q_vec) + 1e-12)
+        query_embedding = resp.data[0].embedding
 
-        # 2. Calculate Similarity
-        results = []
-        for item in RAG_INDEX:
-            chunk_vec = np.array(item["embedding"])
-            chunk_vec = chunk_vec / (np.linalg.norm(chunk_vec) + 1e-12)
-            # Cosine similarity for normalized vectors is just the dot product
-            score = float(np.dot(q_vec, chunk_vec))
-            results.append((score, item))
+        # 2. Query ChromaDB for similar chunks
+        results = RAG_COLLECTION.query(
+            query_embeddings=[query_embedding],
+            n_results=top_k
+        )
 
-        # 3. Sort and Select
-        results.sort(key=lambda x: x[0], reverse=True)
-        top_items = results[:top_k]
+        # 3. Format results
+        chunks = []
+        if results["ids"] and len(results["ids"][0]) > 0:
+            for i in range(len(results["ids"][0])):
+                chunk_id = results["ids"][0][i]
+                chunk_text = results["documents"][0][i]
+                distance = results["distances"][0][i] if "distances" in results else None
+                
+                # Convert distance to similarity score (ChromaDB uses distance, lower is better)
+                # For cosine similarity, similarity = 1 - distance
+                score = 1 - distance if distance is not None else None
+                
+                chunks.append({
+                    "id": chunk_id,
+                    "chunk": chunk_text,
+                    "score": score
+                })
+                
+                # Log retrieval results
+                print(f"   - Score: {score:.4f} | Chunk ID: {chunk_id}", flush=True)
         
-        # Log retrieval results
-        print(f"🔍 Found {len(results)} chunks. Selected top {top_k}.", flush=True)
-        for score, item in top_items:
-            print(f"   - Score: {score:.4f} | Chunk ID: {item['id']}", flush=True)
-
-        return [item for score, item in top_items]
+        print(f"🔍 Found {len(chunks)} relevant chunks from ChromaDB.", flush=True)
+        return chunks
 
     except Exception as e:
         print(f" Retrieval error: {e}", flush=True)
@@ -262,9 +299,28 @@ def rag_endpoint():
         })
 
     except Exception as e:
-        print(f" RAG Error: {e}", flush=True)
-        return jsonify({"error": "An error occurred while processing your request."}), 500
+        error_msg = str(e)
+        print(f" RAG Error: {error_msg}", flush=True)
+        
+        # Provide more helpful error messages
+        if "401" in error_msg or "API key" in error_msg.lower():
+            return jsonify({
+                "error": "OpenAI API key is missing or invalid. Please set OPENAI_API_KEY environment variable."
+            }), 500
+        elif "disturbed" in error_msg.lower() or "locked" in error_msg.lower() or "chromadb" in error_msg.lower():
+            return jsonify({
+                "error": f"ChromaDB database error: {error_msg}. Try restarting the server or rebuilding the index."
+            }), 500
+        elif "empty" in error_msg.lower() or "no chunks" in error_msg.lower():
+            return jsonify({
+                "error": "RAG index is empty. Please rebuild the index using build_rag_index.py"
+            }), 500
+        else:
+            return jsonify({
+                "error": f"An error occurred: {error_msg}"
+            }), 500
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    port = int(os.getenv("FLASK_RUN_PORT", 5001))
+    app.run(host="0.0.0.0", port=port, debug=True)

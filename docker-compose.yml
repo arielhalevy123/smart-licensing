@@ -10,8 +10,9 @@ services:
     environment:
       - OPENAI_API_KEY=${OPENAI_API_KEY}
     command: gunicorn -b 0.0.0.0:5000 app:app --timeout 120
-    volumes:               # 👈 תוסיף את זה
+    volumes:
       - ./backend/json_rules:/app/backend/json_rules
+      - ./backend/chroma_db:/app/backend/chroma_db
 
   nginx:
     image: nginx:alpine

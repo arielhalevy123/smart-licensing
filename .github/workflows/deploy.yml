@@ -36,5 +36,7 @@ jobs:
             cd ~/smart-licensing &&
             echo OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} > .env &&
             docker-compose down || true &&
-            docker-compose up -d --build
+            docker-compose up -d --build &&
+            sleep 10 &&
+            docker exec licensing-api python backend/build_rag_index.py 1 1 || echo 'Index build skipped (may already exist)'
           "
