@@ -189,4 +189,4 @@ The system includes a modern, user-friendly interface:
 
 ---
 
-**Made by [Ariel Halevy](https://github.com/arielhalevy123)**
+**Made by [Ariel Halevy](https://github.com/arielhalevy123) and [Ari Guterman](https://github.com/Gutismall)**
